@@ -1,0 +1,32 @@
+.start-page {
+    position: relative;
+  }
+  
+  .blurry-background {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5));
+  }
+  
+  .overlay-text {
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+
+  #Nav{
+    background-color: white;
+  }
+  
+  
