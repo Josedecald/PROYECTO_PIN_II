@@ -47,3 +47,20 @@ footer{
   background: rgb(0,0,0);
   background: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgb(70, 104, 129) 100%);
 }
+
+.navbar-brand{
+  transition: transform .2s;
+}
+
+.navbar-brand:hover{
+  transform: scale(1.1);
+}
+
+.nav-link{
+  transition: transform .2s;
+
+}
+
+.nav-link:hover{
+  transform: scale(1.1);
+}
