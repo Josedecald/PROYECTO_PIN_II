@@ -18,3 +18,11 @@ aside .body_sidebar .exit_usr{
 aside .body_sidebar .exit_usr:hover{
     transform: scale(1.2);
 }
+
+aside .body_sidebar{
+    background-color:   #d8ffce ;
+}
+
+aside .offcanvas-header{
+    background-color: #d8ffce;
+}
