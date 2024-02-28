@@ -2,3 +2,19 @@
     width: 30px;
     height: 30px;
 }
+
+aside .body_sidebar li{
+    transition: transform .2s;
+}
+
+aside .body_sidebar li:hover{
+    transform: scale(1.1);
+}
+
+aside .body_sidebar .exit_usr{
+    transition: transform .2s;
+}
+
+aside .body_sidebar .exit_usr:hover{
+    transform: scale(1.2);
+}
