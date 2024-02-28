@@ -16,20 +16,21 @@
     <title>SereneMind</title>
   </head>
   <body>
-    <main class="content px-3 py-2 bg-dark" style="height: 100vh">
+    <main id="main" class="content px-3 py-2 bg-dark text-light" style="height: 100vh">
       <div class="container-fluid">
         <div class="mb-3 text-center">
-          <h4>Admin Dashboard</h4>
+          <h4 class="bg-dark text-light">Admin Dashboard</h4>
         </div>
         <div class="row">
-          <div class="col-12 col-md-6 d-flex pb-5">
-            <div class="card border-0">
-              <div class="card-body p-0 d-flex flex-fill">
+          <div class="col-12 col-md-4 p-0 ps-2">
+            <div class="card border-0 bg-light text-dark">
+              <div class="card-body p-0 d-flex">
                 <div class="row g-0 w-100">
                   <div class="col-6 col-md-12">
                     <div class="p-3 m-1">
                       <h4>Bienvenido, Admin</h4>
-                      <p class="mb-0">Admin Dashboard, SereneMind</p>
+                      <p class="mb-3">Admin Dashboard, SereneMind</p>
+                      <button type="button" class="btn btn-primary" onclick="toggletheme()">Tema</button>
                     </div>
                   </div>
                 </div>
@@ -37,8 +38,9 @@
             </div>
           </div>
         </div>
-        <div class="table-responsive">
-          <table class="table table-dark table-hover table-bordered">
+        <div class="table-responsive pt-4">
+          <h4 class="bg-dark text-light">Info Contacts</h4>
+          <table class="table table-ligth table-hover table-bordered">
             <thead class="table-success">
               <tr>
                 <th>Nombre</th>
