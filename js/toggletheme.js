@@ -1,6 +1,6 @@
 const Toggletheme = () => {
   let elements = document.querySelectorAll(
-    ".bg-dark, .text-light, .bg-light, .text-dark"
+    ".bg-dark.text-light, .bg-light.text-dark"
   );
   elements.forEach((element) => {
     element.classList.toggle("bg-dark");
