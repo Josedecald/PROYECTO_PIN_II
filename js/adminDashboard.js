@@ -14,7 +14,7 @@ let view = () => {
                 <tr>
                     <td>${respuesta.nombre}</td>
                     <td>${respuesta.email}</td>
-                    <td>${respuesta.opcion}</td>
+                    <td>${respuesta.asunto}</td>
                     <td>${respuesta.mensaje}</td>
                 </tr>
             `;
