@@ -18,9 +18,7 @@
     <link rel="stylesheet" href="../css/main_user.css" />
   </head>
   <body>
-    <header></header>
-
-    <main class="min-vh-100">
+    <header>
       <aside>
         <button
           class="btn btn-outline-dark shadow-sm mx-3 mt-3"
@@ -76,19 +74,19 @@
           </div>
         </div>
       </aside>
-      <section class="text-center">
+    </header>
+    
+    <main class="h-100 d-flex justify-content-start">
+      <section>
         <div class="container text-dark">
-          <div id="typed-strings" class="row">
-            <div class="col-12 col-md-4 col-lg-4">
-              <h1>SereneMind</h1>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem, recusandae.</p>
-              <p>Nostrum neque voluptates iure quisquam recusandae officia unde esse rem nihil quam.</p>
-              <p>Inventore consequatur sunt temporibus nobis. In, dicta sint.</p>
+            <div id="typed-strings" class="row">
+                <div class="col-12 col-md-9 col-lg-9">
+                  <h1>SereneMind</h1>
+                  <h3><span id="typed"></span></h3>
+                </div>
             </div>
-          </div>
-          <span id="typed"></span>
         </div>
-      </section>
+    </section>
     </main>
 
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
