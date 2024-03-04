@@ -7,7 +7,7 @@ const validateLogin = (event) => {
     const user= document.getElementById("usr").value.trim();
     const pass = document.getElementById("pass").value.trim(); 
   
-    if (user== "" || pass == "") { 
+    if (!user || !pass) { 
       alert("Por favor, rellene ambos espacios para iniciar sesión");
       return; // Detener la ejecución de la función si hay campos vacíos
     }
