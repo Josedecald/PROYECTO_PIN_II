@@ -8,18 +8,19 @@ const saveUsers = (event) =>{
 
     let user = document.getElementById('usr').value.trim();
     let pass = document.getElementById('pass').value.trim();
-
-    if (!user || !pass) {
+    let email = document.getElementById('Email').value.trim(); 
+    
+    if (!user || !pass || !email) { 
         alert('Por favor, completa todos los campos.');
         return;
     }
 
-    if (!isValidEmail(email)) {
+    if (!isValidEmail(email)) { 
         alert('Por favor, introduce una dirección de correo electrónico válida.');
         return;
     }
 
-    if (pass.length < 8) {
+    if (pass.length < 8) { 
         alert("La contraseña debe tener al menos 8 caracteres.");
         return;
     }
@@ -37,6 +38,7 @@ const saveUsers = (event) =>{
 
     document.getElementById('usr').value = '';
     document.getElementById('pass').value = '';
+    document.getElementById('Email').value = '';
 
 };
 document.getElementById('Register-form').addEventListener('submit', saveUsers);
