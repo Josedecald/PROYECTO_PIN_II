@@ -1,8 +1,7 @@
 const typed = new Typed('#typed', {
-    stringsElement: '#typed-strings',
-    typeSpeed: 40,
-    backspeed: 30,
-    loop: true,
-    showCursor: false,
+  strings: [ localStorage.getItem('typedText1'), localStorage.getItem('typedText2'), localStorage.getItem('typedText3')],
+  typeSpeed: 80,
+  backSpeed: 60,
+  loop: true
     
   });
