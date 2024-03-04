@@ -16,11 +16,12 @@ const validateLogin = (event) => {
         const foundUser = savedUsers.find((savedUser) => savedUser.username == user && savedUser.password == pass);
         if (foundUser){
             console.log("Dentro");
-            window.location.href = "../html/Main_user.html";
+            window.location.href = "../html/Main_user.html"; 
         } else {
-            alert("Nombre de usuario o/y contraseña incorrectos")
+            alert("Nombre de usuario o/y contraseña incorrectos");
         }
-    
+    } else {
+        alert("No hay usuarios registrados.");
     }
 
   };
