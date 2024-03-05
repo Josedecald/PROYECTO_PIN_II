@@ -2,6 +2,15 @@ html{
   scroll-behavior: smooth;
 }
 
+@font-face {
+  font-family: Fuente-p;
+  src: url(../fonts/Jost-VariableFont_wght.ttf);
+}
+
+body{
+  font-family: Fuente-p;
+}
+
 .start-page {
     position: relative;
   }
@@ -45,6 +54,10 @@ html{
 
 #Nav.white-bg .navbar-brand {
     color: rgb(0, 0, 0) !important;
+}
+
+header .nav-item{
+  font-size: 20px;
 }
 
 footer{
