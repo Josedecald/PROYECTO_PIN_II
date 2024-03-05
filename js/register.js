@@ -3,7 +3,7 @@ const isValidEmail = (email) => {
     return emailRegex.test(email);
 };
 
-const saveUsers = (event) =>{
+const saveUsers = (event) => {
     event.preventDefault(); 
 
     let user = document.getElementById('usr').value.trim();
@@ -23,6 +23,21 @@ const saveUsers = (event) =>{
     if (pass.length < 8) { 
         alert("La contraseña debe tener al menos 8 caracteres.");
         return;
+    } 
+    
+    if (!/[A-Z]/.test(pass)) {
+        alert("La contraseña debe contener al menos una letra mayúscula.");
+        return;
+    }
+
+    if (!/[$&+,:;=?@#|'<>.^*()%!-]/.test(pass)) {
+        alert("La contraseña debe contener al menos un carácter especial.");
+        return;
+    }
+
+    if (!/[0-9]/.test(pass)) {
+        alert("La contraseña debe contener al menos un número.");
+        return;
     }
 
     let savedUsers  = JSON.parse(localStorage.getItem('USERS')) || [];
@@ -32,7 +47,7 @@ const saveUsers = (event) =>{
         password: pass
     };
 
-    savedUsers .push(newUser);
+    savedUsers.push(newUser);
 
     localStorage.setItem('USERS', JSON.stringify(savedUsers))
 
@@ -41,4 +56,5 @@ const saveUsers = (event) =>{
     document.getElementById('Email').value = '';
 
 };
+
 document.getElementById('Register-form').addEventListener('submit', saveUsers);
