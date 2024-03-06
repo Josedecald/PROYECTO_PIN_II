@@ -16,3 +16,4 @@
         } else {
             echo "Error al registrar el usuario: " . mysqli_error($conexion);
         }
+?>
