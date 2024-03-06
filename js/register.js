@@ -7,6 +7,7 @@ const saveUsers = (event) => {
     event.preventDefault(); 
 
     let user = document.getElementById('usr').value.trim();
+    let ap = document.getElementById('ap').value.trim();
     let pass = document.getElementById('pass').value.trim();
     let email = document.getElementById('Email').value.trim(); 
     
@@ -51,6 +52,7 @@ const saveUsers = (event) => {
 
     localStorage.setItem('USERS', JSON.stringify(savedUsers))
 
+    document.getElementById('usr').value = '';
     document.getElementById('usr').value = '';
     document.getElementById('pass').value = '';
     document.getElementById('Email').value = '';
