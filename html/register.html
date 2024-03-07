@@ -18,7 +18,7 @@
 
     <main class="min-vh-100 d-flex justify-content-center align-items-center">
         <section >  
-            <form action="/php/register_user.php" method="POST" id="Register-form" autocomplete="off" class="px-3 py-4 rounded">
+            <form action="../php/register_user.php" method="post" id="Register-form" autocomplete="off" class="px-3 py-4 rounded">
                 <h1 class="mb-3 text-center">Registrarse</h1>
                 <div class="form-floating mb-3">
                     <input name="Nombre" type="text" class="form-control" id="usr" placeholder="Usuario" sandbox="allow-forms allow-popups allow-scripts allow-same-origin" autocomplete="off">
@@ -38,9 +38,7 @@
                     <label for="password">Contraseña</label>
                 </div>
                 <div class="d-flex justify-content-center my-3">
-                    <button type="submit" class="btn btn-primary">
-                        Registrarme
-                    </button>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
                 </div>
                 <div class="text-center text-black-50">
                     <p>Al registrarte, aceptas nuestras <br> Condiciones de uso y politica de privacidad</p>
@@ -48,5 +46,6 @@
             </form>
         </section>
     </main>
+    <script src="../js/register.js"></script>
 </body>
 </html>
