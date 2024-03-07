@@ -18,7 +18,7 @@
 
     <main class="min-vh-100 d-flex justify-content-center align-items-center">
         <section >  
-            <form action="../php/register_user.php" method="post" id="Register-form" autocomplete="off" class="px-3 py-4 rounded">
+            <form action="/registrar" method="post" id="Register-form" autocomplete="off" class="px-3 py-4 rounded">
                 <h1 class="mb-3 text-center">Registrarse</h1>
                 <div class="form-floating mb-3">
                     <input name="Nombre" type="text" class="form-control" id="usr" placeholder="Usuario" sandbox="allow-forms allow-popups allow-scripts allow-same-origin" autocomplete="off">
@@ -28,14 +28,13 @@
                     <input name="Apellido"  type="text" class="form-control" id="ap" placeholder="Usuario" sandbox="allow-forms allow-popups allow-scripts allow-same-origin" autocomplete="off">
                     <label for="ap">Apellido</label>
                 </div>
-                </div>
                 <div class="form-floating mb-3">
                     <input name="Email" type="email" class="form-control" id="Email" placeholder="Contraseña" sandbox="allow-forms allow-popups allow-scripts allow-same-origin" autocomplete="off">
                     <label for="Email">Email</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input name="Contrasena" type="password" class="form-control" id="pass" placeholder="Contraseña" sandbox="allow-forms allow-popups allow-scripts allow-same-origin" autocomplete="off">
-                    <label for="password">Contraseña</label>
+                    <label for="pass">Contraseña</label>
                 </div>
                 <div class="d-flex justify-content-center my-3">
                     <button type="submit" class="btn btn-primary">Registrar</button>
