@@ -4,12 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/94686504bc.js" crossorigin="anonymous"></script>
     <title>SereneMind</title>
   </head>
-  <body>
-    <main id="main" class="content px-3 py-2 bg-light text-light  min-vh-100">
+  <body class="min-vh-100">
+    <header>
       <aside>
         <button class="btn btn-outline-dark shadow-sm mx-3 mt-3" data-bs-toggle="offcanvas" data-bs-target="#intro">
           <i class="fa-solid fa-bars"></i>
@@ -40,41 +39,64 @@
           </div>
         </div>
       </aside>
-      <div class="container-fluid">
-        <div class="mb-3 text-center">
-          <h4 class="bg-light text-dark">Admin Dashboard</h4>
-        </div>
-        <div class="row">
-          <div class="col-12 col-md-4 p-0 ps-2">
-            <div class="card border-0 bg-light text-dark shadow">
-              <div class="card-body p-0 d-flex">
-                <div class="row g-0 w-100">
-                  <div class="col-6 col-md-12">
-                    <div class="p-3 m-1">
-                      <h4>Bienvenido, Admin</h4>
-                      <p class="mb-3">Admin Dashboard, SereneMind</p>
-                    </div>
+    </header>
+    <main id="main" class="content px-3 py-2">
+
+      <article>
+
+        <section>
+          <div class="container-fluid">
+            <div class="mb-3 text-center">
+              <h4 class="text-dark">Admin Dashboard</h4>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-3">
+                <div class="card border-0 text-dark shadow">
+                  <div class="card-body p-3">
+                    <h4>Bienvenido, Admin</h4>
+                    <p class="mb-3">Admin Dashboard, SereneMind</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6">
+                <div class="card border-0 text-dark shadow">
+                  <div class="card-body p-0">
+                    <canvas id="graph-1"></canvas>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="table-responsive pt-4">
-          <h4 class="bg-light text-dark">Info Contacts</h4>
-          <table class="table table-ligth table-hover table-bordered">
-            <thead class="table-success">
-              <tr>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Asunto</th>
-                <th>Mensaje</th>
-              </tr>
-            </thead>
-            <tbody id="respuestasTable"></tbody>
-          </table>
-        </div>
-      </div>
+        </section>
+
+        <section>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12 col-md-4 p-0 ps-2">
+              </div>
+            </div>
+            <div class="table-responsive pt-4">
+              <h4 class=" text-dark">Info Contacts</h4>
+              <table class="table table-ligth table-hover table-bordered">
+                <thead class="table-success">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Asunto</th>
+                    <th>Mensaje</th>
+                  </tr>
+                </thead>
+                <tbody id="respuestasTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </article>
+
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="../js/charts.js"></script>
   </body>
 </html>
