@@ -20,22 +20,26 @@
         <section >  
             <form id="Register-form" autocomplete="off" class="px-3 py-4 rounded shadow-lg">
                 <h1 class="mb-3 text-center">Registrarse</h1>
+              
                 <div class="form-floating mb-3">  
                     <input type="text" class="form-control" id="usr" placeholder="Usuario">
                     <label for="usr">Usuario</label>
+
+
+                <div class="form-floating mb-3">
+                    <input name="Apellido"  type="text" class="form-control" id="ap" placeholder="Usuario" sandbox="allow-forms allow-popups allow-scripts allow-same-origin" autocomplete="off">
+                    <label for="ap">Apellido</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="Email" placeholder="Contraseña">
+                    <input name="Email" type="email" class="form-control" id="Email" placeholder="Contraseña" sandbox="allow-forms allow-popups allow-scripts allow-same-origin" autocomplete="off">
                     <label for="Email">Email</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="password" class="form-control" id="pass" placeholder="Contraseña">
+                    <input name="Contrasena" type="password" class="form-control" id="pass" placeholder="Contraseña" sandbox="allow-forms allow-popups allow-scripts allow-same-origin" autocomplete="off">
                     <label for="pass">Contraseña</label>
                 </div>
                 <div class="d-flex justify-content-center my-3">
-                    <button type="submit" class="btn btn-primary">
-                        Registrarme
-                    </button>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
                 </div>
                 <div class="text-center text-black-50">
                     <p>Al registrarte, aceptas nuestras <br> Condiciones de uso y politica de privacidad</p>
@@ -43,7 +47,5 @@
             </form>
         </section>
     </main>
-
-    <script src="../js/register.js"></script>
 </body>
 </html>

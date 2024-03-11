@@ -1,3 +1,16 @@
+html{
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: Fuente-p;
+  src: url(../fonts/Jost-VariableFont_wght.ttf);
+}
+
+body{
+  font-family: Fuente-p;
+}
+
 .start-page {
     position: relative;
   }
@@ -43,6 +56,10 @@
     color: rgb(0, 0, 0) !important;
 }
 
+header .nav-item{
+  font-size: 20px;
+}
+
 footer{
   background-color: rgb(191, 216, 175);
 }
@@ -62,4 +79,14 @@ footer{
 
 .nav-link:hover{
   transform: scale(1.1);
+}
+
+section .btn{
+  transition: all ease .3s;
+}
+
+section .btn:hover{
+  transform: scale(1.1);
+  background: transparent;
+
 }
