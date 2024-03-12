@@ -44,7 +44,7 @@ const uploadPosts = () => {
   } else {
     postsContainer.style.display = "block";
 
-    posts.forEach((currentPost, index) => { // Cambio de nombre de variable
+    posts.forEach((currentPost, index) => { 
       const postCard = document.createElement("div");
       postCard.className = "card border rounded mt-3";
 
