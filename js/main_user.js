@@ -44,36 +44,36 @@ const uploadPosts = () => {
   } else {
     postsContainer.style.display = "block";
 
-    posts.forEach(post => {
+    posts.forEach((currentPost, index) => { // Cambio de nombre de variable
       const postCard = document.createElement("div");
       postCard.className = "card border rounded mt-3";
 
       postCard.innerHTML = `
       <div class="card-body">
-      <p class="card-text">${post.text}</p>
-      <p class="card-text"><small class="text-muted">${post.publicationTime}</small></p>
-      <button class="btn btn-outline-secondary" onclick="showResponseForm(${posts.indexOf(post)})"><i class="fa-regular fa-comment"></i></button>
-      <div id="responses-${posts.indexOf(post)}"></div>
-      <form id="responseForm-${posts.indexOf(post)}" style="display: none;">
+      <p class="card-text">${currentPost.text}</p>
+      <p class="card-text"><small class="text-muted">${currentPost.publicationTime}</small></p>
+      <button class="btn btn-outline-secondary" onclick="showResponseForm(${index})"><i class="fa-regular fa-comment"></i></button>
+      <div id="responses-${index}"></div>
+      <form id="responseForm-${index}" style="display: none;">
         <div class="form-group mt-2">
-          <textarea class="form-control" id="responseText-${posts.indexOf(post)}" placeholder="Escribe tu respuesta..." rows="1"></textarea>
+          <textarea class="form-control" id="responseText-${index}" placeholder="Escribe tu respuesta..." rows="1"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary mt-2" onclick="postResponse(event, ${posts.indexOf(post)})">Enviar respuesta</button>
+        <button type="submit" class="btn btn-primary mt-2" onclick="postResponse(event, ${index})">Enviar respuesta</button>
       </form>
     </div>
       `;
 
       postsContainer.appendChild(postCard);
 
-      if (post.responses) {
-        post.responses.forEach(response => {
+      if (currentPost.responses) {
+        currentPost.responses.forEach(response => {
           const responseElement = document.createElement("div");
           responseElement.className = "card border rounded mt-3 bg-light";
           responseElement.innerHTML = `
           <p class="card-text">${response.text}</p>
           <p class="card-text"><small class="text-muted">${response.publicationTime}</small></p>`;
           
-          document.getElementById(`responses-${posts.indexOf(post)}`).appendChild(responseElement);
+          document.getElementById(`responses-${index}`).appendChild(responseElement);
         });
       }
     });
@@ -92,7 +92,7 @@ const postResponse = (event, index) =>{
   if (responseText === ''){
     alert("Debes escribir algo");
     return;
-  } 
+  }
 
   let posts = JSON.parse(localStorage.getItem("posts")) || [];
 
