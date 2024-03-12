@@ -68,7 +68,7 @@ const uploadPosts = () => {
       if (post.responses) {
         post.responses.forEach(response => {
           const responseElement = document.createElement("div");
-          responseElement.className = "card border rounded mt-3";
+          responseElement.className = "card border rounded mt-3 bg-light";
           responseElement.innerHTML = `
           <p class="card-text">${response.text}</p>
           <p class="card-text"><small class="text-muted">${response.publicationTime}</small></p>`;
@@ -92,7 +92,7 @@ const postResponse = (event, index) =>{
   if (responseText === ''){
     alert("Debes escribir algo");
     return;
-  }
+  } 
 
   let posts = JSON.parse(localStorage.getItem("posts")) || [];
 

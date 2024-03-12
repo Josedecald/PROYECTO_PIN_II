@@ -18,27 +18,24 @@
 
     <main class="min-vh-100 d-flex justify-content-center align-items-center">
         <section >  
-            <form id="Register-form" autocomplete="off" class="px-3 py-4 rounded">
+            <form id="Register-form" autocomplete="off" class="px-3 py-4 rounded shadow-lg">
                 <h1 class="mb-3 text-center">Registrarse</h1>
-                <div class="form-floating mb-3">
-                    <input name="Nombre" type="text" class="form-control" id="usr" placeholder="Usuario" sandbox="allow-forms allow-popups allow-scripts allow-same-origin" autocomplete="off">
-                    <label f
-                    or="usr">Nombre</label>
+                <div class="form-floating mb-3">  
+                    <input type="text" class="form-control" id="usr" placeholder="Usuario">
+                    <label for="usr">Usuario</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input name="Apellido"  type="text" class="form-control" id="ap" placeholder="Usuario" sandbox="allow-forms allow-popups allow-scripts allow-same-origin" autocomplete="off">
-                    <label for="ap">Apellido</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input name="Email" type="email" class="form-control" id="Email" placeholder="Contraseña" sandbox="allow-forms allow-popups allow-scripts allow-same-origin" autocomplete="off">
+                    <input type="email" class="form-control" id="Email" placeholder="Contraseña">
                     <label for="Email">Email</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input name="Contrasena" type="password" class="form-control" id="pass" placeholder="Contraseña" sandbox="allow-forms allow-popups allow-scripts allow-same-origin" autocomplete="off">
+                    <input type="password" class="form-control" id="pass" placeholder="Contraseña">
                     <label for="pass">Contraseña</label>
                 </div>
                 <div class="d-flex justify-content-center my-3">
-                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <button type="submit" class="btn btn-primary">
+                        Registrarme
+                    </button>
                 </div>
                 <div class="text-center text-black-50">
                     <p>Al registrarte, aceptas nuestras <br> Condiciones de uso y politica de privacidad</p>
@@ -46,5 +43,7 @@
             </form>
         </section>
     </main>
+
+    <script src="../js/register.js"></script>
 </body>
 </html>
