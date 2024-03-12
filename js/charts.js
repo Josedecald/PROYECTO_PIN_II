@@ -46,3 +46,15 @@ const data = {
   };
   
   const chart = new Chart(document.querySelector("#graph-1"), config);
+
+  let contenidoVisible = true
+  document.getElementById('viewContent').addEventListener('click', () =>{
+    const content = document.getElementById('Info');
+    if (contenidoVisible) {
+      content.style.display = "block";
+      contenidoVisible = false;
+    } else {
+      content.style.display = "none";
+      contenidoVisible = true;
+    }
+  });
