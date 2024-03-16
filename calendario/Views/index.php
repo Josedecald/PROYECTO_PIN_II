@@ -11,9 +11,40 @@
 </head>
 
 <body>
-    <div class="container">
-        <div id="calendar"></div>
+<header>
+        <nav class="navbar navbar-expand-md shadow">
+            <div class="container">
+                <a class="navbar-brand text-dark" href="../index.html">SereneMind</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="../html\Main_user.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Grupos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="../calendario/index.php">Citas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Ayuda</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+<div class="container-fluid d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="col-md-6">
+        <div id="calendar" class="shadow"></div>
     </div>
+</div>
+
+
+
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="Label" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

@@ -6,11 +6,11 @@ const isValidEmail = (email) => {
 const saveUsers = (event) =>{
     event.preventDefault(); 
 
-    let user = document.getElementById('usr').value.trim();
-    let pass = document.getElementById('pass').value.trim();
-    let email = document.getElementById('Email').value.trim(); 
+    let fullname = document.getElementById('fullname').value.trim();
+    let email = document.getElementById('email').value.trim();
+    let password = document.getElementById('password').value.trim(); 
     
-    if (!user || !pass || !email) { 
+    if (!fullname || !password || !email) { 
         alert('Por favor, completa todos los campos.');
         return;
     }
@@ -20,43 +20,30 @@ const saveUsers = (event) =>{
         return;
     }
 
-    if (pass.length < 8) { 
+    if (password.length < 8) { 
         alert("La contraseña debe tener al menos 8 caracteres.");
         return;
     }
 
     
-    if (!/[A-Z]/.test(pass)) {
+    if (!/[A-Z]/.test(password)) {
         alert("La contraseña debe contener al menos una letra mayúscula.");
         return;
     }
 
-    if (!/[$&+,:;=?@#|'<>.^*()%!-]/.test(pass)) {
+    if (!/[$&+,:;=?@#|'<>.^*()%!-]/.test(password)) {
         alert("La contraseña debe contener al menos un carácter especial.");
         return;
     }
 
-    if (!/[0-9]/.test(pass)) {
+    if (!/[0-9]/.test(password)) {
         alert("La contraseña debe contener al menos un número.");
         return;
     }
 
-
-    let savedUsers  = JSON.parse(localStorage.getItem('USERS')) || [];
-
-    let newUser = {
-        username: user,
-        password: pass
-    };
-
-    savedUsers .push(newUser);
-
-    localStorage.setItem('USERS', JSON.stringify(savedUsers))
-
-    document.getElementById('usr').value = '';
-    document.getElementById('pass').value = '';
-    document.getElementById('Email').value = '';
-
+    document.getElementById('fullname').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
 };
-document.getElementById('Register-form').addEventListener('submit', saveUsers);
 
+document.getElementById('Register-form').addEventListener('submit', saveUsers);
