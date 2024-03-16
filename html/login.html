@@ -17,35 +17,47 @@
     </header>
 
     <main class="min-vh-100 d-flex justify-content-center align-items-center">
-        <section>
-            <form id="Login-form" autocomplete="off" class="px-4 py-5 rounded">
-                <h1 class="mb-3 text-center">Iniciar sesión</h1>
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="usr" placeholder="Usuario">
-                    <label for="usr">Usuario</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="password" class="form-control" id="pass" placeholder="Contraseña">
-                    <label for="pass">Contraseña</label>
-                </div>
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div class="form-check me-3">
-                        <input class="form-check-input" type="checkbox" id="Remember">
-                        <label class="form-check-label" for="Remember">Recordarme</label>
+        <section class="rounded shadow mx-5 py-3">
+                <div class="row justify-content-center align-items-center">
+                    <div class=" col-10 col-md-5 d-flex justify-content-center align-items-center">
+                        <img src="https://images.pexels.com/photos/2033997/pexels-photo-2033997.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                            class="rounded img-fluid shadow" alt="">
+                            <h2 class="position-absolute d-flex"> Bienvenido a SereneMind</h2>
                     </div>
-                    <a class="text-decoration-none fw-semibold ms-3" href="#">Olvidé mi contraseña</a>
+                    <div class="col-md-5">
+                        <form id="Login-form" autocomplete="off" class="px-4 py-5">
+                            <h1 class="mb-3 text-center">Iniciar sesión</h1>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="usr" placeholder="Usuario o Correo">
+                                <label for="usr">Usuario</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="pass" placeholder="Contraseña">
+                                <label for="pass">Contraseña</label>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="form-check me-3">
+                                    <input class="form-check-input" type="checkbox" id="Remember">
+                                    <label class="form-check-label" for="Remember">Recordarme</label>
+                                </div>
+                                <a class="text-decoration-none fw-semibold ms-3" href="#">Olvidé mi contraseña</a>
+                            </div>
+                            <div class="d-flex justify-content-center my-3">
+                                <button type="submit" class="btn btn-primary">
+                                    Iniciar sesión
+                                </button>
+                            </div>
+                            <div class="text-center">
+                                <p>No tengo una cuenta.<a class="text-decoration-none fw-semibold" href="../html/register.html"> Crear una</a></p>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="d-flex justify-content-center my-3">
-                    <button type="submit" class="btn btn-primary">
-                        Iniciar sesión
-                    </button>
-                </div>
-                <div class="text-center">
-                    <p>No tengo una cuenta.<a class="text-decoration-none fw-semibold" href="../html/register.html"> Crear una</a></p>
-                </div>
-            </form>
-        </section>
+         </section>
     </main>
+    
+    
+
     
     <script src="../js/login.js"></script>
 </body>
