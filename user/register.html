@@ -17,31 +17,43 @@
     </header>
 
     <main class="min-vh-100 d-flex justify-content-center align-items-center">
-        <section >  
-            <form action="http://localhost:5000/add_contact" method="post" id="Register-form" autocomplete="off" class="px-3 py-4 rounded shadow-lg">
-                <h1 class="mb-3 text-center">Registrarse</h1>
-                <div class="form-floating mb-3">  
-                    <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Usuario">
-                    <label for="fullname">Usuario</label>
+        <section class="rounded shadow mx-5 py-3">
+                <div class="row justify-content-center align-items-center">
+
+                    <div class="col-md-5">
+                        <form id="Register-form" autocomplete="off" class="px-4 py-5">
+                            <h1 class="mb-3 text-center">Registrarse</h1>
+                            <div class="form-floating mb-3">  
+                                <input type="text" class="form-control" id="usr" placeholder="Usuario">
+                                <label for="usr">Usuario</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="Email" placeholder="Contraseña">
+                                <label for="Email">Email</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="pass" placeholder="Contraseña">
+                                <label for="pass">Contraseña</label>
+                            </div>
+                            <div class="d-flex justify-content-center my-3">
+                                <button type="submit" class="btn btn-primary">
+                                    Registrarme
+                                </button>
+                            </div>
+                            <div class="text-center text-black-50">
+                                <p>Al registrarte, aceptas nuestras <br> Condiciones de uso y politica de privacidad</p>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class=" col-10 col-md-5 d-flex justify-content-center align-items-center">
+                        <img src="https://images.pexels.com/photos/2033997/pexels-photo-2033997.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                            class="rounded img-fluid shadow" alt="">
+                            <h2 class="position-absolute d-flex"> Bienvenido a SereneMind</h2>
+                    </div>
+
                 </div>
-                <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-                    <label for="email">Email</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
-                    <label for="password">Contraseña</label>
-                </div>
-                <div class="d-flex justify-content-center my-3">
-                    <button type="submit" class="btn btn-primary">
-                        Registrarme
-                    </button>
-                </div>
-                <div class="text-center text-black-50">
-                    <p>Al registrarte, aceptas nuestras <br> Condiciones de uso y política de privacidad</p>
-                </div>
-            </form>            
-        </section>
+         </section>
     </main>
 
     <script src="../js/register.js"></script>
