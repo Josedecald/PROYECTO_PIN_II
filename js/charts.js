@@ -1,10 +1,10 @@
 
-const data = {
+const dataInicioSesion = {
     labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
     datasets: [
       {
         label: 'Usuarios que iniciaron sesión',
-        data: [45, 50, 60, 55, 70, 65, 60], // Datos inventados para ilustrar el ejemplo
+        data: [45, 50, 60, 55, 70, 65, 60], 
         backgroundColor: [
           '#92C7CF',
           '#AC87C5',
@@ -28,9 +28,9 @@ const data = {
     ]
   };
   
-  const config = {
+  const configInicioSesion = {
       type: 'doughnut',
-      data: data,
+      data: dataInicioSesion,
       options: {
         responsive: true,
         plugins: {
@@ -45,7 +45,108 @@ const data = {
       },
   };
   
-  const chart = new Chart(document.querySelector("#graph-1"), config);
+  
+
+  // Datos inventados para la cantidad de publicaciones hechas en la semana
+const dataPublicaciones = {
+  labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+  datasets: [
+    {
+      label: 'Publicaciones realizadas',
+      data: [50, 35, 30, 55, 40, 25, 10], // Datos inventados para ilustrar el ejemplo
+      backgroundColor: [
+        '#92C7CF',
+        '#AC87C5',
+        '#9BB8CD',
+        '#AFC8AD',
+        '#4F6F52',
+        '#D7C0AE',
+        '#CBB279'
+      ],
+      borderColor: [
+        '#92C7CF',
+        '#AC87C5',
+        '#9BB8CD',
+        '#AFC8AD',
+        '#4F6F52',
+        '#D7C0AE',
+        '#CBB279'
+      ],
+      borderWidth: 1
+    }
+  ]
+};
+
+const configPublicaciones = {
+  type: 'bar',
+  data: dataPublicaciones,
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Publicaciones realizadas en los últimos 7 días'
+      }
+    }
+  },
+};
+
+
+
+// Datos inventados para la cantidad de citas creadas en la semana
+const dataCitas = {
+  labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+  datasets: [
+    {
+      label: 'Citas creadas',
+      data: [10, 15, 20, 25, 30, 35, 40], // Datos inventados para ilustrar el ejemplo
+      backgroundColor: [
+        '#92C7CF',
+        '#AC87C5',
+        '#9BB8CD',
+        '#AFC8AD',
+        '#4F6F52',
+        '#D7C0AE',
+        '#CBB279'
+      ],
+      borderColor: [
+        '#92C7CF',
+        '#AC87C5',
+        '#9BB8CD',
+        '#AFC8AD',
+        '#4F6F52',
+        '#D7C0AE',
+        '#CBB279'
+      ],
+      borderWidth: 1
+    }
+  ]
+};
+
+const configCitas = {
+  type: 'doughnut',
+  data: dataCitas,
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'right',
+      },
+      title: {
+        display: true,
+        text: 'Citas creadas en los últimos 7 días'
+      }
+    }
+  },
+};
+
+const chart = new Chart(document.querySelector("#graph-InicioSesion"), configInicioSesion);
+const chartPublicaciones = new Chart(document.querySelector("#graph-publicaciones"), configPublicaciones);
+const chartCitas = new Chart(document.querySelector("#graph-citas"), configCitas);
+
 
   let contenidoVisible = true
   document.getElementById('viewContent').addEventListener('click', () =>{
