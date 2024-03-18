@@ -10,39 +10,55 @@ const typed = new Typed("#typed", {
   loop: true,
 });
 
-
 const currentPage = document.body.id;
 
-const post = (event) => {
-  event.preventDefault();
+//Se abre el modal y se inserta el texto para publicar
+document.getElementById("textoPublicacion").addEventListener("focus", () => {
+  swal({
+    title: "Comparte tus dudas con tus compañeros...",
+    content: "input",
+    button: {
+      text: "Publicar",
+    },
+    allowOutsideClick: false,
+  })
+  .then(postText => {
+    if (!postText || !postText.trim()){//Verifica que no intenten publicar sin texto
+      swal({
+        title: 'Debes escribir algo para publicar',
+        icon: 'warning',
+      });
+      throw null;//si está vacio detiene la función
+    }
 
-  const postText = document.getElementById("textoPublicacion").value.trim();
-  if (postText === "") {
-    alert("Debes escribir algo");
-    return;
-  }
+    let posts = JSON.parse(localStorage.getItem(`${currentPage}_posts`)) || [];
 
-  let posts = JSON.parse(localStorage.getItem(`${currentPage}_posts`)) || [];
+    const newPost = {
+      text: postText,
+      publicationTime: new Date().toLocaleString('en-US', {
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          hour12: true 
+      }),
+    };
 
-  const newPost = {
-    text: postText,
-    publicationTime: new Date().toLocaleString('en-US', {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true // Opcional, si deseas usar el formato de 12 horas
-    }),
-  };
+    posts.unshift(newPost);
+    localStorage.setItem(`${currentPage}_posts`, JSON.stringify(posts));
 
-  posts.unshift(newPost);
-  localStorage.setItem(`${currentPage}_posts`, JSON.stringify(posts));
-
-  uploadPosts();
-
-  document.getElementById("textoPublicacion").value = "";
-};
+    uploadPosts();
+  })
+  .catch(err => {
+    if (err) {
+      swal("Ha ocurrido un error", "Hubo un error!", "error");
+    } else {
+      swal.stopLoading();
+      swal.close();
+    }
+  });
+});
 
 const uploadPosts = () => {
   let posts = JSON.parse(localStorage.getItem(`${currentPage}_posts`)) || [];
@@ -102,7 +118,7 @@ const postResponse = (event, index) =>{
   const responseText = document.getElementById(`responseText-${index}`).value.trim();
 
   if (responseText === ''){
-    alert("Debes escribir algo");
+    swal("Debes escribir algo");
     return;
   }
 
@@ -129,9 +145,7 @@ const postResponse = (event, index) =>{
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("publicarForm").addEventListener("submit", post);
   uploadPosts();
-
 });
 
-});
 
 
