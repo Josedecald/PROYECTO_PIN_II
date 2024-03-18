@@ -10,6 +10,9 @@ const typed = new Typed("#typed", {
   loop: true,
 });
 
+
+const currentPage = document.body.id;
+
 const post = (event) => {
   event.preventDefault();
 
@@ -19,7 +22,7 @@ const post = (event) => {
     return;
   }
 
-  let posts = JSON.parse(localStorage.getItem("posts")) || [];
+  let posts = JSON.parse(localStorage.getItem(`${currentPage}_posts`)) || [];
 
   const newPost = {
     text: postText,
@@ -34,7 +37,7 @@ const post = (event) => {
   };
 
   posts.unshift(newPost);
-  localStorage.setItem("posts", JSON.stringify(posts));
+  localStorage.setItem(`${currentPage}_posts`, JSON.stringify(posts));
 
   uploadPosts();
 
@@ -42,7 +45,7 @@ const post = (event) => {
 };
 
 const uploadPosts = () => {
-  let posts = JSON.parse(localStorage.getItem("posts")) || [];
+  let posts = JSON.parse(localStorage.getItem(`${currentPage}_posts`)) || [];
   const postsContainer = document.getElementById("post");
   postsContainer.innerHTML = "";
 
@@ -76,7 +79,7 @@ const uploadPosts = () => {
       if (currentPost.responses) {
         currentPost.responses.forEach(response => {
           const responseElement = document.createElement("div");
-          responseElement.className = "card border rounded mt-3 bg-light";
+          responseElement.className = "card border rounded mt-3 p-2 bg-light";
           responseElement.innerHTML = `
           <p class="m-2">Nombre usuario </p>
           <p class="card-text m-3">${response.text}</p>
@@ -103,7 +106,7 @@ const postResponse = (event, index) =>{
     return;
   }
 
-  let posts = JSON.parse(localStorage.getItem("posts")) || [];
+  let posts = JSON.parse(localStorage.getItem(`${currentPage}_posts`)) || [];
 
   if (!posts[index].responses) {
     posts[index].responses = [];
@@ -114,7 +117,7 @@ const postResponse = (event, index) =>{
     publicationTime: new Date().toLocaleString(),
   }
   posts[index].responses.push(newResponse);
-  localStorage.setItem("posts", JSON.stringify(posts));
+  localStorage.setItem(`${currentPage}_posts`, JSON.stringify(posts));
 
   uploadPosts();
   
@@ -126,5 +129,9 @@ const postResponse = (event, index) =>{
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("publicarForm").addEventListener("submit", post);
   uploadPosts();
+
 });
+
+});
+
 
