@@ -7,3 +7,12 @@
     cursor: pointer;
 }
 
+@font-face {
+    font-family: Fuente-p;
+    src: url(../fonts/Jost-VariableFont_wght.ttf);
+  }
+  
+  body{
+    font-family: Fuente-p;
+  }
+
