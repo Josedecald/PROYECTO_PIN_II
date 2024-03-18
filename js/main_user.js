@@ -4,8 +4,9 @@ const typed = new Typed("#typed", {
     localStorage.getItem("typedText2"),
     localStorage.getItem("typedText3"),
   ],
-  typeSpeed: 80,
-  backSpeed: 60,
+  typeSpeed: 100,
+  backSpeed: 100,
+  backDelay: 7000,
   loop: true,
 });
 
@@ -30,7 +31,6 @@ const post = (event) => {
         minute: 'numeric',
         hour12: true // Opcional, si deseas usar el formato de 12 horas
     }),
-    responses: [],
   };
 
   posts.unshift(newPost);
@@ -78,6 +78,7 @@ const uploadPosts = () => {
           const responseElement = document.createElement("div");
           responseElement.className = "card border rounded mt-3 bg-light";
           responseElement.innerHTML = `
+          <p class="m-2">Nombre usuario </p>
           <p class="card-text m-3">${response.text}</p>
           <p class="card-text mx-2"><small class="text-muted">${response.publicationTime}</small></p>`;
           
