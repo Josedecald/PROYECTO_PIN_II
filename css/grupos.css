@@ -1,9 +1,30 @@
-.articles .box h3{
+.articles .box h4{
     transition: transform .2s;
 }
 
-.articles .box h3:hover{
+.articles .box h4:hover{
     transform: scale(1.1);
     cursor: pointer;
 }
+
+.articles .box{
+    background-color: rgba(167, 255, 243, 0.226);
+}
+
+body main{
+    background: linear-gradient(#ACE2E1, #fdfdfd6b);
+    font-family: Fuente-p;
+}
+
+body header{
+    background-color: #ACE2E1;
+    font-family: Fuente-p;
+}
+
+
+@font-face {
+    font-family: Fuente-p;
+    src: url(/fonts/Jost-VariableFont_wght.ttf);
+  }
+  
 
