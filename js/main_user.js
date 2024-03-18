@@ -13,7 +13,7 @@ const typed = new Typed("#typed", {
 const uploadPosts = async () => {
   console.log('Uploading posts...');
   try {
-    const response = await axios.get('http://127.0.0.1:3000/get_posts');
+    const response = await axios.get('http://127.0.0.1:4000/get_posts');
     const posts = response.data; // Accede a la propiedad data de la respuesta
     const postsContainer = document.getElementById("post");
     postsContainer.innerHTML = "";
@@ -21,7 +21,7 @@ const uploadPosts = async () => {
       postsContainer.style.display = "none";
     } else {
       postsContainer.style.display = "block";
-      posts.forEach((currentPost) => {
+      posts.forEach((currentPost, index) => {
         const postCard = document.createElement("div");
         postCard.className = "card border rounded mt-3";
         postCard.innerHTML = `
@@ -68,7 +68,7 @@ const post = async (event) => {
   }
   const publicationTime = new Date().toLocaleString();
   try {
-    await axios.post('http://127.0.0.1:3000/create_post', 
+    await axios.post('http://127.0.0.1:4000/create_post', 
     { 
       text: postText,
       publicationTime
@@ -96,7 +96,7 @@ const postResponse = async (event, postId) => {
     return;
   }
   try {
-    await axios.post(`http://127.0.0.1:3000/create_response/${postId}/responses`, { text: responseText });
+    await axios.post(`http://127.0.0.1:4000/create_response/${postId}/responses`, { text: responseText });
     await uploadPosts(); // Actualizar la interfaz del usuario después de enviar la respuesta
     document.getElementById(`responseText-${postId}`).value = ""; // Corrección aquí
     document.getElementById(`responseForm-${postId}`).style.display = "none"; // Corrección aquí
