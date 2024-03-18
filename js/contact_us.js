@@ -40,7 +40,7 @@ const obtained_data = (event) => {
     };
     respuestasGuardadas.push(nuevaRespuesta);
 
-    // Guardar el array de respuestas en localStorage
+    // Guarda el array en localStorage
     localStorage.setItem('respuestas', JSON.stringify(respuestasGuardadas));
 
     alerta();
