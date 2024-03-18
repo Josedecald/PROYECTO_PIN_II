@@ -22,7 +22,14 @@ const post = (event) => {
 
   const newPost = {
     text: postText,
-    publicationTime: new Date().toLocaleString(),
+    publicationTime: new Date().toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true // Opcional, si deseas usar el formato de 12 horas
+    }),
     responses: [],
   };
 
@@ -50,6 +57,7 @@ const uploadPosts = () => {
 
       postCard.innerHTML = `
       <div class="card-body">
+      <p>Nombre usuario</p>
       <p class="card-text">${currentPost.text}</p>
       <p class="card-text"><small class="text-muted">${currentPost.publicationTime}</small></p>
       <button class="btn btn-outline-secondary" onclick="showResponseForm(${index})"><i class="fa-regular fa-comment"></i></button>
@@ -70,8 +78,8 @@ const uploadPosts = () => {
           const responseElement = document.createElement("div");
           responseElement.className = "card border rounded mt-3 bg-light";
           responseElement.innerHTML = `
-          <p class="card-text">${response.text}</p>
-          <p class="card-text"><small class="text-muted">${response.publicationTime}</small></p>`;
+          <p class="card-text m-3">${response.text}</p>
+          <p class="card-text mx-2"><small class="text-muted">${response.publicationTime}</small></p>`;
           
           document.getElementById(`responses-${index}`).appendChild(responseElement);
         });
@@ -118,3 +126,4 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("publicarForm").addEventListener("submit", post);
   uploadPosts();
 });
+
