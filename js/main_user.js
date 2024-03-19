@@ -10,39 +10,58 @@ const typed = new Typed("#typed", {
   loop: true,
 });
 
-const post = (event) => {
-  event.preventDefault();
+const currentPage = document.body.id;
 
-  const postText = document.getElementById("textoPublicacion").value.trim();
-  if (postText === "") {
-    alert("Debes escribir algo");
-    return;
-  }
+//Se abre el modal y se inserta el texto para publicar
+document.getElementById("textoPublicacion").addEventListener("focus", () => {
+  swal({
+    title: "Comparte tus dudas con tus compañeros...",
+    content: "input",
+    button: {
+      text: "Publicar",
+    },
+    allowOutsideClick: false,
+  })
+  .then(postText => {
+    if (!postText || !postText.trim()){//Verifica que no intenten publicar sin texto
+      swal({
+        title: 'Debes escribir algo para publicar',
+        icon: 'warning',
+      });
+      throw null;//si está vacio detiene la función
+    }
 
-  let posts = JSON.parse(localStorage.getItem("posts")) || [];
+    let posts = JSON.parse(localStorage.getItem(`${currentPage}_posts`)) || [];
 
-  const newPost = {
-    text: postText,
-    publicationTime: new Date().toLocaleString('en-US', {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true // Opcional, si deseas usar el formato de 12 horas
-    }),
-  };
+    const newPost = {
+      text: postText,
+      publicationTime: new Date().toLocaleString('en-US', {
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          hour12: true 
+      }),
+    };
 
-  posts.unshift(newPost);
-  localStorage.setItem("posts", JSON.stringify(posts));
+    posts.unshift(newPost);
+    localStorage.setItem(`${currentPage}_posts`, JSON.stringify(posts));
 
-  uploadPosts();
-
-  document.getElementById("textoPublicacion").value = "";
-};
+    uploadPosts();
+  })
+  .catch(err => {
+    if (err) {
+      swal("Ha ocurrido un error", "Hubo un error!", "error");
+    } else {
+      swal.stopLoading();
+      swal.close();
+    }
+  });
+});
 
 const uploadPosts = () => {
-  let posts = JSON.parse(localStorage.getItem("posts")) || [];
+  let posts = JSON.parse(localStorage.getItem(`${currentPage}_posts`)) || [];
   const postsContainer = document.getElementById("post");
   postsContainer.innerHTML = "";
 
@@ -76,7 +95,7 @@ const uploadPosts = () => {
       if (currentPost.responses) {
         currentPost.responses.forEach(response => {
           const responseElement = document.createElement("div");
-          responseElement.className = "card border rounded mt-3 bg-light";
+          responseElement.className = "card border rounded mt-3 p-2 bg-light";
           responseElement.innerHTML = `
           <p class="m-2">Nombre usuario </p>
           <p class="card-text m-3">${response.text}</p>
@@ -99,11 +118,11 @@ const postResponse = (event, index) =>{
   const responseText = document.getElementById(`responseText-${index}`).value.trim();
 
   if (responseText === ''){
-    alert("Debes escribir algo");
+    swal("Debes escribir algo");
     return;
   }
 
-  let posts = JSON.parse(localStorage.getItem("posts")) || [];
+  let posts = JSON.parse(localStorage.getItem(`${currentPage}_posts`)) || [];
 
   if (!posts[index].responses) {
     posts[index].responses = [];
@@ -114,7 +133,7 @@ const postResponse = (event, index) =>{
     publicationTime: new Date().toLocaleString(),
   }
   posts[index].responses.push(newResponse);
-  localStorage.setItem("posts", JSON.stringify(posts));
+  localStorage.setItem(`${currentPage}_posts`, JSON.stringify(posts));
 
   uploadPosts();
   
@@ -127,4 +146,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("publicarForm").addEventListener("submit", post);
   uploadPosts();
 });
+
+
 
