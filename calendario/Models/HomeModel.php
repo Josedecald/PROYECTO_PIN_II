@@ -4,10 +4,10 @@ class HomeModel extends Query{
     {
         parent::__construct();
     }
-    public function registrar($title, $inicio, $color)
+    public function registrar($title,$user, $inicio, $color)
     {
-        $sql = "INSERT INTO evento (title, start, color) VALUES (?,?,?)";
-        $array = array($title, $inicio, $color);
+        $sql = "INSERT INTO evento (title, user, start, color) VALUES (?,?,?,?)";
+        $array = array($title,$user, $inicio, $color);
         $data = $this->save($sql, $array);
         if ($data == 1) {
             $res = 'ok';
@@ -21,10 +21,10 @@ class HomeModel extends Query{
         $sql = "SELECT * FROM evento";
         return $this->selectAll($sql);
     }
-    public function modificar($title, $inicio, $color, $id)
+    public function modificar($title,$user, $inicio, $color, $id)
     {
-        $sql = "UPDATE evento SET title=?, start=?, color=? WHERE id=?";
-        $array = array($title, $inicio, $color, $id);
+        $sql = "UPDATE evento SET title=?, user=?, start=?, color=? WHERE id=?";
+        $array = array($title, $user, $inicio, $color, $id);
         $data = $this->save($sql, $array);
         if ($data == 1) {
             $res = 'ok';
@@ -45,7 +45,7 @@ class HomeModel extends Query{
         }
         return $res;
     }
-    public function dragOver($start, $id)
+    public function dragOver($start,$user, $id)
     {
         $sql = "UPDATE evento SET start=? WHERE id=?";
         $array = array($start, $id);

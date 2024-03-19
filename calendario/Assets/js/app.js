@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log(this.responseText);
                     const res = JSON.parse(this.responseText);
                      Swal.fire(
-                         'Avisos?',
+                         'Aviso',
                          res.msg,
                          res.tipo
                      )
@@ -67,9 +67,10 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
         const title = document.getElementById('title').value;
         const start = document.getElementById('start').value;
-        if (title == '' || start == '') {
+        const user = document.getElementById('user').value;
+        if (title == '' || start == '' || user == '') {
              Swal.fire(
-                 'Avisos?',
+                 'Aviso',
                  'Todo los campos son obligatorios',
                  'warning'
              )
@@ -83,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log(this.responseText);
                     const res = JSON.parse(this.responseText);
                      Swal.fire(
-                         'Avisos?',
+                         'Aviso',
                          res.msg,
                          res.tipo
                      )
@@ -98,13 +99,13 @@ document.addEventListener('DOMContentLoaded', function () {
     eliminar.addEventListener('click', function () {
         myModal.hide();
         Swal.fire({
-            title: 'Advertencia?',
-            text: "Esta seguro de eliminar!",
+            title: 'Advertencia',
+            text: "¿Esta seguro de eliminar?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Si, eliminar'
         }).then((result) => {
             if (result.isConfirmed) {
                 const url = base_url + 'Home/eliminar/' + document.getElementById('id').value;
@@ -116,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         console.log(this.responseText);
                         const res = JSON.parse(this.responseText);
                         Swal.fire(
-                            'Avisos?',
+                            'Aviso',
                             res.msg,
                             res.tipo
                         )
