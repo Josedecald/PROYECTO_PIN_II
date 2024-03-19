@@ -5,7 +5,7 @@ const typed = new Typed("#typed", {
     localStorage.getItem("typedText3"),
   ],
   typeSpeed: 100,
-  backSpeed: 100,
+  backSpeed: 50,
   backDelay: 7000,
   loop: true,
 });
