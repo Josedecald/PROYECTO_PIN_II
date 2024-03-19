@@ -6,44 +6,79 @@ const isValidEmail = (email) => {
 const saveUsers = (event) =>{
     event.preventDefault(); 
 
-    let fullname = document.getElementById('fullname').value.trim();
-    let email = document.getElementById('email').value.trim();
-    let password = document.getElementById('password').value.trim(); 
+    swal({
+        title: 'Registrado correctamente',
+        icon: 'success'
+    })
+
+    let user = document.getElementById('usr').value.trim();
+    let pass = document.getElementById('pass').value.trim();
+    let email = document.getElementById('Email').value.trim(); 
     
-    if (!fullname || !password || !email) { 
-        alert('Por favor, completa todos los campos.');
+    if (!user || !pass || !email) { 
+        swal({
+            title: 'Por favor, completa todos los campos.',
+            icon: 'warning',
+        });
         return;
     }
 
     if (!isValidEmail(email)) { 
-        alert('Por favor, introduce una dirección de correo electrónico válida.');
+        swal({
+            title: 'Por favor, introduce una dirección de correo electrónico válida.',
+            icon: 'warning',
+        });
         return;
     }
 
-    if (password.length < 8) { 
-        alert("La contraseña debe tener al menos 8 caracteres.");
+    if (pass.length < 8) { 
+        swal({
+            title: "La contraseña debe tener al menos 8 caracteres.",
+            icon: 'warning',
+        });
         return;
     }
 
     
-    if (!/[A-Z]/.test(password)) {
-        alert("La contraseña debe contener al menos una letra mayúscula.");
+    if (!/[A-Z]/.test(pass)) {
+        swal({
+            title: "La contraseña debe contener al menos una letra mayúscula.",
+            icon: 'warning',
+        });
         return;
     }
 
-    if (!/[$&+,:;=?@#|'<>.^*()%!-]/.test(password)) {
-        alert("La contraseña debe contener al menos un carácter especial.");
+    if (!/[$&+,:;=?@#|'<>.^*()%!-]/.test(pass)) {
+        swal({
+            title: "La contraseña debe contener al menos un carácter especial.",
+            icon: 'warning',
+        });
         return;
     }
 
-    if (!/[0-9]/.test(password)) {
-        alert("La contraseña debe contener al menos un número.");
+    if (!/[0-9]/.test(pass)) {
+        swal({
+            title: "La contraseña debe contener al menos un número.",
+            icon: 'warning',
+        });
         return;
     }
 
-    document.getElementById('fullname').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('password').value = '';
+
+    let savedUsers  = JSON.parse(localStorage.getItem('USERS')) || [];
+
+    let newUser = {
+        username: user,
+        password: pass
+    };
+
+    savedUsers .push(newUser);
+
+    localStorage.setItem('USERS', JSON.stringify(savedUsers))
+
+    document.getElementById('usr').value = '';
+    document.getElementById('pass').value = '';
+    document.getElementById('Email').value = '';
+
 };
-
 document.getElementById('Register-form').addEventListener('submit', saveUsers);
