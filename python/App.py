@@ -17,6 +17,7 @@ app.config['MYSQL_PASSWORD'] = '123456'
 app.config['MYSQL_DB'] = 'pin_ii_db'
 mysql = MySQL(app)
 
+###################################### USUARIOS ##########################################################################
 
 # ruta para consultar todos los usuarios
 @cross_origin()
@@ -50,7 +51,7 @@ def getcount():
         payload = []
         content = {}
         for result in rv:
-            content = {'total': result[0]}
+            content = {'total de usuarios': result[0]}
             payload.append(content)
             content = {}
         return jsonify(payload)
@@ -60,11 +61,11 @@ def getcount():
 
 # ruta para consultar por parametro
 @cross_origin()
-@app.route('/getAllById/<id>',methods=['GET'])
-def getAllById(id):
+@app.route('/getAllById/<email>',methods=['GET'])
+def getAllById(email):
     try:
         cur = mysql.connection.cursor()
-        cur.execute('SELECT * FROM usuarios WHERE id = %s', (id))
+        cur.execute('SELECT * FROM usuarios WHERE id = %s', (email))
         rv = cur.fetchall()
         cur.close()
         payload = []
@@ -79,10 +80,10 @@ def getAllById(id):
         return jsonify({"informacion":e})
     
 
-#### ruta para registrar usuario########
+#ruta para registrar usuario
 @cross_origin()
-@app.route('/add_contact', methods=['POST'])
-def add_contact():
+@app.route('/add_user', methods=['POST'])
+def add_user():
     try:
         if request.method == 'POST':
             nombre = request.json['nombre'] 
@@ -92,7 +93,7 @@ def add_contact():
             genero = request.json['genero']  
             carrera = request.json['carrera'] 
             cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO contacts (nombre, email, password, edad, genero, carrera) VALUES (%s,%s,%s)", (nombre, email, password, edad, genero, carrera))
+            cur.execute("INSERT INTO usuarios (nombre, email, password, edad, genero, carrera) VALUES (%s, %s, %s, %s, %s, %s)", (nombre, email, password, edad, genero, carrera))
             mysql.connection.commit()
             return jsonify({"informacion":"Registro exitoso"})
         
@@ -101,46 +102,62 @@ def add_contact():
         return jsonify({"informacion":e})
 
 
-######### ruta para actualizar################
+#ruta para actualizar el usuario
 @cross_origin()
-@app.route('/update/<id>', methods=['PUT'])
-def update_contact(id):
+@app.route('/updateuser/<email>', methods=['PUT'])
+def update_user(email):
     try:
         nombre = request.json['nombre'] 
-        email = request.json['email']        
+        nuevo_email = request.json['email']        
         password = request.json['password']
         edad = request.json['edad']
         genero = request.json['genero']  
-        carrera = request.json['carrera'] 
+        carrera = request.json['carrera']  
+
         cur = mysql.connection.cursor()
-        cur.execute("""
-        UPDATE contacts
-        SET nombre = %s,
-            email = %s,
-            password = %s,
-            edad = %s,
-            genero = %s,
-            carrera = %s
-        WHERE id = %s
-        """, (nombre, email, password, edad, genero, carrera, id))
-        mysql.connection.commit()
-        return jsonify({"informacion":"Registro actualizado"})
+        cur.execute("SELECT * FROM usuarios WHERE email = %s", (email,))
+        usuario_existente = cur.fetchone()
+        cur.close()
+
+        if usuario_existente:
+            cur = mysql.connection.cursor()
+            cur.execute("""
+            UPDATE usuarios
+            SET nombre = %s,
+                email = %s,
+                password = %s,
+                edad = %s,
+                genero = %s,
+                carrera = %s
+            WHERE email = %s
+            """, (nombre, nuevo_email, password, edad, genero, carrera, email))
+            mysql.connection.commit()
+            cur.close()
+            return jsonify({"informacion":"Registro actualizado"})
+        else:
+            return jsonify({"informacion": "El usuario con el correo electrónico proporcionado no existe."})
+
     except Exception as e:
         print(e)
-        return jsonify({"informacion":e})
+        return jsonify({"informacion": str(e)})
 
-########## Ruta para eliminar usuario ################
+#ruta para eliminar el usuario
 @cross_origin()
 @app.route('/delete/<email>', methods = ['DELETE'])
 def delete_contact(email):
     try:
         cur = mysql.connection.cursor()
-        cur.execute('DELETE FROM contacts WHERE id = %s', (email,))
+        cur.execute('DELETE FROM usuarios WHERE email = %s', (email,))
         mysql.connection.commit()
         return jsonify({"informacion":"Registro eliminado"}) 
     except Exception as e:
         print(e)
-        return jsonify({"informacion":e})
+        return jsonify({"informacion":str(e)})
+
+#########################################################################################################################
+    
+
+###################################### CITAS ###########################################################################
 
 
 # starting the app
