@@ -174,15 +174,13 @@ const chart = new Chart(document.querySelector("#graph-InicioSesion"), configIni
 const chartPublicaciones = new Chart(document.querySelector("#graph-publicaciones"), configPublicaciones);
 const chartCitas = new Chart(document.querySelector("#graph-citas"), configCitas);
 
-
-  let contenidoVisible = true
-  document.getElementById('viewContent').addEventListener('click', () =>{
-    const content = document.getElementById('Info');
-    if (contenidoVisible) {
-      content.style.display = "block";
-      contenidoVisible = false;
-    } else {
-      content.style.display = "none";
-      contenidoVisible = true;
+//DataTable
+$(document).ready( () =>{
+  $('#ContactTable').DataTable(
+    {
+      "language":{
+        "url": "https://cdn.datatables.net/plug-ins/2.0.2/i18n/es-ES.json"
+      }
     }
-  });
+  );
+});
