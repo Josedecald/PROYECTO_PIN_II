@@ -79,7 +79,6 @@ def getAllById(email):
         print(e)
         return jsonify({"informacion":e})
     
-
 #ruta para registrar usuario
 @cross_origin()
 @app.route('/add_user', methods=['POST'])
@@ -100,8 +99,7 @@ def add_user():
     except Exception as e:
         print(e)
         return jsonify({"informacion":e})
-
-
+    
 #ruta para actualizar el usuario
 @cross_origin()
 @app.route('/updateuser/<email>', methods=['PUT'])
@@ -159,6 +157,109 @@ def delete_contact(email):
 
 ###################################### CITAS ###########################################################################
 
+#Ruta para ver todas las citas
+@cross_origin()
+@app.route('/getAllEvents', methods=['GET'])
+def getAllEvents():
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM evento')
+        rv = cur.fetchall()
+        cur.close()
+        payload = []
+        content = {}
+        for result in rv:
+            content = {'id': result[0], 'id_usuario': result[1], 'titulo': result[2], 'fecha': str(result[3]), 'hora': str(result[4]), 'color': result[5]}
+            payload.append(content)
+            content = {}
+        return jsonify(payload)
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion":str(e)})
+    
+#Registrar cita
+@cross_origin()
+@app.route('/registrar_cita', methods=['POST'])
+def registrar_cita():
+    try:
+        titulo = request.json['titulo']
+        fecha = request.json['fecha']
+        hora = request.json['hora']
+        color = request.json['color']
+        email_usuario = request.json['email_usuario']
+
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT id_usuario FROM usuarios WHERE email = %s", (email_usuario,))
+        usuario = cur.fetchone()
+        if usuario is None:
+            return jsonify({"informacion": "No se encontró un usuario con ese email"})
+
+        id_usuario = usuario[0]
+
+        cur.execute("INSERT INTO evento (titulo, fecha, hora, color, id_usuario) VALUES (%s, %s, %s, %s, %s)", (titulo, fecha, hora, color, id_usuario))
+        mysql.connection.commit()
+
+        return jsonify({"informacion": "Cita registrada correctamente"})
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion": str(e)})
+
+#Ruta para actualizar
+@cross_origin()
+@app.route('/updateEvent/<email>', methods=['PUT'])
+def update_event(email):
+    try:
+        titulo = request.json['titulo'] 
+        fecha = request.json['fecha']        
+        hora = request.json['hora']
+        color = request.json['color']
+        usuario = email
+
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM usuarios WHERE email = %s", (usuario,))
+        usuario_existente = cur.fetchone()
+
+        if usuario_existente:
+            cur.execute("""
+                UPDATE evento
+                SET titulo = %s,
+                    fecha = %s,
+                    hora = %s,
+                    color = %s
+                WHERE id_usuario = %s
+            """, (titulo, fecha, hora, color, usuario_existente[0]))
+            mysql.connection.commit()
+            cur.close()
+            return jsonify({"informacion": "Evento actualizado correctamente."})
+        else:
+            return jsonify({"informacion": "El usuario con el correo electrónico proporcionado no existe."})
+
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion": str(e)})
+
+#Ruta para eliminar evento
+@cross_origin()
+@app.route('/deleteEvent/<email>', methods=['DELETE'])
+def delete_event(email):
+    try:
+
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT id_usuario FROM usuarios WHERE email = %s', (email,))
+        usuario = cur.fetchone()
+
+        if usuario:
+            cur.execute('DELETE FROM evento WHERE id_usuario = %s', (usuario[0],))
+            mysql.connection.commit()
+            cur.close()
+            return jsonify({"informacion": "Evento eliminado correctamente."})
+        else:
+            return jsonify({"informacion": "El usuario con el correo electrónico proporcionado no existe."})
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion": str(e)})
+
+##############################################################################################################################
 
 # starting the app
 if __name__ == "__main__":
