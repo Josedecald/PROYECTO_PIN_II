@@ -7,9 +7,6 @@ from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 CORS(app)
 
-
-
-
 # Mysql Connection
 app.config['MYSQL_HOST'] = 'localhost' 
 app.config['MYSQL_USER'] = 'root'
@@ -90,11 +87,19 @@ def add_user():
             password = request.json['password']
             edad = request.json['edad']
             genero = request.json['genero']  
-            carrera = request.json['carrera'] 
+            carrera = request.json['carrera']
+            
             cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO usuarios (nombre, email, password, edad, genero, carrera) VALUES (%s, %s, %s, %s, %s, %s)", (nombre, email, password, edad, genero, carrera))
-            mysql.connection.commit()
-            return jsonify({"informacion":"Registro exitoso"})
+            cur.execute("SELECT * FROM usuarios WHERE email = %s", (email,))
+            usuario_existente = cur.fetchone()
+
+            if not usuario_existente:
+                cur = mysql.connection.cursor()
+                cur.execute("INSERT INTO usuarios (nombre, email, password, edad, genero, carrera) VALUES (%s, %s, %s, %s, %s, %s)", (nombre, email, password, edad, genero, carrera))
+                mysql.connection.commit()
+                return jsonify({"informacion":"Registro exitoso"})
+            else:
+                return jsonify({"informacion":"el usuario ya existe"})
         
     except Exception as e:
         print(e)
@@ -260,6 +265,133 @@ def delete_event(email):
         return jsonify({"informacion": str(e)})
 
 ##############################################################################################################################
+
+############################### PUBLICACIONES ###########################################################################
+
+#ruta para guardar publicacion
+@cross_origin()
+@app.route('/guardar_publi', methods=['POST'])
+def guardar_publi():
+    try:
+        contenido = request.json['contenido']
+        fecha = request.json['fecha']
+        hora = request.json['hora']
+        url = request.json['url']
+        email_usuario = request.json['email_usuario']
+
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT id_usuario FROM usuarios WHERE email = %s", (email_usuario,))
+        usuario = cur.fetchone()
+        if usuario is None:
+            return jsonify({"informacion": "No se encontró un usuario con ese email"})
+        id_usuario = usuario[0]
+
+        cur.execute("INSERT INTO publicaciones (contenido, fecha, hora, url) VALUES (%s, %s, %s, %s)", (contenido, fecha, hora, url))
+        mysql.connection.commit()
+
+        id_publi = cur.lastrowid
+
+        cur.execute("INSERT INTO usu_publi (id_usuario, id_publi) VALUES (%s, %s)", (id_usuario, id_publi))
+        mysql.connection.commit()
+
+        return jsonify({"informacion": "Publicación registrada correctamente"})
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion": str(e)})
+
+#ruta para actualizar publicaciones
+@cross_origin()
+@app.route('/updatePubli/<email>/<id_publi>', methods=['PUT'])
+def update_Publi(email, id_publi):
+    try:
+        contenido = request.json['contenido'] 
+        fecha = request.json['fecha']        
+        hora = request.json['hora']
+        url = request.json['url']
+
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT id_usuario FROM usuarios WHERE email = %s", (email,))
+        usuario_existente = cur.fetchone()
+        
+        if usuario_existente:
+            id_usuario = usuario_existente[0]
+
+            cur.execute("SELECT * FROM usu_publi WHERE id_usuario = %s AND id_publi = %s", (id_usuario, id_publi))
+            acceso = cur.fetchone()
+            
+            if acceso:
+                cur.execute("""
+                    UPDATE publicaciones
+                    SET contenido = %s,
+                        fecha = %s,
+                        hora = %s,
+                        url = %s
+                    WHERE id_publi = %s
+                """, (contenido, fecha, hora, url, id_publi))
+                mysql.connection.commit()
+                cur.close()
+                return jsonify({"informacion": "Publicación actualizada correctamente."})
+            else:
+                return jsonify({"informacion": "El usuario no tiene acceso a la publicación."})
+        else:
+            return jsonify({"informacion": "El usuario con el correo electrónico proporcionado no existe."})
+
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion": str(e)})
+
+#ruta para ver todas las publicaciones 
+@cross_origin()
+@app.route('/getAllPubli', methods=['GET'])
+def getAllPubli():
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM publicaciones')
+        rv = cur.fetchall()
+        cur.close()
+        payload = []
+        content = {}
+        for result in rv:
+            content = {'id_publi': result[0], 'contenido': result[1],'fecha': str(result[2]), 'hora': str(result[3]), 'url': result[4]}
+            payload.append(content)
+            content = {}
+        return jsonify(payload)
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion":str(e)})
+
+#ruta para eliminar publicacion
+@cross_origin()
+@app.route('/deletePubli/<email>/<id_publi>', methods=['DELETE'])
+def delete_publi(email, id_publi):
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT id_usuario FROM usuarios WHERE email = %s", (email,))
+        usuario_existente = cur.fetchone()
+        
+        if usuario_existente:
+            id_usuario = usuario_existente[0]
+
+            cur.execute("SELECT * FROM usu_publi WHERE id_usuario = %s AND id_publi = %s", (id_usuario, id_publi))
+            acceso = cur.fetchone()
+            
+            if acceso:
+                cur.execute('DELETE FROM publicaciones WHERE id_publi = %s', (id_publi,))
+                mysql.connection.commit()
+
+                cur.execute('DELETE FROM usu_publi WHERE id_usuario = %s AND id_publi = %s', (id_usuario, id_publi))
+                mysql.connection.commit()
+                cur.close()
+                return jsonify({"informacion": "Publicación eliminada correctamente."})
+            else:
+                return jsonify({"informacion": "El usuario no tiene acceso a la publicación."})
+        else:
+            return jsonify({"informacion": "El usuario con el correo electrónico proporcionado no existe."})
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion": str(e)})
+
+
 
 # starting the app
 if __name__ == "__main__":
