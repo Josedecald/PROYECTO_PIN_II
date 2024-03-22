@@ -24,19 +24,45 @@
                         <form id="Register-form" autocomplete="off" class="px-4 py-5">
                             <h1 class="mb-3 text-center">Registrarse</h1>
                             <div class="form-floating mb-3">  
-                                <input type="text" class="form-control" id="usr" placeholder="Usuario">
-                                <label for="usr">Usuario</label>
+                                <input type="text" class="form-control" id="txtNombre" placeholder="Usuario">
+                                <label for="usr">Nombre</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="Email" placeholder="Contraseña">
-                                <label for="Email">Email</label>
+                                <input type="email" class="form-control" id="txtEmail" placeholder="Contraseña">
+                                <label for="Email">Correo</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="pass" placeholder="Contraseña">
+                                <input type="password" class="form-control" id="txtPassword" placeholder="Contraseña">
                                 <label for="pass">Contraseña</label>
                             </div>
+                            <div class="form-floating mb-3">
+                                <input type="number" class="form-control" id="txtEdad" placeholder="Contraseña">
+                                <label for="pass">Edad</label>
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-select" aria-label="Default select example" id="txtGenero">
+                                    <option selected>Genero</option>
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Femenino</option>
+                                    <option value="O">Otro</option>
+                                  </select>
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-select" aria-label="Default select example" id="txtCarrera">
+                                    <option selected>Carrera</option>
+                                    <option value="Licenciatura en Educación Básica Primaria">Licenciatura en Educación Básica Primaria</option>
+                                    <option value="Profesional en Inteligencia de Negocios">Profesional en Inteligencia de Negocios</option>
+                                    <option value="Ingeniería en Seguridad y Salud en el Trabajo">Ingeniería en Seguridad y Salud en el Trabajo</option>
+                                    <option value="Ingeniería Eléctrica">Ingeniería Eléctrica</option>
+                                    <option value="Administración de Negocios Internacionales">Administración de Negocios Internacionales</option>
+                                    <option value="Diseño Gráfico">Diseño Gráfico</option>
+                                    <option value="Ingeniería Industrial">Ingeniería Industrial</option>
+                                    <option value="Ingeniería Mecatrónica">Ingeniería Mecatrónica</option>
+                                    <option value="Ingeniería Telemática">Ingeniería Telemática</option>
+                                  </select>
+                            </div>
                             <div class="d-flex justify-content-center my-3">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" >
                                     Registrarme
                                 </button>
                             </div>
@@ -58,5 +84,7 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../js/register.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </body>
 </html>
