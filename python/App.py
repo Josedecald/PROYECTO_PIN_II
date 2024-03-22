@@ -391,7 +391,7 @@ def delete_publi(email, id_publi):
         print(e)
         return jsonify({"informacion": str(e)})
 
-
+#########################################################################################################################################
 
 # starting the app
 if __name__ == "__main__":
