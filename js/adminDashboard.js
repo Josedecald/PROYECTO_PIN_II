@@ -174,9 +174,17 @@ const chart = new Chart(document.querySelector("#graph-InicioSesion"), configIni
 const chartPublicaciones = new Chart(document.querySelector("#graph-publicaciones"), configPublicaciones);
 const chartCitas = new Chart(document.querySelector("#graph-citas"), configCitas);
 
-//DataTable
+//DataTables
 $(document).ready( () =>{
   $('#ContactTable').DataTable(
+    {
+      "language":{
+        "url": "https://cdn.datatables.net/plug-ins/2.0.2/i18n/es-ES.json"
+      }
+    }
+  );
+
+  $('#UsersTable').DataTable(
     {
       "language":{
         "url": "https://cdn.datatables.net/plug-ins/2.0.2/i18n/es-ES.json"
