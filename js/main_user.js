@@ -1,64 +1,35 @@
-const typed = new Typed("#typed", {
-  strings: [
-    localStorage.getItem("typedText1"),
-    localStorage.getItem("typedText2"),
-    localStorage.getItem("typedText3"),
-  ],
-  typeSpeed: 100,
-  backSpeed: 100,
-  backDelay: 7000,
-  loop: true,
-});
-
 const currentPage = document.body.id;
 
-//Se abre el modal y se inserta el texto para publicar
-document.getElementById("textoPublicacion").addEventListener("focus", () => {
-  swal({
-    title: "Comparte tus dudas con tus compañeros...",
-    content: "input",
-    button: {
-      text: "Publicar",
-    },
-    allowOutsideClick: false,
-  })
-  .then(postText => {
-    if (!postText || !postText.trim()){//Verifica que no intenten publicar sin texto
-      swal({
-        title: 'Debes escribir algo para publicar',
-        icon: 'warning',
-      });
-      throw null;//si está vacio detiene la función
-    }
+const post = (event) => {
+  event.preventDefault();
 
-    let posts = JSON.parse(localStorage.getItem(`${currentPage}_posts`)) || [];
+  const postText = document.getElementById("textoPublicacion").value.trim();
+  if (postText === "") {
+    swal("Debes escribir algo");
+    return;
+  }
 
-    const newPost = {
-      text: postText,
-      publicationTime: new Date().toLocaleString('en-US', {
-          year: 'numeric',
-          month: 'numeric',
-          day: 'numeric',
-          hour: 'numeric',
-          minute: 'numeric',
-          hour12: true 
-      }),
-    };
+  let posts = JSON.parse(localStorage.getItem(`${currentPage}_posts`)) || [];
 
-    posts.unshift(newPost);
-    localStorage.setItem(`${currentPage}_posts`, JSON.stringify(posts));
+  const newPost = {
+    text: postText,
+    publicationTime: new Date().toLocaleString("en-US", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    }),
+  };
 
-    uploadPosts();
-  })
-  .catch(err => {
-    if (err) {
-      swal("Ha ocurrido un error", "Hubo un error!", "error");
-    } else {
-      swal.stopLoading();
-      swal.close();
-    }
-  });
-});
+  posts.unshift(newPost);
+  localStorage.setItem(`${currentPage}_posts`, JSON.stringify(posts));
+
+  uploadPosts();
+
+
+};
 
 const uploadPosts = () => {
   let posts = JSON.parse(localStorage.getItem(`${currentPage}_posts`)) || [];
@@ -70,7 +41,7 @@ const uploadPosts = () => {
   } else {
     postsContainer.style.display = "block";
 
-    posts.forEach((currentPost, index) => { 
+    posts.forEach((currentPost, index) => {
       const postCard = document.createElement("div");
       postCard.className = "card border rounded mt-3";
 
@@ -93,31 +64,35 @@ const uploadPosts = () => {
       postsContainer.appendChild(postCard);
 
       if (currentPost.responses) {
-        currentPost.responses.forEach(response => {
+        currentPost.responses.forEach((response) => {
           const responseElement = document.createElement("div");
           responseElement.className = "card border rounded mt-3 p-2 bg-light";
           responseElement.innerHTML = `
           <p class="m-2">Nombre usuario </p>
           <p class="card-text m-3">${response.text}</p>
           <p class="card-text mx-2"><small class="text-muted">${response.publicationTime}</small></p>`;
-          
-          document.getElementById(`responses-${index}`).appendChild(responseElement);
+
+          document
+            .getElementById(`responses-${index}`)
+            .appendChild(responseElement);
         });
       }
     });
   }
 };
 
-const showResponseForm = (index) =>{
+const showResponseForm = (index) => {
   document.getElementById(`responseForm-${index}`).style.display = "block";
 };
 
-const postResponse = (event, index) =>{
+const postResponse = (event, index) => {
   event.preventDefault();
 
-  const responseText = document.getElementById(`responseText-${index}`).value.trim();
+  const responseText = document
+    .getElementById(`responseText-${index}`)
+    .value.trim();
 
-  if (responseText === ''){
+  if (responseText === "") {
     swal("Debes escribir algo");
     return;
   }
@@ -131,15 +106,14 @@ const postResponse = (event, index) =>{
   const newResponse = {
     text: responseText,
     publicationTime: new Date().toLocaleString(),
-  }
+  };
   posts[index].responses.push(newResponse);
   localStorage.setItem(`${currentPage}_posts`, JSON.stringify(posts));
 
   uploadPosts();
-  
+
   document.getElementById(`responseText-${index}`).value = "";
   document.getElementById(`responseForm-${index}`).style.display = "none";
-
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -147,5 +121,14 @@ document.addEventListener("DOMContentLoaded", () => {
   uploadPosts();
 });
 
-
-
+const typed = new Typed("#typed", {
+  strings: [
+    localStorage.getItem("typedText1"),
+    localStorage.getItem("typedText2"),
+    localStorage.getItem("typedText3"),
+  ],
+  typeSpeed: 100,
+  backSpeed: 100,
+  backDelay: 7000,
+  loop: true,
+});
