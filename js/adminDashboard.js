@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded",  () => {
 
 const view = async () => {
   try {
-    const response = await axios.get("/ruta hacia datos-almacenados");
+    const response = await axios.get("http://127.0.0.1:5000/getAllContact");
     const respuestasGuardadas = response.data;
 
     if (Array.isArray(respuestasGuardadas)) {
@@ -51,10 +51,14 @@ const view = async () => {
 
 const getUserData = async () => {
   try {
-    const response = await axios.get("/ruta/hacia/datos-de-usuario");
+
+    const response = await axios.get('http://127.0.0.1:5000/getAll');
     const users = response.data;
 
+    console.log(response.data)
+
     const userTableBody = document.getElementById("UserResponseTable");
+
 
     userTableBody.innerHTML = "";
 
@@ -64,7 +68,7 @@ const getUserData = async () => {
         <td>${user.id}</td>
         <td>${user.nombre}</td>
         <td>${user.email}</td>
-        <td>${user.contraseña}</td>
+        <td>${user.password}</td>
         <td>${user.edad}</td>
         <td>${user.genero}</td>
         <td>${user.carrera}</td>
@@ -234,3 +238,4 @@ const ConfigsGraphs = () => {
     );
   });
 };
+
