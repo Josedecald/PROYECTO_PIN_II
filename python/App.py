@@ -2,6 +2,7 @@
 from flask import Flask, request, jsonify
 from flask_mysqldb import MySQL
 from flask_cors import CORS, cross_origin
+from datetime import datetime, timedelta
 
 # initializations
 app = Flask(__name__)
@@ -391,7 +392,249 @@ def delete_publi(email, id_publi):
         print(e)
         return jsonify({"informacion": str(e)})
 
+
 #########################################################################################################################################
+
+#################################### CONTACTO ##############################################################################
+
+#ruta para registrar contacto
+@cross_origin()
+@app.route('/add_contact', methods=['POST'])
+def add_contact():
+    try:
+        if request.method == 'POST':
+            nombre = request.json['nombre'] 
+            correo = request.json['correo']        
+            mensaje = request.json['mensaje']
+            asunto = request.json['asunto']
+            
+            cur = mysql.connection.cursor()
+            cur.execute("INSERT INTO contacto (nombre, correo, mensaje, asunto) VALUES (%s, %s, %s, %s)", (nombre, correo, mensaje, asunto))
+            mysql.connection.commit()
+            return jsonify({"informacion":"Registro exitoso"})
+ 
+        
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion":str(e)})
+
+#####################################################################################################################################
+
+#################################### PROFESIONALES ###########################################################################################
+
+# ruta para consultar todos los profesionales
+@cross_origin()
+@app.route('/getAllPro', methods=['GET'])
+def getAllPro():
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM profesional')
+        rv = cur.fetchall()
+        cur.close()
+        payload = []
+        content = {}
+        for result in rv:
+            content = {'id': result[0], 'nombre': result[1], 'correo': result[2], 'contraseña': result[3]}
+            payload.append(content)
+            content = {}
+        return jsonify(payload)
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion":e})
+    
+# ruta para consultar el numero de usuarios
+@cross_origin()
+@app.route('/getcountPro', methods=['GET'])
+def getcountPro():
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT COUNT(*) as total from profesional')
+        rv = cur.fetchall()
+        cur.close()
+        payload = []
+        content = {}
+        for result in rv:
+            content = {'total de usuarios': result[0]}
+            payload.append(content)
+            content = {}
+        return jsonify(payload)
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion":e})
+
+# ruta para consultar por parametro
+@cross_origin()
+@app.route('/getAllById_Pro/<email>',methods=['GET'])
+def getAllById_Pro(email):
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM profesional WHERE correo = %s', (email,))
+        rv = cur.fetchall()
+        cur.close()
+        payload = []
+        content = {}
+        for result in rv:
+            content = {'id_profesional': result[0], 'nombre': result[1], 'correo': result[2], 'contraseña': result[3]}
+            payload.append(content)
+            content = {}
+        return jsonify(payload)
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion":str(e)})
+    
+#ruta para registrar usuario
+@cross_origin()
+@app.route('/add_userPro', methods=['POST'])
+def add_userPro():
+    try:
+        if request.method == 'POST':
+            nombre = request.json['nombre'] 
+            correo = request.json['correo']        
+            contraseña = request.json['contraseña']
+            
+            cur = mysql.connection.cursor()
+            cur.execute("SELECT * FROM profesional WHERE correo = %s", (correo,))
+            usuario_existente = cur.fetchone()
+
+            if not usuario_existente:
+                cur = mysql.connection.cursor()
+                cur.execute("INSERT INTO profesional (nombre, correo, contraseña) VALUES (%s, %s, %s)", (nombre, correo, contraseña))
+                mysql.connection.commit()
+                return jsonify({"informacion":"Registro exitoso"})
+            else:
+                return jsonify({"informacion":"el usuario ya existe"})
+        
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion":str(e)})
+    
+#ruta para actualizar el usuario
+@cross_origin()
+@app.route('/updateuserPro/<email>', methods=['PUT'])
+def update_userPro(email):
+    try:
+        nombre = request.json['nombre'] 
+        correo = request.json['correo']        
+        contraseña = request.json['contraseña']
+
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM profesional WHERE correo = %s", (email,))
+        usuario_existente = cur.fetchone()
+        cur.close()
+
+        if usuario_existente:
+            cur = mysql.connection.cursor()
+            cur.execute("""
+            UPDATE profesional
+            SET nombre = %s,
+                correo = %s,
+                contraseña = %s
+            WHERE correo = %s
+            """, (nombre, correo, contraseña, email))
+            mysql.connection.commit()
+            cur.close()
+            return jsonify({"informacion":"Registro actualizado"})
+        else:
+            return jsonify({"informacion": "El usuario con el correo electrónico proporcionado no existe."})
+
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion": str(e)})
+
+#ruta para eliminar profesional
+@cross_origin()
+@app.route('/deletePro/<email>', methods = ['DELETE'])
+def delete_contactPro(email):
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute('DELETE FROM profesional WHERE correo = %s', (email,))
+        mysql.connection.commit()
+        return jsonify({"informacion":"Registro eliminado"}) 
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion":str(e)})
+
+#####################################################################################################################################
+
+################################### COMENTARIOS #####################################################################################
+
+#ruta para guardar comentario    
+@cross_origin()
+@app.route('/guardar_comen', methods=['POST'])
+def guardar_comen():
+    try:
+        contenido = request.json['contenido']
+        fecha = request.json['fecha']
+        hora = request.json['hora']
+
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO comentarios (contenido, fecha, hora) VALUES (%s, %s, %s)", (contenido, fecha, hora))
+        mysql.connection.commit()
+
+        return jsonify({"informacion": "Comentario registrado correctamente"})
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion": str(e)})
+
+#ruta para actualizar comentario
+@cross_origin()
+@app.route('/updateComen/<id_comen>', methods=['PUT'])
+def update_Comen(id_comen):
+    try:
+        contenido = request.json['contenido'] 
+        fecha = request.json['fecha']        
+        hora = request.json['hora']
+
+        cur = mysql.connection.cursor()
+        cur.execute("""
+            UPDATE comentarios
+            SET contenido = %s,
+                fecha = %s,
+                hora = %s
+            WHERE id_comen = %s
+        """, (contenido, fecha, hora, id_comen))
+        mysql.connection.commit()
+        cur.close()
+        return jsonify({"informacion": "Comentario actualizado correctamente."})
+
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion": str(e)})
+
+#ruta para ver todos los comentarios 
+@cross_origin()
+@app.route('/getAllComen', methods=['GET'])
+def getAllComen():
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM comentarios')
+        rv = cur.fetchall()
+        cur.close()
+        payload = []
+        content = {}
+        for result in rv:
+            content = {'id_publi': result[0], 'contenido': result[1],'fecha': str(result[2]), 'hora': str(result[3])}
+            payload.append(content)
+            content = {}
+        return jsonify(payload)
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion":str(e)})
+
+#ruta para eliminar publicacion
+@cross_origin()
+@app.route('/deleteComen/<id_comen>', methods=['DELETE'])
+def delete_Comen(id_comen):
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute('DELETE FROM comentarios WHERE id_comen = %s', (id_comen,))
+        mysql.connection.commit()
+        cur.close()
+        return jsonify({"informacion": "Publicación eliminada correctamente."})
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion": str(e)})
+
 
 # starting the app
 if __name__ == "__main__":
