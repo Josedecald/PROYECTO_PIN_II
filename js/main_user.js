@@ -1,3 +1,4 @@
+
 const currentPage = document.body.id;
 
 const post = (event) => {

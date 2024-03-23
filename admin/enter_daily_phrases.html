@@ -49,8 +49,8 @@
         <section class="d-flex justify-content-center align-items-center h-100">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 col-md-6 col-lg-4 d-flex flex-column align-items-center justify-content-center">
-                        <form id="enterphrase" class="w-100" autocomplete="off">
+                    <div class="col-12 col-md-6 col-lg-6 mt-5 d-flex flex-column align-items-center justify-content-center">
+                        <form id="enterphrase" class="w-50" autocomplete="off">
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="text1" placeholder="Inserta la primera frase: ">
                                 <label for="text1">Inserta la primera frase: </label>
@@ -67,21 +67,23 @@
                                 <button type="submit" class="btn btn-primary mx-1">
                                     Enviar
                                 </button>
-                                <button type="submit" class="btn btn-primary">
-                                <a href="../html/Main_user.html" class="text-white link-underline ">Ver frases</a>
+                                <button type="submit" class="btn btn-secondary">
+                                <a href="../html/Main_user.html" class="text-white text-decoration-none ">Ver frases</a>
                                 </button>
                             </div>
                         </form>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-4 d-flex flex-column align-items-center justify-content-center">
-                        <div id="preview1" class="text-center text-black mb-3"></div>
-                        <div id="preview2" class="text-center text-black mb-3"></div>
-                        <div id="preview3" class="text-center text-black"></div>
+                    <div class="col-12 col-md-6 col-lg-6 d-flex flex-column align-items-center justify-content-center">
+                        <div id="preview1" class="col-12 col-md-12 text-center text-black ms-5 mb-3 p-5 shadow"></div>
+                        <div id="preview2" class="col-12 col-md-12 text-center text-black ms-5 mb-3 p-5 shadow"></div>
+                        <div id="preview3" class="col-12 col-md-12 text-center text-black ms-5 p-5 shadow"></div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../js/enter_phrases.js"></script>
 </body>
 </html>

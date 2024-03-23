@@ -14,18 +14,19 @@ class Home extends Controller
             if (empty($_POST['title']) || empty($_POST['start'])) {
             }else{
                 $title = $_POST['title'];
+                $user = $_POST['user'];
                 $start = $_POST['start'];
                 $color = $_POST['color'];
                 $id = $_POST['id'];
                 if ($id == '') {
-                    $data = $this->model->registrar($title, $start, $color);
+                    $data = $this->model->registrar($title,$user, $start, $color);
                     if ($data == 'ok') {
                         $msg = array('msg' => 'Evento Registrado', 'estado' => true, 'tipo' => 'success');
                     }else{
                         $msg = array('msg' => 'Error al Registrar', 'estado' => false, 'tipo' => 'danger');
                     }
                 } else {
-                    $data = $this->model->modificar($title, $start, $color, $id);
+                    $data = $this->model->modificar($title,$user, $start, $color, $id);
                     if ($data == 'ok') {
                         $msg = array('msg' => 'Evento Modificado', 'estado' => true, 'tipo' => 'success');
                     } else {

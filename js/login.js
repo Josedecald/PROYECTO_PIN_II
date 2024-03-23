@@ -8,20 +8,29 @@ const validateLogin = (event) => {
     const pass = document.getElementById("pass").value.trim(); 
   
     if (!user || !pass) { 
-      alert("Por favor, rellene ambos espacios para iniciar sesión");
-      return; // Detener la ejecución de la función si hay campos vacíos
+      swal({
+        title: 'Por favor, rellene ambos espacios para iniciar sesión',
+        icon: 'warning'
+      });
+      return; 
     }
   
     if(Array.isArray(savedUsers)){
         const foundUser = savedUsers.find((savedUser) => savedUser.username == user && savedUser.password == pass);
         if (foundUser){
             console.log("Dentro");
-            window.location.href = "../html/Main_user.html"; 
+            window.location.href = "../user/grupos.html"; 
         } else {
-            alert("Nombre de usuario o/y contraseña incorrectos");
+            swal({
+                title: "Nombre de usuario o/y contraseña incorrectos",
+                icon: 'warning'
+            })
         }
     } else {
-        alert("No hay usuarios registrados.");
+        swal({
+            title: "No hay usuarios registrados.",
+            icon: 'warning'
+        });
     }
 
   };

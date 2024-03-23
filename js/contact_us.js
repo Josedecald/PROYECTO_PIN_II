@@ -4,13 +4,15 @@ const isValidEmail = (email) => {
     return emailRegex.test(email);
 };
 
-const alerta = () =>{
-    alert('Formulario enviado exitosamente');
-};
+
 
 const obtained_data = (event) => {
     event.preventDefault(); // Evita que el formulario se envíe solo
 
+    swal({
+        title: 'Formulario enviado exitosamente',
+        icon: 'success'
+    });
 
     let nombre = document.getElementById('name').value.trim();
     let email = document.getElementById('Email').value.trim();
@@ -18,7 +20,10 @@ const obtained_data = (event) => {
     let mensaje = document.querySelector('textarea[name="mensaje"]').value;
 
     if (!nombre || !email || !asunto || !mensaje) {
-        alert('Por favor, completa todos los campos del formulario.');
+        swal({
+            title: 'Por favor, completa todos los campos del formulario.',
+            icon: 'warning'
+        });
         return;
     }
 
@@ -28,7 +33,10 @@ const obtained_data = (event) => {
     let respuestasGuardadas = JSON.parse(localStorage.getItem('respuestas')) || [];
 
     if (!isValidEmail(email)) {
-        alert('Por favor, introduce una dirección de correo electrónico válida.');
+        swal({
+            title: 'Por favor, introduce una dirección de correo electrónico válida.',
+            icon: 'warning'
+        });
         return;
     }
 
