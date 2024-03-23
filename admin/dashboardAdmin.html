@@ -50,13 +50,33 @@
             <h4 class="text-dark">Admin Dashboard</h4>
           </div>
           <div class="row">
+            <div class="col-12 col-md-3 col-xl-3">
+              <div class="card border-warning pb-2">
+                <div class="card-header bg-white">
+                  <h5 class="card-title">FORMULARIO DE CONTACTENOS ENVIADOS (HOY)</h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text"><i class="fa-regular fa-user me-2"></i>10</p>
+                </div>
+                <div class="card-footer bg-white">
+                  <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ContactsModal">
+                    +INFO  
+                </button>
+                </div>
+              </div>
+            </div>
             <div class="col-12 col-md-3 col-xl-3 ">
-              <div class="card border-primary pb-3">
+              <div class="card border-primary pb-2">
                 <div class="card-header bg-white">
                   <h5 class="card-title">USUARIOS REGISTRADOS (HOY)</h5>
                 </div>
                 <div class="card-body">
                   <p class="card-text"><i class="fa-regular fa-user me-2"></i>40</p>
+                </div>
+                <div class="card-footer bg-white">
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UsersModal">
+                    +INFO  
+                </button>
                 </div>
               </div>
             </div>
@@ -72,7 +92,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-md-8 mb-3 shadow-sm">
+              <div class="col-sm-12 col-md-8 mb-3 shadow-sm">
                 <div class="card border-0 text-dark">
                   <div class="card-body p-0">
                     <canvas id="graph-publicaciones"></canvas> 
@@ -90,33 +110,90 @@
 
         </section>
 
-        <section>
-            <div class="table-responsive pt-4">
-              <h4 class=" text-dark">Info Contacts</h4>
-              <table id="ContactTable" class="table table-ligth table-hover table-bordered">
-                <thead class="table-success">
-                  <tr>
-                    <th>Nombre</th>
-                    <th>Email</th>
-                    <th>Asunto</th>
-                    <th>Mensaje</th>
-                  </tr>
-                </thead>
-                <tbody id="respuestasTable"></tbody>
-              </table>
-            </div>
 
+        <section>
+          <div class="modal fade" id="ContactsModal" tabindex="-1" aria-labelledby="ContactsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ContactsModalLabel">Info Contacts</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-12 col-md-12">
+                          <div class="table-responsive pt-4">
+                            <table id="ContactTable" class="table table-ligth table-hover table-bordered">
+                              <thead class="table-success">
+                                <tr>
+                                  <th>Nombre</th>
+                                  <th>Email</th>
+                                  <th>Asunto</th>
+                                  <th>Mensaje</th>
+                                </tr>
+                              </thead>
+                              <tbody id="respuestasTable"></tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+
+        <section>
+          <div class="modal fade" id="UsersModal" tabindex="-1" aria-labelledby="UsersModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="UsersModalLabel">Info Contacts</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-12 col-md-12">
+                          <div class="table-responsive pt-4">
+                            <table id="UsersTable" class="table table-ligth table-hover table-bordered">
+                              <thead class="table-dark">
+                                <tr>
+                                  <th>ID</th>
+                                  <th>Nombre</th>
+                                  <th>Email</th>
+                                  <th>Contraseña</th>
+                                  <th>Edad</th>
+                                  <th>Genero</th>
+                                  <th>Carrera</th>
+                                </tr>
+                              </thead>
+                              <tbody id="UserResponseTable"></tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         </section>
       </article>
 
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="../js/adminDashboard.js"></script>
+    <script  src="../js/adminDashboard.js"></script>
   </body>
 </html>
