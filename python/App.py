@@ -418,6 +418,26 @@ def add_contact():
         print(e)
         return jsonify({"informacion":str(e)})
 
+# ruta para consultar todos los contactos
+@cross_origin()
+@app.route('/getAllContact', methods=['GET'])
+def getAllContac():
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM contacto')
+        rv = cur.fetchall()
+        cur.close()
+        payload = []
+        content = {}
+        for result in rv:
+            content = {'id_contacto': result[0], 'nombre': result[1], 'correo': result[2], 'mensaje': result[3], 'asunto': result[4]}
+            payload.append(content)
+            content = {}
+        return jsonify(payload)
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion":e})
+
 #####################################################################################################################################
 
 #################################### PROFESIONALES ###########################################################################################
@@ -638,4 +658,4 @@ def delete_Comen(id_comen):
 
 # starting the app
 if __name__ == "__main__":
-    app.run(port=3000, debug=True)
+    app.run(port=5000, debug=True)

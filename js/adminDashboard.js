@@ -19,16 +19,16 @@ $(document).ready(  () =>{
   );
 });
 
-document.addEventListener('DOMContentLoaded', async () => {
-  await getUserData();
-  await view();
-  await getDataAndUpdateGraphs();
+document.addEventListener('DOMContentLoaded',  () => {
+   getUserData();
+   view();
+   getDataAndUpdateGraphs();
 });
 
 const view = async () => {
   try {
 
-    const response = await axios.get('/ruta hacia datos-almacenados');
+    const response = await axios.get('http://127.0.0.1:5000/getAllContact');
     const respuestasGuardadas = response.data;
 
     if (Array.isArray(respuestasGuardadas)) {
@@ -40,7 +40,7 @@ const view = async () => {
         respuestasTable.innerHTML += `
           <tr>
             <td>${respuesta.nombre}</td>
-            <td>${respuesta.email}</td>
+            <td>${respuesta.correo}</td>
             <td>${respuesta.asunto}</td>
             <td>${respuesta.mensaje}</td>
           </tr>
@@ -58,7 +58,7 @@ const view = async () => {
 const getUserData = async () => {
   try {
 
-    const response = await axios.get('http://127.0.0.1:3000/getAll');
+    const response = await axios.get('http://127.0.0.1:5000/getAll');
     const users = response.data;
 
     console.log(response.data)
