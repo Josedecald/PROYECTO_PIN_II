@@ -16,7 +16,7 @@ $(document).ready(() => {
 document.addEventListener('DOMContentLoaded',  () => {
    getUserData();
    view();
-   getDataAndUpdateGraphs();
+   ConfigsGraphs();
 });
 
 const view = async () => {
