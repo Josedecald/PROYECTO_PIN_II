@@ -68,7 +68,7 @@ const agregarcontacto = (event) => {
          
                 axios ({
                     method: 'POST',
-                    url: 'http://127.0.0.1:3000/add_user',
+                    url: 'http://127.0.0.1:5000/add_user',
                     data: {
                             nombre:v_nombre,
                             email:v_correo,

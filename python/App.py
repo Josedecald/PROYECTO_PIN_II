@@ -63,19 +63,19 @@ def getcount():
 def getAllById(email):
     try:
         cur = mysql.connection.cursor()
-        cur.execute('SELECT * FROM usuarios WHERE id = %s', (email))
+        cur.execute('SELECT * FROM usuarios WHERE email = %s', (email))
         rv = cur.fetchall()
         cur.close()
         payload = []
         content = {}
         for result in rv:
-            content = {'id': result[0], 'nombre': result[1], 'email': result[2], 'password': result[3], 'edad': result[4], 'genero': result[5], 'carrera': result[6]}
+            content = {'id_usuario': result[0], 'nombre': result[1], 'email': result[2], 'password': result[3], 'edad': result[4], 'genero': result[5], 'carrera': result[6]}
             payload.append(content)
             content = {}
         return jsonify(payload)
     except Exception as e:
         print(e)
-        return jsonify({"informacion":e})
+        return jsonify({"informacion":str(e)})
     
 #ruta para registrar usuario
 @cross_origin()
@@ -418,6 +418,24 @@ def add_contact():
         print(e)
         return jsonify({"informacion":str(e)})
 
+@cross_origin()
+@app.route('/getAllContact', methods=['GET'])
+def getAllContact():
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM contacto')
+        rv = cur.fetchall()
+        cur.close()
+        payload = []
+        content = {}
+        for result in rv:
+            content = {'id_contacto': result[0], 'nombre': result[1], 'correo': result[2], 'mensaje': result[3], 'asunto': result[4]}
+            payload.append(content)
+            content = {}
+        return jsonify(payload)
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion":e})
 #####################################################################################################################################
 
 #################################### PROFESIONALES ###########################################################################################
@@ -638,4 +656,4 @@ def delete_Comen(id_comen):
 
 # starting the app
 if __name__ == "__main__":
-    app.run(port=3000, debug=True)
+    app.run(port=5000, debug=True)
