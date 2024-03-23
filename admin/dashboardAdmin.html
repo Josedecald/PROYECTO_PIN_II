@@ -8,8 +8,8 @@
     <script src="https://kit.fontawesome.com/94686504bc.js" crossorigin="anonymous"></script>
     <title>SereneMind</title>
   </head>
-  <body class="bg-light min-vh-100">
-    <header>
+  <body class="bg-body-tertiary min-vh-100">
+    <header>  
       <aside>
         <button class="btn btn-outline-dark shadow-sm mx-3 mt-3" data-bs-toggle="offcanvas" data-bs-target="#intro">
           <i class="fa-solid fa-bars"></i>
@@ -19,20 +19,20 @@
           <div class="body_sidebar offcanvas-body d-flex flex-column justify-content-between">
             <ul class="side_list justify-content-start p-0">
               <li class="list-group-item">
-                <a href="#" class="text-decoration-none text-black"><i class="fa-solid fa-message mx-3"></i>Inicio</a>
+                <a href="#" class="text-decoration-none text-black">Inicio</a>
               </li>
               <hr />
               <li class="list-group-item">
-                <a href="../admin/adminvideos.html" class="text-decoration-none text-black"><i class="fa-regular fa-calendar mx-3"></i>Subir videos</a>
+                <a href="../admin/adminvideos.html" class="text-decoration-none text-black">Subir videos</a>
               </li>
               <hr/>
               <li class="list-group-item">
-                <a href="../admin/enter_daily_phrases.html" class="text-decoration-none text-black"><i class="fa-solid fa-phone mx-3"></i>Editar frases</a>
+                <a href="../admin/enter_daily_phrases.html" class="text-decoration-none text-black">Editar frases</a>
               </li>
               <hr/>
             </ul>
             <ul class="side_list_user d-flex p-0 align-items-center">
-              <div class="name_user m-0 px-3 text-black">Jose Luis</div>
+              <div class="name_user m-0 px-3 text-black">Nombre Usuario</div>
               <div class="exit_usr ms-5">
                 <a href="#" class="exit_usr text-decoration-none text-black"><i class="fa-solid fa-right-from-bracket"></i></a>
               </div>
@@ -41,17 +41,13 @@
         </div>
       </aside>
     </header>
-    <main id="main" class="content px-2 py-2">
+    <main id="main" class="content px-2">
 
-      <article class=" px-3 py-3">
-
+      <article class="px-3 py-1">
         <section>
-          <div class="mb-3">
-            <h4 class="text-dark">Admin Dashboard</h4>
-          </div>
           <div class="row">
-            <div class="col-12 col-md-3 col-xl-3">
-              <div class="card border-warning pb-2">
+            <div class="col-12 col-md-2 col-xl-2">
+              <div class="card border-warning pb-2 mb-2">
                 <div class="card-header bg-white">
                   <h5 class="card-title">FORMULARIO DE CONTACTENOS ENVIADOS (HOY)</h5>
                 </div>
@@ -65,8 +61,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-12 col-md-3 col-xl-3 ">
-              <div class="card border-primary pb-2">
+            <div class="col-12 col-md-2 col-xl-2 ">
+              <div class="card border-primary pb-2 mb-2">
                 <div class="card-header bg-white">
                   <h5 class="card-title">USUARIOS REGISTRADOS (HOY)</h5>
                 </div>
@@ -79,34 +75,35 @@
                 </button>
                 </div>
               </div>
+            </div>  
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-3 col-xl-3 mb-3"> 
+              <div class="card border-0 text-dark">
+                <div class="card-body p-0">
+                  <canvas id="graph-InicioSesion"></canvas>
+                </div>
+              </div>
             </div>
+            <div class="col-sm-12 col-md-6 col-xl-6 mb-3 ">
+              <div class="card border-0 text-dark">
+                <div class="card-body p-0">
+                  <canvas id="graph-publicaciones"></canvas> 
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-3 col-xl-3 mb-3">
+              <div class="card border-0 text-dark">
+                <div class="card-body p-0">
+                  <canvas id="graph-citas"></canvas> 
+                </div>
+              </div>
+            </div>
+          </div>
           </div>
         </section>
 
         <section class="mt-4">
-            <div class="row">
-              <div class="col-12 col-md-4 col-xl-4 mb-3 shadow-sm">
-                <div class="card border-0 text-dark">
-                  <div class="card-body p-0">
-                    <canvas id="graph-InicioSesion"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-12 col-md-8 col-xl-8 mb-3 shadow-sm">
-                <div class="card border-0 text-dark">
-                  <div class="card-body p-0">
-                    <canvas id="graph-publicaciones"></canvas> 
-                  </div>
-                </div>
-              </div>
-              <div class="col-12 col-md-4 col-xl-4 mb-3 shadow-sm">
-                <div class="card border-0 text-dark">
-                  <div class="card-body p-0">
-                    <canvas id="graph-citas"></canvas> 
-                  </div>
-                </div>
-              </div>
-            </div>
 
         </section>
 
