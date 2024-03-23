@@ -80,9 +80,9 @@ const agregarcontacto = (event) => {
                   }).then(function (response) {
                     swal({
                         title: "Usuario registrado con exito",
-                        icon: 'success'
+                        icon: 'success', 
                     })
-                    window.location.href = '../index.html';
+                    window.location.href = '../todos/login.html';
                   }).catch(err => {
                     console.log('Error: ', err);
                 });
