@@ -1,0 +1,37 @@
+{
+  "Lunes": {
+    "usuarios": 100,
+    "publicaciones": 120,
+    "citas": 50
+  },
+  "Martes": {
+    "usuarios": 110,
+    "publicaciones": 130,
+    "citas": 60
+  },
+  "Miércoles": {
+    "usuarios": 120,
+    "publicaciones": 140,
+    "citas": 70
+  },
+  "Jueves": {
+    "usuarios": 130,
+    "publicaciones": 150,
+    "citas": 80
+  },
+  "Viernes": {
+    "usuarios": 140,
+    "publicaciones": 160,
+    "citas": 90
+  },
+  "Sábado": {
+    "usuarios": 150,
+    "publicaciones": 170,
+    "citas": 100
+  },
+  "Domingo": {
+    "usuarios": 160,
+    "publicaciones": 180,
+    "citas": 110
+  }
+}

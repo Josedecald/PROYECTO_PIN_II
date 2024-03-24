@@ -68,7 +68,7 @@ const agregarcontacto = (event) => {
          
                 axios ({
                     method: 'POST',
-                    url: 'http://127.0.0.1:3000/add_user',
+                    url: 'http://127.0.0.1:5000/add_user',
                     data: {
                             nombre:v_nombre,
                             email:v_correo,
@@ -80,9 +80,9 @@ const agregarcontacto = (event) => {
                   }).then(function (response) {
                     swal({
                         title: "Usuario registrado con exito",
-                        icon: 'success'
+                        icon: 'success', 
                     })
-                    window.location.href = '../index.html';
+                    window.location.href = '../todos/login.html';
                   }).catch(err => {
                     console.log('Error: ', err);
                 });

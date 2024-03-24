@@ -2,7 +2,6 @@
 from flask import Flask, request, jsonify
 from flask_mysqldb import MySQL
 from flask_cors import CORS, cross_origin
-from datetime import datetime, timedelta
 
 # initializations
 app = Flask(__name__)
@@ -29,7 +28,7 @@ def getAll():
         payload = []
         content = {}
         for result in rv:
-            content = {'id': result[0], 'nombre': result[1], 'email': result[2], 'password': result[3], 'edad': result[4], 'genero': result[5], 'carrera': result[6]}
+            content = {'id_usuario': result[0], 'nombre': result[1], 'email': result[2], 'password': result[3], 'edad': result[4], 'genero': result[5], 'carrera': result[6]}
             payload.append(content)
             content = {}
         return jsonify(payload)
@@ -63,19 +62,19 @@ def getcount():
 def getAllById(email):
     try:
         cur = mysql.connection.cursor()
-        cur.execute('SELECT * FROM usuarios WHERE id = %s', (email))
+        cur.execute('SELECT * FROM usuarios WHERE email = %s', (email,))
         rv = cur.fetchall()
         cur.close()
         payload = []
         content = {}
         for result in rv:
-            content = {'id': result[0], 'nombre': result[1], 'email': result[2], 'password': result[3], 'edad': result[4], 'genero': result[5], 'carrera': result[6]}
+            content = {'id_usuario': result[0], 'nombre': result[1], 'email': result[2], 'password': result[3], 'edad': result[4], 'genero': result[5], 'carrera': result[6]}
             payload.append(content)
             content = {}
         return jsonify(payload)
     except Exception as e:
         print(e)
-        return jsonify({"informacion":e})
+        return jsonify({"informacion":str(e)})
     
 #ruta para registrar usuario
 @cross_origin()
@@ -418,10 +417,9 @@ def add_contact():
         print(e)
         return jsonify({"informacion":str(e)})
 
-# ruta para consultar todos los contactos
 @cross_origin()
 @app.route('/getAllContact', methods=['GET'])
-def getAllContac():
+def getAllContact():
     try:
         cur = mysql.connection.cursor()
         cur.execute('SELECT * FROM contacto')
@@ -437,7 +435,6 @@ def getAllContac():
     except Exception as e:
         print(e)
         return jsonify({"informacion":e})
-
 #####################################################################################################################################
 
 #################################### PROFESIONALES ###########################################################################################

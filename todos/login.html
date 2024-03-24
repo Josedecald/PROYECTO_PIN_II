@@ -17,26 +17,22 @@
     </header>
 
     <main class="min-vh-100 d-flex justify-content-center align-items-center">
-        <section class="rounded shadow mx-5 py-3">
+        <section class="rounded-5 shadow-lg">
+            <div class="container">
                 <div class="row justify-content-center align-items-center">
-                    <div class=" col-10 col-md-5 d-flex justify-content-center align-items-center">
-                        <img src="https://images.pexels.com/photos/2033997/pexels-photo-2033997.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                            class="rounded img-fluid shadow" alt="">
-                            <h2 class="position-absolute d-flex"> Bienvenido a SereneMind</h2>
-                    </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <form id="Login-form" autocomplete="off" class="px-4 py-5">
-                            <h1 class="mb-3 text-center">Iniciar sesión</h1>
+                            <h2 class="h2 mb-3 text-center">Iniciar sesión</h2>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="usr" placeholder="Usuario o Correo">
-                                <label for="usr">Usuario</label>
+                                <input type="text" class="form-control rounded-5" id="usr" placeholder="Usuario o Correo">
+                                <label for="usr">Correo</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="pass" placeholder="Contraseña">
+                                <input type="password" class="form-control rounded-5" id="pass" placeholder="Contraseña">
                                 <label for="pass">Contraseña</label>
                             </div>
                             <div class="mb-3">
-                                <select class="form-select" aria-label="Default select example">
+                                <select class="p-3 form-select rounded-5" aria-label="Default select example">
                                     <option selected>Tipo de usuario</option>
                                     <option value="1">Estudiante</option>
                                     <option value="2">Profesional</option>
@@ -52,16 +48,21 @@
                             </div>
                             <div class="d-flex justify-content-center my-3">
                                 <button type="submit" class="btn btn-primary">
-                                    Iniciar sesión
-                                </button>
+                                    Iniciar sesión</button>
                             </div>
                             <div class="text-center">
-                                <p>No tengo una cuenta.<a class="text-decoration-none fw-semibold" href="../todos/register.html"> Crear una</a></p>
+                                <p>¿No tienes una cuenta?<a class="text-decoration-none fw-semibold" href="../todos/register.html"> ¡Crear una!</a></p>
                             </div>
                         </form>
                     </div>
+                    <div class="col-md-6">
+                        <div class="text-center">
+                            <img src="../img/pexels-buro-millennial-1438081_11zon.webp" class="img-fluid rounded" alt="">
+                        </div>
+                    </div>
                 </div>
-         </section>
+            </div>
+        </section>        
     </main>
     
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
