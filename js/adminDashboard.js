@@ -32,7 +32,7 @@ const view = async () => {
         respuestasTable.innerHTML += `
           <tr>
             <td>${respuesta.nombre}</td>
-            <td>${respuesta.email}</td>
+            <td>${respuesta.correo}</td>
             <td>${respuesta.asunto}</td>
             <td>${respuesta.mensaje}</td>
           </tr>
