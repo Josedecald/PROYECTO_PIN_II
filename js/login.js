@@ -6,10 +6,11 @@ const validateLogin = (event) => {
 
     const user= document.getElementById("usr").value.trim();
     const pass = document.getElementById("pass").value.trim(); 
+    const type = document.getElementById("Type").value.trim();
   
-    if (!user || !pass) { 
+    if (!user || !pass || !type) { 
       swal({
-        title: 'Por favor, rellene ambos espacios para iniciar sesión',
+        title: 'Por favor, complete los datos para iniciar sesión',
         icon: 'warning'
       });
       return; 
