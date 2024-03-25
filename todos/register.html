@@ -1,90 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/Main.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/Main.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
     <title>SereneMind</title>
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm fixed-top" id="Nav">
-          <div class="container-fluid">
-              <a class="navbar-brand text-dark" href="../index.html">SereneMind</a>
-          </div>
-      </nav>
-    </header>
-
-    <main class="min-vh-100 d-flex justify-content-center align-items-center">
-        <section class="rounded shadow mx-5 py-3">
-                <div class="row justify-content-center align-items-center">
-
-                    <div class="col-md-5">
-                        <form id="Register-form" autocomplete="off" class="px-4 py-5">
-                            <h1 class="mb-3 text-center">Registrarse</h1>
-                            <div class="form-floating mb-3">  
-                                <input type="text" class="form-control" id="txtNombre" placeholder="Usuario">
-                                <label for="usr">Nombre</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="txtEmail" placeholder="Contraseña">
-                                <label for="Email">Correo</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="txtPassword" placeholder="Contraseña">
-                                <label for="pass">Contraseña</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="number" class="form-control" id="txtEdad" placeholder="Contraseña">
-                                <label for="pass">Edad</label>
-                            </div>
-                            <div class="mb-3">
-                                <select class="form-select" aria-label="Default select example" id="txtGenero">
-                                    <option selected>Genero</option>
-                                    <option value="M">Masculino</option>
-                                    <option value="F">Femenino</option>
-                                    <option value="O">Otro</option>
-                                  </select>
-                            </div>
-                            <div class="mb-3">
-                                <select class="form-select" aria-label="Default select example" id="txtCarrera">
-                                    <option selected>Carrera</option>
-                                    <option value="Licenciatura en Educación Básica Primaria">Licenciatura en Educación Básica Primaria</option>
-                                    <option value="Profesional en Inteligencia de Negocios">Profesional en Inteligencia de Negocios</option>
-                                    <option value="Ingeniería en Seguridad y Salud en el Trabajo">Ingeniería en Seguridad y Salud en el Trabajo</option>
-                                    <option value="Ingeniería Eléctrica">Ingeniería Eléctrica</option>
-                                    <option value="Administración de Negocios Internacionales">Administración de Negocios Internacionales</option>
-                                    <option value="Diseño Gráfico">Diseño Gráfico</option>
-                                    <option value="Ingeniería Industrial">Ingeniería Industrial</option>
-                                    <option value="Ingeniería Mecatrónica">Ingeniería Mecatrónica</option>
-                                    <option value="Ingeniería Telemática">Ingeniería Telemática</option>
-                                  </select>
-                            </div>
-                            <div class="d-flex justify-content-center my-3">
-                                <button type="submit" class="btn btn-primary" >
-                                    Registrarme
-                                </button>
-                            </div>
-                            <div class="text-center text-black-50">
-                                <p>Al registrarte, aceptas nuestras <br> Condiciones de uso y politica de privacidad</p>
-                            </div>
-                        </form>
+  </head>
+  <body class="bg-body-tertiary">
+    <main>
+      <section class="">
+        <div class="container">
+          <div class="card o-hidden border-0 shadow-lg my-5 rounded-5">
+            <div class="row justify-content-center align-items-center">
+              <div class="col-md-6">
+                <form id="Register-form" autocomplete="off" class="px-4 py-5">
+                  <h2 class="h2 mb-3 text-center">Bienvenido a SereneMind</h2>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control rounded-5"
+                      id="txtNombre"
+                      placeholder="Nombre"
+                    />
+                    <label for="usr">Nombre</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="email"
+                      class="form-control rounded-5"
+                      id="txtEmail"
+                      placeholder="Correo"
+                    />
+                    <label for="Email">Correo</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="password"
+                      class="form-control rounded-5"
+                      id="txtPassword"
+                      placeholder="Contraseña"
+                    />
+                    <label for="pass">Contraseña</label>
+                  </div>
+                  <div class="form-group row mb-3">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                      <div class="form-floating">
+                        <input
+                          type="number"
+                          class="form-control rounded-5"
+                          id="txtEdad"
+                          placeholder="Edad"
+                        />
+                        <label for="txtEdad">Edad</label>
+                      </div>
                     </div>
-
-                    <div class=" col-10 col-md-5 d-flex justify-content-center align-items-center">
-                        <img src="https://images.pexels.com/photos/2033997/pexels-photo-2033997.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                            class="rounded img-fluid shadow" alt="">
-                            <h2 class="position-absolute d-flex"> Bienvenido a SereneMind</h2>
+                    <div class="col-sm-6">
+                      <select
+                        class="p-3 form-select rounded-5"
+                        aria-label="Default select example"
+                        id="txtGenero"
+                      >
+                        <option selected>Genero</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                        <option value="O">Otro</option>
+                      </select>
                     </div>
-
+                  </div>
+                  <div class="mb-3">
+                    <select
+                      class="p-3 form-select rounded-5"
+                      aria-label="Default select example"
+                      id="txtCarrera"
+                    >
+                      <option selected>Carrera</option>
+                      <option value="Licenciatura en Educación Básica Primaria">
+                        Licenciatura en Educación Básica Primaria
+                      </option>
+                      <option value="Profesional en Inteligencia de Negocios">
+                        Profesional en Inteligencia de Negocios
+                      </option>
+                      <option
+                        value="Ingeniería en Seguridad y Salud en el Trabajo"
+                      >
+                        Ingeniería en Seguridad y Salud en el Trabajo
+                      </option>
+                      <option value="Ingeniería Eléctrica">
+                        Ingeniería Eléctrica
+                      </option>
+                      <option
+                        value="Administración de Negocios Internacionales"
+                      >
+                        Administración de Negocios Internacionales
+                      </option>
+                      <option value="Diseño Gráfico">Diseño Gráfico</option>
+                      <option value="Ingeniería Industrial">
+                        Ingeniería Industrial
+                      </option>
+                      <option value="Ingeniería Mecatrónica">
+                        Ingeniería Mecatrónica
+                      </option>
+                      <option value="Ingeniería Telemática">
+                        Ingeniería Telemática
+                      </option>
+                    </select>
+                  </div>
+                  <div class="d-flex justify-content-center my-3">
+                    <button type="submit" class="btn btn-primary my-2">
+                      Registrarme
+                    </button>
+                  </div>
+                  <div class="text-center">
+                    <p>
+                      ¿Ya tienes una cuenta?<a
+                        class="text-decoration-none fw-semibold"
+                        href="../todos/login.html"
+                      >
+                        ¡Inicia sesión!</a
+                      >
+                    </p>
+                  </div>
+                </form>
+              </div>
+              <div class="col-md-6 d-none d-md-block">
+                <div class="text-center">
+                  <img
+                    src="../img/pexels-stanley-morales-1454360.webp"
+                    class="img-fluid rounded-5 px-2"
+                    alt=""
+                  />
                 </div>
-         </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../js/register.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-</body>
+  </body>
 </html>

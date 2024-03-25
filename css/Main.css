@@ -4,7 +4,7 @@ html{
 
 @font-face {
   font-family: Fuente-p;
-  src: url(../fonts/Jost-VariableFont_wght.ttf);
+  src: url(/fonts/MadimiOne-Regular.ttf);
 }
 
 body{
@@ -87,7 +87,6 @@ section .btn{
 
 section .btn:hover{
   transform: scale(1.1);
-  background: transparent;
 
 }
 
