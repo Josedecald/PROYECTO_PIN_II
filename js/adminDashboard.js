@@ -93,24 +93,25 @@ const ConfigsGraphs = () => {
           label: 'Usuarios que iniciaron sesión',
           data: Object.values(datosSemanales).map(dia => dia.usuarios), 
           backgroundColor: [
-            '#92C7CF',
-            '#AC87C5',
-            '#9BB8CD',
-            '#AFC8AD',
-            '#4F6F52',
-            '#D7C0AE',
-            '#CBB279'
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(191, 216, 175, 0.3)'
           ],
           borderColor: [
-            '#92C7CF',
-            '#AC87C5',
-            '#9BB8CD',
-            '#AFC8AD',
-            '#4F6F52',
-            '#D7C0AE',
-            '#CBB279'
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)',
+            'rgba(191, 216, 175, 1)'
           ],
-          borderWidth: 1
+          borderWidth: 1,
+          fill: false
         }
       ]
     };
@@ -125,7 +126,7 @@ const ConfigsGraphs = () => {
             position: "right",
           },
           title: {
-            display: true,
+            display: false,
             text: "Usuarios que iniciaron sesión en los últimos 7 días",
           },
         },
@@ -139,24 +140,25 @@ const ConfigsGraphs = () => {
           label: "Publicaciones realizadas",
           data: Object.values(datosSemanales).map(dia => dia.publicaciones),
           backgroundColor: [
-            "#92C7CF",
-            "#AC87C5",
-            "#9BB8CD",
-            "#AFC8AD",
-            "#4F6F52",
-            "#D7C0AE",
-            "#CBB279",
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(191, 216, 175, 0.3)'
           ],
           borderColor: [
-            "#92C7CF",
-            "#AC87C5",
-            "#9BB8CD",
-            "#AFC8AD",
-            "#4F6F52",
-            "#D7C0AE",
-            "#CBB279",
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)',
+            'rgba(191, 216, 175, 1)'
           ],
           borderWidth: 1,
+          fill: false
         },
       ],
     };
@@ -171,7 +173,7 @@ const ConfigsGraphs = () => {
             position: "top",
           },
           title: {
-            display: true,
+            display: false,
             text: "Publicaciones realizadas en los últimos 7 días",
           },
         },
@@ -185,24 +187,25 @@ const ConfigsGraphs = () => {
           label: "Citas creadas",
           data: Object.values(datosSemanales).map(dia => dia.citas),
           backgroundColor: [
-            "#92C7CF",
-            "#AC87C5",
-            "#9BB8CD",
-            "#AFC8AD",
-            "#4F6F52",
-            "#D7C0AE",
-            "#CBB279",
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(191, 216, 175, 0.3)'
           ],
           borderColor: [
-            "#92C7CF",
-            "#AC87C5",
-            "#9BB8CD",
-            "#AFC8AD",
-            "#4F6F52",
-            "#D7C0AE",
-            "#CBB279",
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)',
+            'rgba(191, 216, 175, 1)'
           ],
           borderWidth: 1,
+          fill: false
         },
       ],
     };
@@ -217,7 +220,7 @@ const ConfigsGraphs = () => {
             position: "right",
           },
           title: {
-            display: true,
+            display: false,
             text: "Citas creadas en los últimos 7 días",
           },
         },
