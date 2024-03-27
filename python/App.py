@@ -190,18 +190,18 @@ def registrar_cita():
         titulo = request.json['titulo']
         fecha = request.json['fecha']
         hora = request.json['hora']
-        color = request.json['color']
-        email_usuario = request.json['email_usuario']
+        detalles = request.json['detalles']
+        email = request.json['correo']
 
         cur = mysql.connection.cursor()
-        cur.execute("SELECT id_usuario FROM usuarios WHERE email = %s", (email_usuario,))
+        cur.execute("SELECT id_usuario FROM usuarios WHERE email = %s", (email,))
         usuario = cur.fetchone()
         if usuario is None:
             return jsonify({"informacion": "No se encontró un usuario con ese email"})
 
         id_usuario = usuario[0]
 
-        cur.execute("INSERT INTO evento (titulo, fecha, hora, color, id_usuario) VALUES (%s, %s, %s, %s, %s)", (titulo, fecha, hora, color, id_usuario))
+        cur.execute("INSERT INTO evento (titulo, fecha, hora, detalles, id_usuario) VALUES (%s, %s, %s, %s, %s)", (titulo, fecha, hora, detalles, id_usuario))
         mysql.connection.commit()
 
         return jsonify({"informacion": "Cita registrada correctamente"})

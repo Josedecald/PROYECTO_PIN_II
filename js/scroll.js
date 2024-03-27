@@ -8,3 +8,7 @@ window.addEventListener('scroll', function() {
         navbar.classList.add('transparent');
     }
 });
+
+$(function(){
+    $('#datepicker').datepicker();
+  });
