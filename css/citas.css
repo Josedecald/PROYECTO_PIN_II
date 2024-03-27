@@ -1,0 +1,30 @@
+html{
+    scroll-behavior: smooth;
+  }
+  
+  @font-face {
+    font-family: Fuente-p;
+    src: url(/fonts/Jost-VariableFont_wght.ttf);
+  }
+  
+  body{
+    font-family: Fuente-p;
+  }
+
+  .input-group-append {
+    cursor: pointer;
+  }
+
+  #modal::backdrop{
+    background-color: rgba(0, 0, 0, .55);
+  }
+
+
+  #modal{
+    border-radius: 10px;
+    border: none;
+  }
+
+  dialog{
+    min-width: 102vh;
+  }
