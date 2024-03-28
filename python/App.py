@@ -174,7 +174,7 @@ def getAllEvents():
         payload = []
         content = {}
         for result in rv:
-            content = {'id': result[0], 'id_usuario': result[1], 'titulo': result[2], 'fecha': str(result[3]), 'hora': str(result[4]), 'color': result[5]}
+            content = {'id': result[0], 'id_usuario': result[1], 'correo': result[2], 'titulo': result[3], 'fecha': str(result[4]), 'hora': str(result[5]), 'detalles': result[6]}
             payload.append(content)
             content = {}
         return jsonify(payload)
@@ -184,30 +184,33 @@ def getAllEvents():
     
 #Registrar cita
 @cross_origin()
-@app.route('/registrar_cita', methods=['POST'])
-def registrar_cita():
+@app.route('/registrar_citas', methods=['POST'])
+def registrar_citas():
     try:
-        titulo = request.json['titulo']
-        fecha = request.json['fecha']
-        hora = request.json['hora']
-        detalles = request.json['detalles']
-        email = request.json['correo']
+        citas = request.json  # Obtener la lista de citas del cuerpo JSON de la solicitud
+        for cita in citas:  # Iterar sobre cada cita en la lista
+            titulo = cita['titulo']
+            fecha = cita['fecha']
+            hora = cita['hora']
+            detalles = cita['detalles']
+            email = cita['correo']
 
-        cur = mysql.connection.cursor()
-        cur.execute("SELECT id_usuario FROM usuarios WHERE email = %s", (email,))
-        usuario = cur.fetchone()
-        if usuario is None:
-            return jsonify({"informacion": "No se encontró un usuario con ese email"})
+            cur = mysql.connection.cursor()
+            cur.execute("SELECT id_usuario FROM usuarios WHERE email = %s", (email,))
+            usuario = cur.fetchone()
+            if usuario is None:
+                return jsonify({"informacion": f"No se encontró un usuario con el email {email}"}), 400
 
-        id_usuario = usuario[0]
+            id_usuario = usuario[0]
 
-        cur.execute("INSERT INTO evento (titulo, fecha, hora, detalles, id_usuario) VALUES (%s, %s, %s, %s, %s)", (titulo, fecha, hora, detalles, id_usuario))
-        mysql.connection.commit()
+            cur.execute("INSERT INTO evento (titulo, fecha, hora, detalles, id_usuario, correo) VALUES (%s, %s, %s, %s, %s, %s)", (titulo, fecha, hora, detalles, id_usuario, email))
+            mysql.connection.commit()
 
-        return jsonify({"informacion": "Cita registrada correctamente"})
+        return jsonify({"informacion": "Citas registradas correctamente"})
     except Exception as e:
         print(e)
-        return jsonify({"informacion": str(e)})
+        return jsonify({"informacion": str(e)}), 500
+
 
 #Ruta para actualizar
 @cross_origin()
@@ -230,7 +233,7 @@ def update_event(email):
                 SET titulo = %s,
                     fecha = %s,
                     hora = %s,
-                    color = %s
+                    detalles = %s
                 WHERE id_usuario = %s
             """, (titulo, fecha, hora, color, usuario_existente[0]))
             mysql.connection.commit()
