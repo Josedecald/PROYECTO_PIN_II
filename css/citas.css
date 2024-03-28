@@ -47,3 +47,8 @@ html{
   li a:hover{
     background-color: rgba(0, 4, 45, 0.107);
   }
+
+  .centered{
+    text-align: center !important;
+    vertical-align: middle !important;
+  }

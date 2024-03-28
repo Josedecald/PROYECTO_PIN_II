@@ -64,7 +64,7 @@ btnGuardarCita.addEventListener("click", async () => {
     const hora = document.getElementById('hora').value;
     const detalles = document.getElementById('detalles').value;
 
-    if (correo === "" || titulo === "" || fecha === "" || hora === "") {
+    if ( titulo === "" || fecha === "" || hora === "") {
         swal({
             title: "Complete todos los campos obligatorios",
             icon: 'warning',
@@ -97,3 +97,5 @@ btnGuardarCita.addEventListener("click", async () => {
         });
     }
 });
+
+

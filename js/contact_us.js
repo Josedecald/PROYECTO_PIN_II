@@ -27,9 +27,6 @@ const obtained_data = (event) => {
         return;
     }
 
-
-
-    // Obtener respuestas anteriores del localStorage o inicializar un array vacío
     let respuestasGuardadas = JSON.parse(localStorage.getItem('respuestas')) || [];
 
     if (!isValidEmail(email)) {
