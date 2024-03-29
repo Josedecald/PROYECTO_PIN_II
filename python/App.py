@@ -187,24 +187,22 @@ def getAllEvents():
 @app.route('/registrar_citas', methods=['POST'])
 def registrar_citas():
     try:
-        citas = request.json  # Obtener la lista de citas del cuerpo JSON de la solicitud
-        for cita in citas:  # Iterar sobre cada cita en la lista
-            titulo = cita['titulo']
-            fecha = cita['fecha']
-            hora = cita['hora']
-            detalles = cita['detalles']
-            email = cita['correo']
+        titulo = request.json['titulo']
+        fecha = request.json['fecha']
+        hora = request.json['hora']
+        detalles = request.json['detalles']
+        email = request.json['correo']
 
-            cur = mysql.connection.cursor()
-            cur.execute("SELECT id_usuario FROM usuarios WHERE email = %s", (email,))
-            usuario = cur.fetchone()
-            if usuario is None:
-                return jsonify({"informacion": f"No se encontró un usuario con el email {email}"}), 400
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT id_usuario FROM usuarios WHERE email = %s", (email,))
+        usuario = cur.fetchone()
+        if usuario is None:
+            return jsonify({"informacion": f"No se encontró un usuario con el email {email}"}), 400
 
-            id_usuario = usuario[0]
+        id_usuario = usuario[0]
 
-            cur.execute("INSERT INTO evento (titulo, fecha, hora, detalles, id_usuario, correo) VALUES (%s, %s, %s, %s, %s, %s)", (titulo, fecha, hora, detalles, id_usuario, email))
-            mysql.connection.commit()
+        cur.execute("INSERT INTO evento (titulo, fecha, hora, detalles, id_usuario, correo) VALUES (%s, %s, %s, %s, %s, %s)", (titulo, fecha, hora, detalles, id_usuario, email))
+        mysql.connection.commit()
 
         return jsonify({"informacion": "Citas registradas correctamente"})
     except Exception as e:
@@ -214,28 +212,30 @@ def registrar_citas():
 
 #Ruta para actualizar
 @cross_origin()
-@app.route('/updateEvent/<email>', methods=['PUT'])
-def update_event(email):
+@app.route('/updateEvent/<id_cita>', methods=['PUT'])
+def update_event(id_cita):
     try:
         titulo = request.json['titulo'] 
         fecha = request.json['fecha']        
         hora = request.json['hora']
-        color = request.json['color']
-        usuario = email
+        detalles = request.json['detalles']
+        idcita = id_cita
 
         cur = mysql.connection.cursor()
-        cur.execute("SELECT * FROM usuarios WHERE email = %s", (usuario,))
-        usuario_existente = cur.fetchone()
+        cur.execute("SELECT id FROM evento WHERE id = %s", (idcita,))
+        cita_existente = cur.fetchone()
 
-        if usuario_existente:
+        print(idcita)
+
+        if cita_existente:
             cur.execute("""
                 UPDATE evento
                 SET titulo = %s,
                     fecha = %s,
                     hora = %s,
                     detalles = %s
-                WHERE id_usuario = %s
-            """, (titulo, fecha, hora, color, usuario_existente[0]))
+                WHERE id = %s
+            """, (titulo, fecha, hora, detalles, cita_existente[0]))
             mysql.connection.commit()
             cur.close()
             return jsonify({"informacion": "Evento actualizado correctamente."})
@@ -248,16 +248,16 @@ def update_event(email):
 
 #Ruta para eliminar evento
 @cross_origin()
-@app.route('/deleteEvent/<email>', methods=['DELETE'])
-def delete_event(email):
+@app.route('/deleteEvent/<id>', methods=['DELETE'])
+def delete_event(id):
     try:
 
         cur = mysql.connection.cursor()
-        cur.execute('SELECT id_usuario FROM usuarios WHERE email = %s', (email,))
+        cur.execute('SELECT id FROM evento WHERE id = %s', (id,))
         usuario = cur.fetchone()
 
         if usuario:
-            cur.execute('DELETE FROM evento WHERE id_usuario = %s', (usuario[0],))
+            cur.execute('DELETE FROM evento WHERE id = %s', (usuario[0],))
             mysql.connection.commit()
             cur.close()
             return jsonify({"informacion": "Evento eliminado correctamente."})
