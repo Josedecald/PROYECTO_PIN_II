@@ -3,7 +3,7 @@ document.getElementById('search-form').addEventListener('submit', async function
     const correo = document.getElementById('correo-input').value;
     
     if (correo === ""){
-        swal({
+        Swal.fire({
             title: "Ingrese un correo",
             icon: 'warning',
         });
@@ -27,7 +27,7 @@ document.getElementById('search-form').addEventListener('submit', async function
         }
         document.getElementById('carrera').value = userData.carrera;
     } catch (error) {
-        swal({
+        Swal.fire({
             title: "El usuario no existe.",
             icon: 'warning',
         });
@@ -43,7 +43,7 @@ const modal = document.querySelector("#modal")
 btnAbrirModal.addEventListener("click",()=>{
     const correo = document.getElementById('correo-input').value;
     if (correo === ""){
-        swal({
+        Swal.fire({
             title: "Ingrese un correo",
             icon: 'warning',
         });
@@ -65,9 +65,10 @@ btnGuardarCita.addEventListener("click", async () => {
     const detalles = document.getElementById('detalles').value;
 
     if ( titulo === "" || fecha === "" || hora === "") {
-        swal({
-            title: "Complete todos los campos obligatorios",
+        Swal.fire({
+            title: "Complete todos los campos",
             icon: 'warning',
+            target: document.getElementById('modal')
         });
         return;
     }
@@ -77,12 +78,12 @@ btnGuardarCita.addEventListener("click", async () => {
             fecha: fecha,
             hora: hora,
             detalles: detalles,
-            correo: correo
+            correo: correo,
         };
 
-        const response = await axios.post("http://127.0.0.1:5000/registrar_cita", citaData);
+        const response = await axios.post("http://127.0.0.1:5000/registrar_citas", citaData);
 
-        swal({
+        Swal.fire({
             title: "Cita guardada exitosamente",
             icon: "success",
         });
@@ -90,10 +91,11 @@ btnGuardarCita.addEventListener("click", async () => {
         const modal = document.querySelector("#modal");
         modal.close();
     } catch (error) {
-        swal({
+        Swal.fire({
             title: "Error al guardar la cita",
             text: error.message,
             icon: 'error',
+            target: document.getElementById('modal')
         });
     }
 });
