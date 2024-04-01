@@ -18,25 +18,25 @@ body main{
   }
 
 .group-ing{
-    background-image: url('../img/grupo\ ing.webp');        /* Ajusta el tamaño y el comportamiento de la imagen de fondo */
+    background-image: url('../img/grupo\ ing.webp');     
     background-size: cover;
     background-position:center;
 }
 
 .group-dis{
-    background-image: url('../img/grupo\ diseño.webp');        /* Ajusta el tamaño y el comportamiento de la imagen de fondo */
+    background-image: url('../img/grupo\ diseño.webp');   
     background-size: cover;
     background-position:center;
 }
 
 .group-cnc{
-    background-image: url('../img/cnc.webp');        /* Ajusta el tamaño y el comportamiento de la imagen de fondo */
+    background-image: url('../img/cnc.webp');        
     background-size: cover;
     background-position:center;
 }
 
 .group-gnr{
-    background-image: url('../img/gnr.webp');        /* Ajusta el tamaño y el comportamiento de la imagen de fondo */
+    background-image: url('../img/gnr.webp');   
     background-size: cover;
     background-position:center;
 }
