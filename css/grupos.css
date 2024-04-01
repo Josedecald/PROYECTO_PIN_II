@@ -41,3 +41,11 @@ body main{
     background-position:center;
 }
 
+.equis{
+    transition: transform .2s;
+    cursor: pointer;
+  }
+  
+  .equis:hover{
+    transform: scale(1.1);
+  }

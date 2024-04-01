@@ -277,24 +277,10 @@ def delete_event(id):
 def guardar_publi():
     try:
         contenido = request.json['contenido']
-        fecha = request.json['fecha']
-        hora = request.json['hora']
         url = request.json['url']
-        email_usuario = request.json['email_usuario']
 
         cur = mysql.connection.cursor()
-        cur.execute("SELECT id_usuario FROM usuarios WHERE email = %s", (email_usuario,))
-        usuario = cur.fetchone()
-        if usuario is None:
-            return jsonify({"informacion": "No se encontró un usuario con ese email"})
-        id_usuario = usuario[0]
-
-        cur.execute("INSERT INTO publicaciones (contenido, fecha, hora, url) VALUES (%s, %s, %s, %s)", (contenido, fecha, hora, url))
-        mysql.connection.commit()
-
-        id_publi = cur.lastrowid
-
-        cur.execute("INSERT INTO usu_publi (id_usuario, id_publi) VALUES (%s, %s)", (id_usuario, id_publi))
+        cur.execute("INSERT INTO publicaciones (contenido, url) VALUES (%s, %s)", (contenido, url))
         mysql.connection.commit()
 
         return jsonify({"informacion": "Publicación registrada correctamente"})
@@ -355,7 +341,7 @@ def getAllPubli():
         payload = []
         content = {}
         for result in rv:
-            content = {'id_publi': result[0], 'contenido': result[1],'fecha': str(result[2]), 'hora': str(result[3]), 'url': result[4]}
+            content = {'id_publi': result[0], 'contenido': result[1],'fecha_hora': str(result[2]), 'url': result[3]}
             payload.append(content)
             content = {}
         return jsonify(payload)
@@ -365,31 +351,15 @@ def getAllPubli():
 
 #ruta para eliminar publicacion
 @cross_origin()
-@app.route('/deletePubli/<email>/<id_publi>', methods=['DELETE'])
-def delete_publi(email, id_publi):
-    try:
+@app.route('/deletePubli/<id_publi>', methods=['DELETE'])
+def delete_publi(id_publi):
+    try:    
         cur = mysql.connection.cursor()
-        cur.execute("SELECT id_usuario FROM usuarios WHERE email = %s", (email,))
-        usuario_existente = cur.fetchone()
+        cur.execute('DELETE FROM publicaciones WHERE id_publi = %s', (id_publi,))
+        mysql.connection.commit()
         
-        if usuario_existente:
-            id_usuario = usuario_existente[0]
-
-            cur.execute("SELECT * FROM usu_publi WHERE id_usuario = %s AND id_publi = %s", (id_usuario, id_publi))
-            acceso = cur.fetchone()
-            
-            if acceso:
-                cur.execute('DELETE FROM publicaciones WHERE id_publi = %s', (id_publi,))
-                mysql.connection.commit()
-
-                cur.execute('DELETE FROM usu_publi WHERE id_usuario = %s AND id_publi = %s', (id_usuario, id_publi))
-                mysql.connection.commit()
-                cur.close()
-                return jsonify({"informacion": "Publicación eliminada correctamente."})
-            else:
-                return jsonify({"informacion": "El usuario no tiene acceso a la publicación."})
-        else:
-            return jsonify({"informacion": "El usuario con el correo electrónico proporcionado no existe."})
+        return jsonify({"informacion": "Publicación eliminada correctamente."})
+    
     except Exception as e:
         print(e)
         return jsonify({"informacion": str(e)})
