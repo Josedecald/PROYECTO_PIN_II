@@ -1,6 +1,4 @@
-html{
-  scroll-behavior: smooth;
-}
+
 
 @font-face {
   font-family: Fuente-p;
@@ -8,7 +6,12 @@ html{
 }
 
 body{
-  font-family: Fuente-p;
+  font-family: Fuente-p !important;
+}
+
+html{
+  scroll-behavior: smooth;
+  font-family: Fuente-p !important;
 }
 
 .start-page {
@@ -48,12 +51,21 @@ body{
     transition: background-color 0.3s ease-in-out; 
 }
 
+#Nav.white-bg {
+  background-color: white !important;
+  transition: background-color 0.3s ease-in-out; 
+}
+
 #Nav.white-bg .nav-link {
     color: black !important; 
 }
 
 #Nav.white-bg .navbar-brand {
     color: rgb(0, 0, 0) !important;
+}
+
+#Nav.white-bg .reg {
+  border-color: rgb(0, 0, 0) !important;
 }
 
 header .nav-item{
@@ -81,11 +93,11 @@ footer{
   transform: scale(1.1);
 }
 
-section .btn{
-  transition: all ease .3s;
+.btn{
+  transition: all ease .3s !important;
 }
 
-section .btn:hover{
+.btn:hover{
   transform: scale(1.1);
 
 }
