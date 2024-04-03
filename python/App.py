@@ -2,6 +2,7 @@
 from flask import Flask, request, jsonify
 from flask_mysqldb import MySQL
 from flask_cors import CORS, cross_origin
+from flask_mail import Mail, Message
 
 # initializations
 app = Flask(__name__)
@@ -13,6 +14,33 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = '123456'
 app.config['MYSQL_DB'] = 'pin_ii_db'
 mysql = MySQL(app)
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USERNAME'] = 'josedecald@gmail.com'
+app.config['MAIL_PASSWORD'] = 'abuv whjv lqme mghv'
+app.config['MAIL_DEFAULT_SENDER'] = 'josedecald@gmail.com'
+
+mail = Mail(app)
+
+def enviar_correo(destinatario, asunto, fecha, hora):
+    cuerpo = f"""\
+    Estimado/a,
+
+    Se ha registrado una nueva cita con los siguientes detalles:
+
+    - Fecha: {fecha}
+    - Hora: {hora}
+
+    Por favor, asegúrese de marcar esta cita en su calendario.
+
+    Saludos cordiales,
+    Tu aplicación de citas
+    """
+    msg = Message(asunto, recipients=[destinatario])
+    msg.body = cuerpo
+    mail.send(msg)
 
 ###################################### USUARIOS ##########################################################################
 
@@ -196,14 +224,12 @@ def registrar_citas():
         cur = mysql.connection.cursor()
         cur.execute("SELECT id_usuario FROM usuarios WHERE email = %s", (email,))
         usuario = cur.fetchone()
-        if usuario is None:
-            return jsonify({"informacion": f"No se encontró un usuario con el email {email}"}), 400
 
         id_usuario = usuario[0]
 
         cur.execute("INSERT INTO evento (titulo, fecha, hora, detalles, id_usuario, correo) VALUES (%s, %s, %s, %s, %s, %s)", (titulo, fecha, hora, detalles, id_usuario, email))
         mysql.connection.commit()
-
+        enviar_correo(email, 'Cita registrada', fecha, hora)
         return jsonify({"informacion": "Citas registradas correctamente"})
     except Exception as e:
         print(e)
@@ -357,12 +383,13 @@ def delete_publi(id_publi):
         cur = mysql.connection.cursor()
         cur.execute('DELETE FROM publicaciones WHERE id_publi = %s', (id_publi,))
         mysql.connection.commit()
-        
+
         return jsonify({"informacion": "Publicación eliminada correctamente."})
     
     except Exception as e:
         print(e)
-        return jsonify({"informacion": str(e)})
+        return jsonify({"informacion": str
+                        (e)})
 
 
 #########################################################################################################################################

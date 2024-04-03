@@ -1,0 +1,42 @@
+html{
+    scroll-behavior: smooth;
+}
+
+body main{
+    font-family: Fuente-p;
+}
+
+
+@font-face {
+    font-family: Fuente-p;
+    src: url(../fonts/Jost-VariableFont_wght.ttf);
+  }
+
+.conv{
+    background-image: url('/img/authentic-small-youthful-marketing-agency-_1_.webp');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.psi{
+    background-image: url('/img/authentic-scene-young-person-undergoing-psychological-therapy-_1_.webp');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.art{
+    background-image: url('/img/sport-fitness-close-up-portrait-cute-girl-doing-yoga-clasps-her-hands-together-does-deep-_1_.webp');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.custom-container {
+    height: 100vh;
+}
+
+.container{
+    min-width: 210vh;
+}

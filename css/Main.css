@@ -4,7 +4,7 @@ html{
 
 @font-face {
   font-family: Fuente-p;
-  src: url(/fonts/MadimiOne-Regular.ttf);
+  src: url(/fonts/Jost-VariableFont_wght.ttf);
 }
 
 body{
@@ -61,7 +61,7 @@ header .nav-item{
 }
 
 footer{
-  background-color: rgb(191, 216, 175);
+  background-color: rgba(8, 0, 255, 0.375);
 }
 
 .navbar-brand{
