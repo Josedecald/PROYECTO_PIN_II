@@ -1,14 +1,17 @@
-html{
-  scroll-behavior: smooth;
-}
+
 
 @font-face {
   font-family: Fuente-p;
-  src: url(/fonts/MadimiOne-Regular.ttf);
+  src: url(/fonts/Jost-VariableFont_wght.ttf);
 }
 
 body{
-  font-family: Fuente-p;
+  font-family: Fuente-p !important;
+}
+
+html{
+  scroll-behavior: smooth;
+  font-family: Fuente-p !important;
 }
 
 .start-page {
@@ -48,6 +51,11 @@ body{
     transition: background-color 0.3s ease-in-out; 
 }
 
+#Nav.white-bg {
+  background-color: white !important;
+  transition: background-color 0.3s ease-in-out; 
+}
+
 #Nav.white-bg .nav-link {
     color: black !important; 
 }
@@ -56,12 +64,16 @@ body{
     color: rgb(0, 0, 0) !important;
 }
 
+#Nav.white-bg .reg {
+  border-color: rgb(0, 0, 0) !important;
+}
+
 header .nav-item{
   font-size: 20px;
 }
 
 footer{
-  background-color: rgb(191, 216, 175);
+  background-color: rgba(8, 0, 255, 0.375);
 }
 
 .navbar-brand{
@@ -81,11 +93,11 @@ footer{
   transform: scale(1.1);
 }
 
-section .btn{
-  transition: all ease .3s;
+.btn{
+  transition: all ease .3s !important;
 }
 
-section .btn:hover{
+.btn:hover{
   transform: scale(1.1);
 
 }

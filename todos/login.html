@@ -14,14 +14,30 @@
   </head>
   <body class="bg">
     <header>
-      <nav class="navbar navbar-expand-sm fixed-top" id="Nav">
-        <div class="container-fluid">
-          <a class="navbar-brand text-dark" href="../index.html">SereneMind</a>
-        </div>
-      </nav>
-    </header>
-    <main class="min-vh-100 d-flex justify-content-center align-items-center">
-      <section class="rounded-5 shadow-lg">
+        <nav class="navbar navbar-expand-sm fixed-top bg-primary" id="Nav">
+          <div class="container-fluid">
+              <a class="navbar-brand text-white" href="../index.html">SereneMind</a>
+              <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                      <li class="nav-item">
+                          <button class="btn"><a class="nav-link text-white " href="../todos/contact_us.html">Contactenos</a></button>
+                      </li>
+                      <li class="nav-item">
+                          <button class="btn"><a class="nav-link text-white" href="#">Nosotros</a></button>
+                      </li>
+                      <li class="nav-item">
+                        <button class="reg btn border-light"><a class="nav-link text-white" href="../todos/register.html">Registrarse</a></button>
+                    </li>
+                  </ul>
+              </div>
+          </div>
+      </nav>  
+      </header>
+    <main class="min-vh-100 d-flex justify-content-center align-items-center bg-body-secondary">
+      <section class="rounded-3 shadow-lg bg-light">
         <div class="container">
           <div class="row justify-content-center align-items-center">
             <div class="col-md-6">
@@ -30,8 +46,8 @@
                 <div class="form-floating mb-3">
                   <input
                     type="text"
-                    class="form-control rounded-5"
-                    id="usr"
+                    class="form-control rounded-3"
+                    id="correo"
                     placeholder="Usuario o Correo"
                   />
                   <label for="usr">Correo</label>
@@ -39,17 +55,17 @@
                 <div class="form-floating mb-3">
                   <input
                     type="password"
-                    class="form-control rounded-5"
-                    id="pass"
+                    class="form-control rounded-3"
+                    id="contraseña"
                     placeholder="Contraseña"
                   />
                   <label for="pass">Contraseña</label>
                 </div>
                 <div class="mb-3">
                   <select
-                    class="p-3 form-select rounded-5"
+                    class="p-3 form-select rounded-3"
                     aria-label="Default select example"
-                    id="Type"
+                    id="tipo"
                   >
                     <option selected value="">Tipo de usuario</option>
                     <option value="1">Estudiante</option>
@@ -75,7 +91,7 @@
                   >
                 </div>
                 <div class="d-flex justify-content-center my-3">
-                  <button type="submit" class="btn btn-primary">
+                  <button type="submit" class="btn btn-primary" >
                     Ingresar
                   </button>
                 </div>
@@ -105,7 +121,8 @@
       </section>
     </main>
 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../js/login.js"></script>
   </body>
 </html>

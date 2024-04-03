@@ -13,19 +13,30 @@
     <link rel="stylesheet" href="../css/citas.css">
 </head>
 <body>
+    <header>
+        <nav class="navbar navbar-expand-sm fixed-top bg-primary" id="Nav">
+          <div class="container-fluid">
+              <a class="navbar-brand text-white" href="../index.html">SereneMind</a>
+              <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <button class="btn btn-light mx-3"><a class="nav-link text-primary " href="../user/Select_group_user.html"><i class="fa-solid fa-user-group me-3"></i>Ir a Grupos</a></button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-light"><a class="nav-link text-primary " href="../Profesional/citas.html"><i class="fa-solid fa-clock me-3 "></i>Agendar Citas</a></button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-light mx-3"><a class="nav-link text-primary" href="../Profesional/agenda.html"><i class="fa-solid fa-calendar-days me-3 text-primary"></i>Ver Mi Agenda</a></button>
+                    </li>
+                  </ul>
+              </div>
+          </div>
+      </nav>  
+      </header>
     <div class="main-container d-flex">
-        <div class="sidebar bg-primary rounded-end-3 shadow" id="side_nav">
-            <div class="header-box">
-                <h1 class="fs-4 mt-4"><span class="text-white ms-2">SereneMind</span></h1>
-            </div>
-            <ul class="list-group">
-                <li class="list-group-item bg-primary border-0 text-white"></li><hr class="me-4">
-                <li class="list-group-item bg-primary border-0 text-white"><a href="../Profesional/agenda.html" class="link-light link-underline-opacity-0"><i class="fa-solid fa-calendar-days me-3" style="color: #ffffff;"></i>Ver mi agenda</a></li><hr class="me-4">
-                <li class="list-group-item bg-primary border-0 text-white"><a href="../Profesional/citas.html" class="link-light link-underline-opacity-0"><i class="fa-solid fa-clock me-3" style="color: #ffffff;"></i>Programar cita</a></li><hr class="me-4">
-                <li class="list-group-item bg-primary border-0 text-white"><a href="../user/grupos.html" class="link-light link-underline-opacity-0"><i class="fa-solid fa-user-group me-3" style="color: #ffffff;"></i>Grupos de estudio</a></li><hr class="me-4">
-                <li class="list-group-item bg-primary border-0 text-white"><a href="#" class="link-light link-underline-opacity-0"><i class="fa-solid fa-message me-3 "style="color: #ffffff;"></i>Mis mensajes</a></li><hr class="me-4">
-            </ul>
-        </div>
         <div class="content bg-body-secondary">
             <main class="min-vh-100 d-flex justify-content-center align-items-center">
                 <section class="container">

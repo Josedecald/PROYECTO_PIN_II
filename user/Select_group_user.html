@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SereneMind</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/3dd19dd185.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../css/grupos.css">
+    <link rel="stylesheet" href="../css/citas.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm fixed-top bg-primary" id="Nav">
+          <div class="container-fluid">
+              <a class="navbar-brand text-white" href="../index.html">SereneMind</a>
+              <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <button class="btn btn-light mx-3"><a class="nav-link text-primary " href="../user/Select_group_user.html"><i class="fa-solid fa-user-group me-3"></i>Ir a Grupos</a></button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-light"><a class="nav-link text-primary " href="../Profesional/citas.html"><i class="fa-solid fa-clock me-3 "></i>Agendar Citas</a></button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-light mx-3"><a class="nav-link text-primary" href="../Profesional/agenda.html"><i class="fa-solid fa-calendar-days me-3 text-primary"></i>Ver Mi Agenda</a></button>
+                    </li>
+                  </ul>
+              </div>
+          </div>
+      </nav>  
+      </header>
+      <br><br>
+    <div class="main-container d-flex">
+        <div class="content bg-body-secondary">
+            <main class="min-vh-100 d-flex justify-content-center align-items-center">
+                <section class="container">
+                    <div class="main_page rounded-3 bg-light shadow">
+                        <div class="row mx-1 justify-content-center">
+                            <h2 class="my-3">Selecciona el Grupo de Ayuda</h2>
+                            <div class="col-1 col-md-12 d-flex">
+                            </div>
+                            <div class="group-gnr col-2 col-md-12 bg-light mt-3 mb-3 rounded-3 form-control">
+                                <div class="min bg-light rounded-3 py-1 col-md-3 shadow">
+                                    <a href="#" class="link-underline-light text-dark"><h3 class="h3 ms-2">Grupo General</h3></a>
+                                    <p class="ms-2">Accede al grupo General</p>
+                                </div>  
+                            </div>
+                            <div class="group-ing col-2 col-md-12 bg-light mt-3 mb-3 rounded-3 form-control">
+                                <div class="min bg-light rounded-3 py-1 col-md-3 shadow">
+                                    <a href="/user/g_ingenieria/ingenieria.html" class="link-underline-light text-dark"><h3 class="h3 ms-2">Grupo de Ingenieria</h3></a>
+                                    <p class="ms-2">Accede al grupo de Ingenieria</p>
+                                </div>  
+                            </div>
+                            <div class="group-dis col-2 col-md-12 bg-light mt-3 mb-3 rounded-3 form-control">
+                                <div class="min bg-light rounded-3 py-1 col-md-3 shadow">
+                                    <a href="#" class="link-underline-light text-dark"><h3 class="h3 ms-2">Grupo de Diseño</h3></a>
+                                    <p class="ms-2">Accede al grupo de Diseño</p>
+                                </div>  
+                            </div>
+                            <div class="group-cnc col-2 col-md-12 bg-light mt-3 mb-3 rounded-3 form-control">
+                                <div class="min bg-light rounded-3 py-1 col-md-3 shadow">
+                                    <a href="#" class="link-underline-light text-dark"><h3 class="h3 ms-2">Grupo de Ciencias</h3></a>
+                                    <p class="ms-2">Accede al grupo de Ciencias</p>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>     
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
+    <script src="../js/find.js"></script>
+</body>
+</html>

@@ -13,18 +13,41 @@
     <title>SereneMind</title>
   </head>
   <body class="bg-body-tertiary">
-    <main>
+    <header>
+      <nav class="navbar navbar-expand-sm fixed-top bg-primary" id="Nav">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="../index.html">SereneMind</a>
+            <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <button class="btn"><a class="nav-link text-white " href="../todos/contact_us.html">Contactenos</a></button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn"><a class="nav-link text-white" href="#">Nosotros</a></button>
+                    </li>
+                    <li class="nav-item">
+                      <button class="reg btn border-light"><a class="nav-link text-white" href="../todos/login.html">Ingresar</a></button>
+                  </li>
+                </ul>
+            </div>
+        </div>
+    </nav>  
+    </header>
+    <main><br><br><br>
       <section class="">
-        <div class="container">
-          <div class="card o-hidden border-0 shadow-lg my-5 rounded-5">
+        <div class="container align-content-center" >
+          <div class="card o-hidden border-0 shadow-lg my-5 rounded-3" style="border: red solid">
             <div class="row justify-content-center align-items-center">
               <div class="col-md-6">
-                <form id="Register-form" autocomplete="off" class="px-4 py-5">
-                  <h2 class="h2 mb-3 text-center">Bienvenido a SereneMind</h2>
+                <form id="Register-form" autocomplete="off" class="px-5 ">
+                  <h2 class="h2 mb-3 text-center pt-3" >Bienvenido a SereneMind</h2>
                   <div class="form-floating mb-3">
                     <input
                       type="text"
-                      class="form-control rounded-5"
+                      class="form-control rounded-3"
                       id="txtNombre"
                       placeholder="Nombre"
                     />
@@ -33,7 +56,7 @@
                   <div class="form-floating mb-3">
                     <input
                       type="email"
-                      class="form-control rounded-5"
+                      class="form-control rounded-3"
                       id="txtEmail"
                       placeholder="Correo"
                     />
@@ -42,7 +65,7 @@
                   <div class="form-floating mb-3">
                     <input
                       type="password"
-                      class="form-control rounded-5"
+                      class="form-control rounded-3"
                       id="txtPassword"
                       placeholder="Contraseña"
                     />
@@ -53,7 +76,7 @@
                       <div class="form-floating">
                         <input
                           type="number"
-                          class="form-control rounded-5"
+                          class="form-control rounded-3"
                           id="txtEdad"
                           placeholder="Edad"
                         />
@@ -62,7 +85,7 @@
                     </div>
                     <div class="col-sm-6">
                       <select
-                        class="p-3 form-select rounded-5"
+                        class="p-3 form-select rounded-3"
                         aria-label="Default select example"
                         id="txtGenero"
                       >
@@ -75,7 +98,7 @@
                   </div>
                   <div class="mb-3">
                     <select
-                      class="p-3 form-select rounded-5"
+                      class="p-3 form-select rounded-3"
                       aria-label="Default select example"
                       id="txtCarrera"
                     >
@@ -132,7 +155,7 @@
                 <div class="text-center">
                   <img
                     src="../img/pexels-stanley-morales-1454360.webp"
-                    class="img-fluid rounded-5 px-2"
+                    class="img-fluid rounded-4 px-2"
                     alt=""
                   />
                 </div>

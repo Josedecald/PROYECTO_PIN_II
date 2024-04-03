@@ -7,17 +7,7 @@
     cursor: pointer;
 }
 
-.articles .box{
-    background-color: rgba(167, 255, 243, 0.226);
-}
-
 body main{
-    background: linear-gradient(#ACE2E1, #fdfdfd6b);
-    font-family: Fuente-p;
-}
-
-body header{
-    background-color: #ACE2E1;
     font-family: Fuente-p;
 }
 
@@ -26,5 +16,36 @@ body header{
     font-family: Fuente-p;
     src: url(../fonts/Jost-VariableFont_wght.ttf);
   }
-  
 
+.group-ing{
+    background-image: url('../img/grupo\ ing.webp');     
+    background-size: cover;
+    background-position:center;
+}
+
+.group-dis{
+    background-image: url('../img/grupo\ diseño.webp');   
+    background-size: cover;
+    background-position:center;
+}
+
+.group-cnc{
+    background-image: url('../img/cnc.webp');        
+    background-size: cover;
+    background-position:center;
+}
+
+.group-gnr{
+    background-image: url('../img/gnr.webp');   
+    background-size: cover;
+    background-position:center;
+}
+
+.equis{
+    transition: transform .2s;
+    cursor: pointer;
+  }
+  
+  .equis:hover{
+    transform: scale(1.1);
+  }

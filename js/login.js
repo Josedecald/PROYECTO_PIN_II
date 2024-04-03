@@ -1,39 +1,60 @@
-
-const validateLogin = (event) => {
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("Login-form");
+  
+    form.addEventListener("submit", validateLogin);
+  });
+  
+  const validateLogin = async (event) => {
     event.preventDefault(); 
-    let savedUsers  = JSON.parse(localStorage.getItem('USERS')) || [];
-
-
-    const user= document.getElementById("usr").value.trim();
-    const pass = document.getElementById("pass").value.trim(); 
-    const type = document.getElementById("Type").value.trim();
+  
+    const user= document.getElementById("correo").value;
+    const pass = document.getElementById("contraseña").value; 
+    const type = document.getElementById("tipo").value;
+  
+    console.log(user)
   
     if (!user || !pass || !type) { 
-      swal({
+      Swal.fire({
         title: 'Por favor, complete los datos para iniciar sesión',
         icon: 'warning'
       });
       return; 
     }
   
-    if(Array.isArray(savedUsers)){
-        const foundUser = savedUsers.find((savedUser) => savedUser.username == user && savedUser.password == pass);
-        if (foundUser){
-            console.log("Dentro");
-            window.location.href = "../user/grupos.html"; 
-        } else {
-            swal({
-                title: "Nombre de usuario o/y contraseña incorrectos",
-                icon: 'warning'
-            })
-        }
-    } else {
-        swal({
-            title: "No hay usuarios registrados.",
-            icon: 'warning'
-        });
+    try {
+        const response = await axios.get(`http://127.0.0.1:5000/getAllById/${user}`);
+        const userData = response.data[0];
+  
+        const correo = userData.email;
+        const contraseña = userData.password;
+        const name = userData.nombre;
+
+        if (correo === user && pass === contraseña){
+            let timerInterval;
+            Swal.fire({
+            title: `¡Bienvenido, ${name}!`,
+            timer: 2000,
+            timerProgressBar: true,
+            willClose: () => {
+                clearInterval(timerInterval);
+            }
+            }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer) {
+                window.location.href = "../user/Main_pag_user.html"
+            }
+            });
+            }else{
+                Swal.fire({
+                    title: "Correo o contraseña incorrectos",
+                    icon: 'warning'
+                })
+            }
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        title: "El correo no se encuentra registrado",
+        icon: 'warning'
+    })
     }
-
   };
-
-  document.getElementById('Login-form').addEventListener('submit', validateLogin);
+  

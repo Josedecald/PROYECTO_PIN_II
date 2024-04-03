@@ -2,6 +2,7 @@
 from flask import Flask, request, jsonify
 from flask_mysqldb import MySQL
 from flask_cors import CORS, cross_origin
+from flask_mail import Mail, Message
 
 # initializations
 app = Flask(__name__)
@@ -13,6 +14,33 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = '123456'
 app.config['MYSQL_DB'] = 'pin_ii_db'
 mysql = MySQL(app)
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USERNAME'] = 'josedecald@gmail.com'
+app.config['MAIL_PASSWORD'] = 'abuv whjv lqme mghv'
+app.config['MAIL_DEFAULT_SENDER'] = 'josedecald@gmail.com'
+
+mail = Mail(app)
+
+def enviar_correo(destinatario, asunto, fecha, hora):
+    cuerpo = f"""\
+    Estimado/a,
+
+    Se ha registrado una nueva cita con los siguientes detalles:
+
+    - Fecha: {fecha}
+    - Hora: {hora}
+
+    Por favor, asegúrese de marcar esta cita en su calendario.
+
+    Saludos cordiales,
+    Tu aplicación de citas
+    """
+    msg = Message(asunto, recipients=[destinatario])
+    msg.body = cuerpo
+    mail.send(msg)
 
 ###################################### USUARIOS ##########################################################################
 
@@ -196,14 +224,12 @@ def registrar_citas():
         cur = mysql.connection.cursor()
         cur.execute("SELECT id_usuario FROM usuarios WHERE email = %s", (email,))
         usuario = cur.fetchone()
-        if usuario is None:
-            return jsonify({"informacion": f"No se encontró un usuario con el email {email}"}), 400
 
         id_usuario = usuario[0]
 
         cur.execute("INSERT INTO evento (titulo, fecha, hora, detalles, id_usuario, correo) VALUES (%s, %s, %s, %s, %s, %s)", (titulo, fecha, hora, detalles, id_usuario, email))
         mysql.connection.commit()
-
+        enviar_correo(email, 'Cita registrada', fecha, hora)
         return jsonify({"informacion": "Citas registradas correctamente"})
     except Exception as e:
         print(e)
@@ -277,24 +303,10 @@ def delete_event(id):
 def guardar_publi():
     try:
         contenido = request.json['contenido']
-        fecha = request.json['fecha']
-        hora = request.json['hora']
         url = request.json['url']
-        email_usuario = request.json['email_usuario']
 
         cur = mysql.connection.cursor()
-        cur.execute("SELECT id_usuario FROM usuarios WHERE email = %s", (email_usuario,))
-        usuario = cur.fetchone()
-        if usuario is None:
-            return jsonify({"informacion": "No se encontró un usuario con ese email"})
-        id_usuario = usuario[0]
-
-        cur.execute("INSERT INTO publicaciones (contenido, fecha, hora, url) VALUES (%s, %s, %s, %s)", (contenido, fecha, hora, url))
-        mysql.connection.commit()
-
-        id_publi = cur.lastrowid
-
-        cur.execute("INSERT INTO usu_publi (id_usuario, id_publi) VALUES (%s, %s)", (id_usuario, id_publi))
+        cur.execute("INSERT INTO publicaciones (contenido, url) VALUES (%s, %s)", (contenido, url))
         mysql.connection.commit()
 
         return jsonify({"informacion": "Publicación registrada correctamente"})
@@ -355,7 +367,7 @@ def getAllPubli():
         payload = []
         content = {}
         for result in rv:
-            content = {'id_publi': result[0], 'contenido': result[1],'fecha': str(result[2]), 'hora': str(result[3]), 'url': result[4]}
+            content = {'id_publi': result[0], 'contenido': result[1],'fecha_hora': str(result[2]), 'url': result[3]}
             payload.append(content)
             content = {}
         return jsonify(payload)
@@ -365,34 +377,19 @@ def getAllPubli():
 
 #ruta para eliminar publicacion
 @cross_origin()
-@app.route('/deletePubli/<email>/<id_publi>', methods=['DELETE'])
-def delete_publi(email, id_publi):
-    try:
+@app.route('/deletePubli/<id_publi>', methods=['DELETE'])
+def delete_publi(id_publi):
+    try:    
         cur = mysql.connection.cursor()
-        cur.execute("SELECT id_usuario FROM usuarios WHERE email = %s", (email,))
-        usuario_existente = cur.fetchone()
-        
-        if usuario_existente:
-            id_usuario = usuario_existente[0]
+        cur.execute('DELETE FROM publicaciones WHERE id_publi = %s', (id_publi,))
+        mysql.connection.commit()
 
-            cur.execute("SELECT * FROM usu_publi WHERE id_usuario = %s AND id_publi = %s", (id_usuario, id_publi))
-            acceso = cur.fetchone()
-            
-            if acceso:
-                cur.execute('DELETE FROM publicaciones WHERE id_publi = %s', (id_publi,))
-                mysql.connection.commit()
-
-                cur.execute('DELETE FROM usu_publi WHERE id_usuario = %s AND id_publi = %s', (id_usuario, id_publi))
-                mysql.connection.commit()
-                cur.close()
-                return jsonify({"informacion": "Publicación eliminada correctamente."})
-            else:
-                return jsonify({"informacion": "El usuario no tiene acceso a la publicación."})
-        else:
-            return jsonify({"informacion": "El usuario con el correo electrónico proporcionado no existe."})
+        return jsonify({"informacion": "Publicación eliminada correctamente."})
+    
     except Exception as e:
         print(e)
-        return jsonify({"informacion": str(e)})
+        return jsonify({"informacion": str
+                        (e)})
 
 
 #########################################################################################################################################
