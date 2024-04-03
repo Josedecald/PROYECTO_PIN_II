@@ -166,6 +166,8 @@ btnActualizarCita.addEventListener("click", async () => {
             }
         });
         
+        await initDatable();
+
     } catch (error) {
         console.error("Error al enviar la solicitud:", error);
         Swal.fire({
