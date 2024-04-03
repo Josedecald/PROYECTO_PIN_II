@@ -8,11 +8,7 @@ html{
   }
   
   body{
-    font-family: Fuente-p;
-  }
-
-  .input-group-append {
-    cursor: pointer;
+    font-family: Fuente-p !important;
   }
 
   #modal::backdrop{
@@ -37,33 +33,18 @@ html{
     min-width: 102vh;
   }
 
-  #side_nav{
-    min-width: 250px;
-    max-width: 250px;
-  }
-
   .content{
     min-height: 100vh;
     width: 100%;
   }
+
+  .btn{
+    transition: all ease .3s !important;
+  }
   
-  li a{
-    padding: 5px;
-    border-radius: 10px;
-  }
-
-  li a:hover{
-    background-color: rgba(0, 4, 45, 0.107);
-  }
-
-  .centered{
-    text-align: center !important;
-    vertical-align: middle !important;
-  }
-
-  .list-group{
-    position: sticky;
-    top: 20px;
+  .btn:hover{
+    transform: scale(1.1);
+  
   }
 
   
