@@ -16,7 +16,7 @@
     <header>
         <nav class="navbar navbar-expand-sm fixed-top bg-primary" id="Nav">
           <div class="container-fluid">
-              <a class="navbar-brand text-white" href="../index.html">SereneMind</a>
+            <button class="btn border-light"><a class="navbar-brand text-white" href="/index.html">SereneMind</a></button>
               <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
               </button>
@@ -74,7 +74,7 @@
                                     <form id="cita-form" class="mx-2">
                                         <input id="nombre2" class="form-control mt-3" type="text" placeholder="Nombre" aria-label="Disabled input example" disabled readonly>
                                         <input id="titulo" class="form-control mt-3" type="text" placeholder="Título">
-                                        <input id="fecha" class="form-control mt-3" type="date" placeholder="Fecha">
+                                        <input id="fecha" class="form-control mt-3" type="date" placeholder="Fecha" min="2016-01-01">
                                         <input id="hora" class="form-control mt-3" type="time" placeholder="Hora">
                                         <textarea id="detalles" class="form-control mt-3 text-break" placeholder="Detalles" cols="30" rows="6"></textarea>
                                     </form>
@@ -90,6 +90,7 @@
             </main>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
     <script src="../js/find.js"></script>
