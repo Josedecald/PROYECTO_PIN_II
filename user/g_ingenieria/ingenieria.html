@@ -13,7 +13,7 @@
     <header>
         <nav class="navbar navbar-expand-sm fixed-top bg-primary" id="Nav">
           <div class="container-fluid">
-              <a class="navbar-brand text-white" href="../index.html">SereneMind</a>
+               <button class="btn border-light"><a class="navbar-brand text-white" href="/index.html">SereneMind</a></button>
               <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
               </button>
@@ -33,31 +33,28 @@
           </div>
       </nav>  
       </header>
-        <div class="main-container bg-body-secondary justify-content-center">
-            <main class="min-vh-100 justify-content-center align-items-center mt-5">
-                <section>
-                    <div class="container vw-100 ms-4" id="publicar">
-                        <div class="row">
-                            <div class="col-md-11">
-                                <div class="card border rounded-3 position-static shadow rounded-4">
-                                    <div class="card-body">
-                                        <form id="publicarForm">
-                                            <div class="form-group">
-                                                <textarea class="form-control rounded-3" id="textoPublicacion" placeholder=" Comparte tus dudas con tus compañeros..." rows="3"></textarea>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary mt-2">Publicar</button>
-                                        </form> 
-                                    </div>
-                                </div>
-                                <div id="post">
-                                </div>
+      <main class="bg-body-secondary">
+      <br><br>
+      <div class="container mt-5"> <!-- Agregamos un margen superior -->
+        <div class="row justify-content-center"> <!-- Centramos el contenido verticalmente -->
+            <div class="col-md-10">
+                <div class="card border rounded-3 shadow rounded-3">
+                    <div class="card-body">
+                        <form id="publicarForm">
+                            <div class="form-group">
+                                <textarea class="form-control rounded-3" id="textoPublicacion" placeholder=" Comparte tus dudas con tus compañeros..." rows="3"></textarea>
                             </div>
-                        </div>
+                            <button type="submit" class="btn btn-primary mt-2">Publicar</button>
+                        </form> 
                     </div>
-                </section>
-            </main>
+                </div>
+                <div id="post">
+                </div>
+            </div>
         </div>
-    </div>
+      </div>
+    </main>
+      
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

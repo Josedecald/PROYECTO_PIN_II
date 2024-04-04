@@ -56,6 +56,24 @@ btnCerrarModal.addEventListener("click",()=>{
     modal.close();
 })
 
+document.addEventListener('DOMContentLoaded', function() {
+
+    
+    let today = new Date();
+    
+    let year = today.getFullYear();
+    let month = String(today.getMonth() + 1).padStart(2, '0');
+    let day = String(today.getDate()).padStart(2, '0');
+
+    let formattedDate = year + '-' + month + '-' + day;
+
+    console.log(formattedDate)
+
+
+    document.getElementById('fecha').setAttribute('min', formattedDate);
+});
+
+
 const btnGuardarCita = document.querySelector("#btn-guardar-cita");
 btnGuardarCita.addEventListener("click", async () => {
     const correo = document.getElementById('correo-input').value;
@@ -72,6 +90,23 @@ btnGuardarCita.addEventListener("click", async () => {
         });
         return;
     }
+
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+
+    const selectedHour = parseInt(hora.split(':')[0], 10);
+    const selectedMinute = parseInt(hora.split(':')[1], 10);
+
+    if (selectedHour < currentHour || (selectedHour === currentHour && selectedMinute <= currentMinute)) {
+        Swal.fire({
+            title: "La hora seleccionada debe ser posterior a la hora actual",
+            icon: 'warning',
+            target: document.getElementById('modal')
+        });
+        return;
+    }
+
     try {
         const citaData = {
             titulo: titulo,
@@ -99,5 +134,6 @@ btnGuardarCita.addEventListener("click", async () => {
         });
     }
 });
+
 
 

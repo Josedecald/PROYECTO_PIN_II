@@ -229,7 +229,7 @@ def registrar_citas():
 
         cur.execute("INSERT INTO evento (titulo, fecha, hora, detalles, id_usuario, correo) VALUES (%s, %s, %s, %s, %s, %s)", (titulo, fecha, hora, detalles, id_usuario, email))
         mysql.connection.commit()
-        enviar_correo(email, 'Cita registrada', fecha, hora)
+        #enviar_correo(email, 'Cita registrada', fecha, hora)
         return jsonify({"informacion": "Citas registradas correctamente"})
     except Exception as e:
         print(e)
