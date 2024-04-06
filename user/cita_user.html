@@ -43,44 +43,34 @@
                     <div class="row justify-content-center align-items-center">
                         <div class="col-12 col-md-8">
                             <form id="search-form" class="form-control shadow">
-                                <h2 class="my-3">Agendar cita</h2>
-                                <input id="correo-input" class="form-control mb-1 mt-1" type="text" placeholder="Escriba el correo del estudiante...">
-                                <button type="submit" class="btn btn-primary mb-3 mt-2 ms-1">Buscar</button>
-                                <input id="nombre" class="form-control m-1" type="text" placeholder="Nombre" aria-label="Disabled input example" disabled readonly>
-                                <input id="email" class="form-control m-1" type="text" placeholder="Correo" aria-label="Disabled input example" disabled readonly>
-                                <input id="edad" class="form-control m-1" type="text" placeholder="Edad" aria-label="Disabled input example" disabled readonly>
-                                <input id="genero" class="form-control m-1" type="text" placeholder="Genero" aria-label="Disabled input example" disabled readonly>
-                                <input id="carrera" class="form-control m-1" type="text" placeholder="Carrera" aria-label="Disabled input example" disabled readonly>
-                                <div class="container">
-                                    <div class="row justify-content-center">
-                                        <div class="col-md-4">
-                                            <button id="btn-abrir-modal" type="button" class="btn btn-primary m-3">Agendar cita</button>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <button class="btn btn-primary m-3" type="button"><a class="text-white link-underline-primary" href="/Profesional/historial.html">Historial del estudiante</a></button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h5 class="mb-4 mt-2">Verificar Disponibilidad</h5>
+                                <label>Seleccione la fecha deseada</label>
+                                <input type="date" class="form-control mb-4" id="fecha">
+                                <label>Seleccione el Psicologo de preferencia</label>
+                                <select class="form-select mb-3" aria-label="Default select example">
+                                    <option selected>...</option>
+                                    <option value="María Fernanda Gómez Ríos">María Fernanda Gómez Ríos</option>
+                                    <option value="Juan Pablo Rodríguez López">Juan Pablo Rodríguez López</option>
+                                    <option value="Andrés Felipe García Pérez">Andrés Felipe García Pérez</option>
+                                    <option value="Camila Andrea Ramírez Castro">Camila Andrea Ramírez Castro</option>
+                                    <option value="Luis Eduardo Díaz González">Luis Eduardo Díaz González</option>
+                                    <option value="Ana Sofía Martínez Montoya">Ana Sofía Martínez Montoya</option>
+                                    <option value="Valentina López Cardona">Valentina López Cardona</option>
+                                    <option value="Carlos Alberto Gutiérrez Muñoz">Carlos Alberto Gutiérrez Muñoz</option>
+                                  </select>
+                                  <button class="btn btn-primary mb-3" id="abrirDispo" type="button">Ver disponibilidad</button>
                             </form>
                         </div>
                     </div>
-                    <dialog id="modal" class="rounded-3">
+                    <dialog id="modalDispo" class="rounded-3">
                         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title mx-2">Agendar cita</h5>
+                                    <h5 class="modal-title mx-2">Horarios disponibles</h5>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="cita-form" class="mx-2">
-                                        <input id="nombre2" class="form-control mt-3" type="text" placeholder="Nombre" aria-label="Disabled input example" disabled readonly>
-                                        <input id="titulo" class="form-control mt-3" type="text" placeholder="Título">
-                                        <input id="fecha" class="form-control mt-3" type="date" placeholder="Fecha" min="2016-01-01">
-                                        <input id="hora" class="form-control mt-3" type="time" placeholder="Hora">
-                                        <textarea id="detalles" class="form-control mt-3 text-break" placeholder="Detalles" cols="30" rows="6"></textarea>
-                                    </form>
                                 </div>
                                 <div class="modal-footer align-content-center justify-content-center">
-                                    <button id="btn-guardar-cita" type="button" class="btn btn-primary mt-2 mx-5">Guardar</button>
                                     <button id="btn-cerrar-modal" type="button" class="btn btn-secondary mt-2 mx-5" data-bs-dismiss="modal">Cancelar</button>
                                 </div>
                             </div>
@@ -93,6 +83,6 @@
     <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
-    <script src="../js/find.js"></script>
+    <script src="/js/userDate.js"></script>
 </body>
 </html>

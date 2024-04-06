@@ -4,6 +4,8 @@ const currentPage = document.body.id;
 const post = async (event) => {
   event.preventDefault();
 
+  console.log(String(localStorage.getItem('currentID')))
+
   const postText = document.getElementById("textoPublicacion").value.trim();
   if (postText === "") {
     Swal.fire({
@@ -15,8 +17,8 @@ const post = async (event) => {
 
   const data = {
     contenido: postText,
-    url: "",
-    email_usuario: "juan@example.com" 
+    id_usuario: String(localStorage.getItem('currentID'))
+
   };
 
   try {
@@ -68,13 +70,12 @@ const displayPosts = (posts) => {
   posts.forEach((currentPost, index) => {
     const postCard = document.createElement("div");
     postCard.className = "card border rounded-3 mt-3";
-    // Asignar un ID único a cada tarjeta de publicación
     postCard.id = `postCard-${currentPost.id_publi}`; 
 
     postCard.innerHTML = `
       <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center">
-        <p>Nombre usuario</p>
+        <div class="d-flex justify-content-between align-items-center my-3">
+        <p>${localStorage.getItem('currentName')}</p>
         <div class="align-content-end ms-auto">
           <button id="eliminarPubli" class="btn eliminarPubli" data-post-id="${currentPost.id_publi}" type="button"><i class="equis fa-solid fa-x"></i></button>
         </div>

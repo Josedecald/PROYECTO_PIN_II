@@ -24,12 +24,19 @@ document.addEventListener("DOMContentLoaded", function() {
     try {
         const response = await axios.get(`http://127.0.0.1:5000/getAllById/${user}`);
         const userData = response.data[0];
-  
+
+        const id_usuario = userData.id_usuario;
         const correo = userData.email;
         const contraseña = userData.password;
         const name = userData.nombre;
 
         if (correo === user && pass === contraseña){
+
+            localStorage.setItem('currentEmail', user);
+            localStorage.setItem('currentID', id_usuario);
+            localStorage.setItem('currentName', name);
+
+
             let timerInterval;
             Swal.fire({
             title: `¡Bienvenido, ${name}!`,
