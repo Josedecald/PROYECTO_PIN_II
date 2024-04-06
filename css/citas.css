@@ -15,12 +15,30 @@ html{
     background-color: rgba(0, 0, 0, .55);
   }
 
-  #modalEdit{
+  #modalEdit {
     border-radius: 10px;
     border: none;
   }
 
   #modalEdit::backdrop{
+    background-color: rgba(0, 0, 0, .55);
+  }
+
+  #modalInfo {
+    border-radius: 10px;
+    border: none;
+  }
+
+  #modalInfo::backdrop{
+    background-color: rgba(0, 0, 0, .55);
+  }
+
+  #modalDispo {
+    border-radius: 10px;
+    border: none;
+  }
+
+  #modalDispo::backdrop{
     background-color: rgba(0, 0, 0, .55);
   }
 

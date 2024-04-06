@@ -98,6 +98,8 @@ btnGuardarCita.addEventListener("click", async () => {
     const selectedHour = parseInt(hora.split(':')[0], 10);
     const selectedMinute = parseInt(hora.split(':')[1], 10);
 
+    console.log(currentHour, selectedHour)
+
     if (selectedHour < currentHour || (selectedHour === currentHour && selectedMinute <= currentMinute)) {
         Swal.fire({
             title: "La hora seleccionada debe ser posterior a la hora actual",
@@ -114,9 +116,12 @@ btnGuardarCita.addEventListener("click", async () => {
             hora: hora,
             detalles: detalles,
             correo: correo,
+            id_profesional: localStorage.getItem('currentID')
         };
 
         const response = await axios.post("http://127.0.0.1:5000/registrar_citas", citaData);
+        const his = await axios.post("http://127.0.0.1:5000/registro", citaData);
+
 
         Swal.fire({
             title: "Cita guardada exitosamente",
@@ -125,6 +130,19 @@ btnGuardarCita.addEventListener("click", async () => {
 
         const modal = document.querySelector("#modal");
         modal.close();
+
+        document.getElementById('correo-input').value = "";
+        document.getElementById('titulo').value = "";
+        document.getElementById('fecha').value = "";
+        document.getElementById('hora').value = "";
+        document.getElementById('detalles').value = "";
+        document.getElementById('nombre').value = "";
+        document.getElementById('nombre2').value = "";
+        document.getElementById('email').value = "";
+        document.getElementById('edad').value = "";
+        document.getElementById('carrera').value = "";
+        document.getElementById('genero').value = "";
+
     } catch (error) {
         Swal.fire({
             title: "Error al guardar la cita",
@@ -134,6 +152,4 @@ btnGuardarCita.addEventListener("click", async () => {
         });
     }
 });
-
-
 
