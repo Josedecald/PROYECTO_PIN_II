@@ -37,8 +37,7 @@ const listEvents = async()=>{
 
             content += `
             <tr>
-                <td>${index+1}</td>
-                <td>${event.id}</td>
+                <td>${event.id}</td> ?:
                 <td>${event.correo}</td>
                 <td>${event.titulo}</td>
                 <td>${event.fecha}</td>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SereneMind</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <script src="https://kit.fontawesome.com/3dd19dd185.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="../css/citas.css">
+</head>
+<body class="logged-in" id="userPage">
+    <header>
+        <nav class="navbar navbar-expand-sm fixed-top bg-primary" id="Nav">
+            <div class="container-fluid">
+                <button class="btn border-light"><a class="navbar-brand text-white" href="/index.html">SereneMind</a></button>
+                <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <button class="btn btn-light mx-3"><a class="nav-link text-primary " href="/todos/Select_group_user.html"><i class="fa-solid fa-user-group me-3"></i>Ir a Grupos</a></button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-light"><a class="nav-link text-primary " href="/user/cita_user.html"><i class="fa-solid fa-clock me-3 "></i>Agendar Citas</a></button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-light mx-3"><a class="nav-link text-primary" href="/user/agenda_user.html"><i class="fa-solid fa-calendar-days me-3 text-primary"></i>Ver Mi Agenda</a></button>
+                        </li>
+                        <li class="nav-item">
+                            <button id="logoutButton" class="btn btn-light mx-3 d-none"><a class="nav-link text-primary" href="#"><i class="fa-solid fa-sign-out"></i></a></button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>  
+    </header>
+    <br><br>
+    <div class="content bg-body-secondary" >
+        <main class="min-vh-100 d-flex justify-content-center align-items-center">
+            <section class="container my-5">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <table class="table bg-light rounded-4" id="datatable_event">
+                            <thead>
+                                <h2>Mi Agenda</h2>
+                                <tr>
+                                    <th class="text-center">ID</th>
+                                    <th class="text-center">TITULO</th>
+                                    <th class="text-center">FECHA</th>
+                                    <th class="text-center">HORA</th>
+                                    <th class="text-center">DETALLES</th>
+                                    <th class="text-center">OPCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody_event" class="text-center">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <dialog id="modalInfo" class="rounded-3">
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title mx-2 col-md-6">Información de la cita</h5>
+                        </div>                            
+                        <div class="modal-body">
+                            <form id="edit-form" class="mx-2">
+                                <input id="correo_info" class="form-control mt-3" type="text" placeholder="Correo" aria-label="Disabled input example" disabled readonly>
+                                <input id="cita_info" class="form-control mt-3" type="text" placeholder="Cita" aria-label="Disabled input example" disabled readonly>
+                                <input id="titulo_info" class="form-control mt-3" type="text" placeholder="Título" aria-label="Disabled input example" disabled readonly>
+                                <input id="fecha_info" class="form-control mt-3" type="date" placeholder="Fecha" aria-label="Disabled input example" disabled readonly>
+                                <input id="hora_info" class="form-control mt-3" type="time" placeholder="Hora" aria-label="Disabled input example" disabled readonly>
+                                <textarea id="detalles_info" class="form-control mt-3 text-break" placeholder="Detalles" cols="30" rows="6" aria-label="Disabled input example" disabled readonly></textarea>
+                            </form>
+                        </div>
+                        <div class="modal-footer align-content-center justify-content-center">
+                            <button id="btn-cerrar-info" type="button" class="btn btn-secondary mt-2 mx-5" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </dialog>
+        </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/agenda_user.js"></script>
+    <script src="/js/sesion.js"></script>
+</body>
+</html>

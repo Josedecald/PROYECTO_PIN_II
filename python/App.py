@@ -209,8 +209,27 @@ def getAllEvents():
     except Exception as e:
         print(e)
         return jsonify({"informacion":str(e)})
-    
-    
+
+#ruta para ver eventos de usuario 
+@cross_origin()
+@app.route('/getAllEventsUser/<correo_user>', methods=['GET'])
+def getAllEventsUser(correo_user):
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM evento WHERE correo = %s',(correo_user,))
+        rv = cur.fetchall()
+        cur.close()
+        payload = []
+        content = {}
+        for result in rv:
+            content = {'id': result[0], 'id_usuario': result[1] , 'id_profesional': result[2], 'correo': result[3], 'titulo': result[4], 'fecha': str(result[5]), 'hora': str(result[6]), 'detalles': result[7]}
+            payload.append(content)
+            content = {}
+        return jsonify(payload)
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion":str(e)})
+        
 #Registrar cita
 @cross_origin()
 @app.route('/registrar_citas', methods=['POST'])
@@ -231,7 +250,7 @@ def registrar_citas():
 
         cur.execute("INSERT INTO evento (titulo, fecha, hora, detalles, id_usuario, correo, id_profesional) VALUES (%s, %s, %s, %s, %s, %s, %s)", (titulo, fecha, hora, detalles, id_usuario, email, id_profesional))
         mysql.connection.commit()
-        #enviar_correo(email, 'Cita registrada', fecha, hora)
+        enviar_correo(email, 'Cita registrada', fecha, hora)
         return jsonify({"informacion": "Citas registradas correctamente"})
     except Exception as e:
         print(e)
@@ -349,6 +368,7 @@ def delete_event(id):
         print(e)
         return jsonify({"informacion": str(e)})
 
+#ruta para consultar los eventos disponibles
 @cross_origin()
 @app.route('/getAvailableTimes', methods=['GET'])
 def get_available_times():
