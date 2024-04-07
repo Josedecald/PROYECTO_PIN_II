@@ -12,6 +12,7 @@ function verificarSesionYTipo() {
             return;
     }
 
+
     const tipoUsuario = localStorage.getItem('currentRol');
     const esEstudiante = tipoUsuario === 'Estudiante';
     const esProfesional = tipoUsuario === 'Profesional';
@@ -68,4 +69,16 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.removeItem('currentName');
         window.location.href = "/index.html";
     });
+});
+
+window.addEventListener('load', function() {
+    const userType = localStorage.getItem('currentRol');
+
+    if (userType === 'Estudiante') {
+        document.getElementById('botonProfesional-1').style.display = 'none';
+        document.getElementById('botonProfesional-2').style.display = 'none';
+    } else if (userType === 'Profesional') {
+        document.getElementById('botonEstudiante-1').style.display = 'none';
+        document.getElementById('botonEstudiante-2').style.display = 'none';
+    }
 });
