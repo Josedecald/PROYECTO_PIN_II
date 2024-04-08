@@ -250,7 +250,7 @@ def registrar_citas():
 
         cur.execute("INSERT INTO evento (titulo, fecha, hora, detalles, id_usuario, correo, id_profesional) VALUES (%s, %s, %s, %s, %s, %s, %s)", (titulo, fecha, hora, detalles, id_usuario, email, id_profesional))
         mysql.connection.commit()
-        enviar_correo(email, 'Cita registrada', fecha, hora)
+        #enviar_correo(email, 'Cita registrada', fecha, hora)
         return jsonify({"informacion": "Citas registradas correctamente"})
     except Exception as e:
         print(e)
@@ -405,13 +405,20 @@ def guardar_publi():
         id_usuario = request.json['id_usuario']
 
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO publicaciones (contenido, id_usuario) VALUES (%s, %s)", (contenido, id_usuario))
-        mysql.connection.commit()
+        cur.execute("SELECT nombre FROM usuarios WHERE id_usuario = %s", (id_usuario,))
+        usuario = cur.fetchone()
 
-        return jsonify({"informacion": "Publicación registrada correctamente"})
+        if usuario:
+            nombre_usuario = usuario[0]
+            cur.execute("INSERT INTO publicaciones (contenido, id_usuario, nombre) VALUES (%s, %s, %s)", (contenido, id_usuario, nombre_usuario))
+            mysql.connection.commit()
+            return jsonify({"informacion": "Publicación registrada correctamente"})
+        else:
+            return jsonify({"error": "Usuario no encontrado"})
     except Exception as e:
         print(e)
         return jsonify({"informacion": str(e)})
+
 
 #ruta para actualizar publicaciones
 @cross_origin()
@@ -466,7 +473,7 @@ def getAllPubli():
         payload = []
         content = {}
         for result in rv:
-            content = {'id_publi': result[0], 'contenido': result[1],'fecha_hora': str(result[2]), 'url': result[3]}
+            content = {'id_publi': result[0], 'nombre': result[1], 'contenido': result[2],'fecha_hora': str(result[3]), 'id_usuario': result[5]}
             payload.append(content)
             content = {}
         return jsonify(payload)

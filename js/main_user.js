@@ -55,6 +55,7 @@ const uploadPosts = async () => {
 
 
 const displayPosts = (posts) => {
+
   const postsContainer = document.getElementById("post");
   postsContainer.innerHTML = "";
 
@@ -71,11 +72,11 @@ const displayPosts = (posts) => {
     const postCard = document.createElement("div");
     postCard.className = "card border rounded-3 mt-3";
     postCard.id = `postCard-${currentPost.id_publi}`; 
-
+    
     postCard.innerHTML = `
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center my-3">
-        <p>${localStorage.getItem('currentName')}</p>
+        <p>${currentPost.nombre}</p>
         <div class="align-content-end ms-auto">
           <button id="eliminarPubli" class="btn eliminarPubli" data-post-id="${currentPost.id_publi}" type="button"><i class="equis fa-solid fa-x"></i></button>
         </div>
@@ -94,11 +95,14 @@ const displayPosts = (posts) => {
     `;
     postsContainer.appendChild(postCard);
 
+    const currentUserID = String(localStorage.getItem('currentID'))
+
+    console.log(currentUserID, currentPost.id_usuario)
+
     const eliminarPubliIcons = document.querySelectorAll("#eliminarPubli");
 
     eliminarPubliIcons.forEach((btn) => {
       btn.addEventListener("click", async ()=>{
-      console.log("Hola")
       try {
           const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -157,6 +161,9 @@ const displayPosts = (posts) => {
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("publicarForm").addEventListener("submit", post);
   uploadPosts();
+
+  
+  
 });
 
 const showResponseForm = (index) => {
