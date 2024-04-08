@@ -1,127 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/Main.css" />
-    <script
-      src="https://kit.fontawesome.com/94686504bc.js"
-      crossorigin="anonymous"
-    ></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <title>SereneMind</title>
-  </head>
-  <body>
-    <header>
-      <nav class="navbar navbar-expand-sm fixed-top bg-primary" id="Nav">
-        <div class="container-fluid">
-          <button class="btn border-light"><a class="navbar-brand text-white" href="/index.html">SereneMind</a></button>
-            <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <button class="btn"><a class="nav-link text-white " href="../todos/contact_us.html">Contactenos</a></button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn"><a class="nav-link text-white" href="#">Nosotros</a></button>
-                    </li>
-                    <li class="nav-item">
-                      <button class="btn"><a class="nav-link text-white" href="../todos/login.html">Ingresar</a></button>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/94686504bc.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="../css/Main.css">
+  <title>SereneMind</title>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md fixed-top bg-primary" id="Nav">
+      <div class="container-fluid">
+        <button class="btn"><a class="navbar-brand text-white" href="/index.html">SereneMind</a></button>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars fa-xl text-white"></i>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+              <ul class="navbar-nav align-items-end my-2 mx-2">
+                  <li class="nav-item">
+                      <button class="btn"><a class="nav-link text-white " href="../todos/contact_us.html">Contactenos</a></button>
                   </li>
-                    <li class="nav-item">
-                      <button class="reg btn border-light"><a class="nav-link text-white" href="../todos/login.html">Registrarse</a></button>
+                  <li class="nav-item">
+                      <button class="btn"><a class="nav-link text-white" href="#">Nosotros</a></button>
                   </li>
-                </ul>
-            </div>
-        </div>
-    </nav>  
-    </header>
-    <br><br><br><br>
-    <section
-      class="d-flex justify-content-center align-items-center"
-    >
-      <div class="container">
-        <div class="row justify-content-center shadow-lg rounded-3">
-          <div
-            class="col-6 col-md-5"
-          >
+                  <li class="nav-item">
+                    <button class="btn border-light"><a class="nav-link text-white" href="../todos/login.html">Ingresar</a></button>
+                </li>
+                <li class="nav-item">
+                  <button class="reg btn border-light"><a class="nav-link text-white" href="../todos/register.html">Registrarse</a></button>
+              </li>
+              </ul>
+          </div>
+      </div>
+  </nav>  
+  </header>
+  <br><br><br><br>
+  <section class="d-flex justify-content-center align-items-center m-2 py-5">
+    <div class="container">
+      <div class="row justify-content-center shadow-lg rounded-3">
+        <div class="col-md-6 d-none d-md-block">
           <img src="../img/pexels-tima-miroshnichenko-5453809.webp" alt="" class="img-fluid rounded-3 mt-5 me-1">
-          </div>
-
-          <div class="col-6 col-md-6 justify-content-center text-center">
-            <h2 class="pt-3">Contáctenos</h2>
-            <form id="contactForm"  autocomplete="off">
-              <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="name"
-                  placeholder="Nombre"
-                  autocomplete="off"
-                />
-                <label for="name">Nombre</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input
-                  type="email"
-                  class="form-control"
-                  id="Email"
-                  placeholder="Email"
-                />
-                <label for="Email">Email</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="subject"
-                  placeholder="Asunto"
-                />
-                <label for="subject">Asunto</label>
-              </div>
-              <div class="form-floating mb-3">
-                <textarea
-                  class="form-control"
-                  name="mensaje"
-                  id="mensaje"
-                  placeholder="Dejanos tu mensaje"
-                ></textarea>
-                <label for="mensaje">Mensaje</label>
-              </div>
-              <div class="d-flex justify-content-center my-3">
-                <button type="submit" class="btn btn-primary">Enviar</button>
-              </div>
-            </form>
-          </div>
-          <section>
-            <div class="container pb-4">
-              <div class="row justify-content-center mt-5">
-                <div class="col-1 col-md-2 justify-content-center text-center">
-                  <i class="fa-solid fa-map-location-dot"></i>
-                  <p>Cra 45 No. 48-31</p>
-                </div>
-                <div class="col-2 col-md-2 justify-content-center text-center">
-                  <i class="fa-solid fa-envelope"></i>
-                  <p>ContactUs@gmail.com</p>
-                </div>
-                <div class="col-3 col-md-2 justify-content-center text-center">
-                  <i class="fa-solid fa-phone"></i>
-                  <p>123-456-7890</p>
-                </div>
-              </div>
+        </div>
+        <div class="col-11 col-md-6 col-sm-12 justify-content-center text-center">
+          <h2 class="pt-3">Contáctenos</h2>
+          <form id="contactForm" autocomplete="off">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="name" placeholder="Nombre" autocomplete="off">
+              <label for="name">Nombre</label>
             </div>
-          </section>
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="Email" placeholder="Email">
+              <label for="Email">Email</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="subject" placeholder="Asunto">
+              <label for="subject">Asunto</label>
+            </div>
+            <div class="form-floating mb-3">
+              <textarea class="form-control" name="mensaje" id="mensaje" placeholder="Dejanos tu mensaje"></textarea>
+              <label for="mensaje">Mensaje</label>
+            </div>
+            <div class="d-flex justify-content-center my-3">
+              <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+          </form>
         </div>
       </div>
-    </section>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="../js/contact_us.js"></script>
-  </body>
+    </div>
+  </section>
+  <section>
+    <div class="container pb-4">
+      <div class="row justify-content-center mt-5">
+        <div class="col-12 col-md-4 col-sm-12 justify-content-center text-center">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <p>Cra 45 No. 48-31</p>
+        </div>
+        <div class="col-12 col-md-4 col-sm-12 justify-content-center text-center">
+          <i class="fa-solid fa-envelope"></i>
+          <p>ContactUs@gmail.com</p>
+        </div>
+        <div class="col-12 col-md-4 col-sm-12 justify-content-center text-center">
+          <i class="fa-solid fa-phone"></i>
+          <p>123-456-7890</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="../js/contact_us.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/3dd19dd185.js" crossorigin="anonymous"></script>
+</body>
 </html>
