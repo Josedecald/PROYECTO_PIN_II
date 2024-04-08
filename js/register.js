@@ -17,7 +17,7 @@ const agregarcontacto = (event) => {
         const v_carrera = document.getElementById('txtCarrera').value
 
         if (!v_nombre || !v_correo || !v_password || !v_edad || !v_genero || !v_carrera) { 
-            swal({
+            Swal.fire({
                 title: 'Por favor, completa todos los campos.',
                 icon: 'warning',
             });
@@ -25,7 +25,7 @@ const agregarcontacto = (event) => {
         }
     
         if (!isValidEmail(v_correo)) { 
-            swal({
+            Swal.fire({
                 title: 'Por favor, introduce una dirección de correo electrónico válida.',
                 icon: 'warning',
             });
@@ -33,7 +33,7 @@ const agregarcontacto = (event) => {
         }
     
         if (v_password.length < 8) { 
-            swal({
+            Swal.fire({
                 title: "La contraseña debe tener al menos 8 caracteres.",
                 icon: 'warning',
             });
@@ -42,7 +42,7 @@ const agregarcontacto = (event) => {
     
         
         if (!/[A-Z]/.test(v_password)) {
-            swal({
+            Swal.fire({
                 title: "La contraseña debe contener al menos una letra mayúscula.",
                 icon: 'warning',
             });
@@ -50,7 +50,7 @@ const agregarcontacto = (event) => {
         }
     
         if (!/[$&+,:;=?@#|'<>.^*()%!-]/.test(v_password)) {
-            swal({
+            Swal.fire({
                 title: "La contraseña debe contener al menos un carácter especial.",
                 icon: 'warning',
             });
@@ -58,7 +58,7 @@ const agregarcontacto = (event) => {
         }
     
         if (!/[0-9]/.test(v_password)) {
-            swal({
+            Swal.fire({
                 title: "La contraseña debe contener al menos un número.",
                 icon: 'warning',
             });
@@ -78,11 +78,12 @@ const agregarcontacto = (event) => {
                             carrera:v_carrera                      
                         },
                   }).then(function (response) {
-                    swal({
-                        title: "Usuario registrado con exito",
-                        icon: 'success', 
-                    })
-                    window.location.href = '../todos/login.html';
+                    Swal.fire({
+                        title: "Usuario registrado con éxito",
+                        icon: 'success',
+                    }).then(function () {
+                        window.location.href = '../todos/login.html'; // Redirige después de hacer clic en "OK"
+                    });
                   }).catch(err => {
                     console.log('Error: ', err);
                 });
