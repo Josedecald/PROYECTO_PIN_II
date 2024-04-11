@@ -13,6 +13,30 @@ $(document).ready(() => {
   });
 });
 
+const DescargarPDF = () => {
+  const generarPDF = (elementId, titulo, nombreArchivo) => {
+    const elemento = document.getElementById(elementId);
+
+    html2canvas(elemento, { scale: 5 }).then((canvas) => {
+      const canvasIMG = canvas.toDataURL('image/png');
+      const doc = new jsPDF();
+      doc.setFontSize(20);
+      doc.text(titulo, 35, 20)
+      doc.addImage(canvasIMG, 'png', 55, 40, 80, 80);
+      doc.save(nombreArchivo);
+    }).catch((error) => {
+      console.error(`Error al generar el PDF para ${elementId}:`, error);
+    });
+  }
+
+  generarPDF('graph-InicioSesion', 'Usuarios que iniciaron sesión en los últimos 7 días', 'Reporte-inicios-de-sesion.pdf');
+  generarPDF('graph-publicaciones', 'Publicaciones realizadas en los últimos 7 días', 'Reporte-publicaciones-realizadas.pdf');
+  generarPDF('graph-citas', 'Citas creadas en los últimos 7 días', 'Reporte-citas-creadas.pdf');
+}
+
+
+
+
 document.addEventListener("DOMContentLoaded",  () => {
   getUserData();
   view();
