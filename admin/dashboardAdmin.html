@@ -56,34 +56,43 @@
                   </div>
                 </div>
               </div>  
+              <div class="col-12 col-sm-3 col-md-3 col-xl-3">
+                <div class="card border-danger-subtle mb-2 shadow-sm">
+                  <div class="card-body pb-4">
+                    <h5 class="card-title">Graficos en PDF</h5>
+                    <button type="button" onclick="DescargarPDF()" class="btn btn-danger mt-5"><i class="fa-regular fa-file-pdf"></i></button>
+                  </div>
+                </div>
+              </div>  
             </div>
-            <div class="row">
-              <div class="col-12 col-md-3 col-xl-3 mb-3"> 
-                <div class="card border-0 text-dark rounded-3 shadow-sm">
-                  <div class="card-body p-3">
-                    <h5 class="card-title float-left text-center">Usuarios que iniciaron sesión en los últimos 7 días</h5>
-                    <canvas id="graph-InicioSesion"></canvas>
+            <section id="Graphs">
+              <div class="row">
+                <div class="col-12 col-md-3 col-xl-3 mb-3"> 
+                  <div class="card border-0 text-dark rounded-3 shadow-sm">
+                    <div class="card-body p-3">
+                      <h5 class="card-title float-left text-center">Usuarios que iniciaron sesión en los últimos 7 días</h5>
+                      <canvas id="graph-InicioSesion"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-5 col-xl-6 mb-3 ">
+                  <div class="card border-0 text-dark rounded-3 shadow-sm">
+                    <div class="card-body p-3">
+                      <h5 class="card-title float-left text-center">Publicaciones realizadas en los últimos 7 días</h5>
+                      <canvas id="graph-publicaciones"></canvas> 
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-3 col-xl-3 mb-3">
+                  <div class="card border-0 text-dark rounded-3 shadow-sm">
+                    <div class="card-body p-3">
+                      <h5 class="card-title float-left text-center">Citas creadas en los últimos 7 días</h5>
+                      <canvas id="graph-citas"></canvas> 
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-md-5 col-xl-6 mb-3 ">
-                <div class="card border-0 text-dark rounded-3 shadow-sm">
-                  <div class="card-body p-3">
-                    <h5 class="card-title float-left text-center">Publicaciones realizadas en los últimos 7 días</h5>
-                    <canvas id="graph-publicaciones"></canvas> 
-                  </div>
-                </div>
-              </div>
-              <div class="col-12 col-md-3 col-xl-3 mb-3">
-                <div class="card border-0 text-dark rounded-3 shadow-sm">
-                  <div class="card-body p-3">
-                    <h5 class="card-title float-left text-center">Citas creadas en los últimos 7 días</h5>
-                    <canvas id="graph-citas"></canvas> 
-                  </div>
-                </div>
-              </div>
-            </div>
-            </div>
+            </section>
           </section>
 
           <section>
@@ -162,6 +171,9 @@
 
       </main>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
