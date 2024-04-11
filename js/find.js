@@ -1,3 +1,6 @@
+
+
+
 document.getElementById('search-form').addEventListener('submit', async function(event) {
     event.preventDefault();
     const correo = document.getElementById('correo-input').value;
@@ -56,22 +59,6 @@ btnCerrarModal.addEventListener("click",()=>{
     modal.close();
 })
 
-document.addEventListener('DOMContentLoaded', function() {
-
-    
-    let today = new Date();
-    
-    let year = today.getFullYear();
-    let month = String(today.getMonth() + 1).padStart(2, '0');
-    let day = String(today.getDate()).padStart(2, '0');
-
-    let formattedDate = year + '-' + month + '-' + day;
-
-    console.log(formattedDate)
-
-
-    document.getElementById('fecha').setAttribute('min', formattedDate);
-});
 
 
 const btnGuardarCita = document.querySelector("#btn-guardar-cita");
