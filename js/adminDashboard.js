@@ -17,12 +17,12 @@ const DescargarPDF = () => {
   const generarPDF = (elementId, titulo, nombreArchivo) => {
     const elemento = document.getElementById(elementId);
 
-    html2canvas(elemento, { scale: 2 }).then((canvas) => {
-      const canvasIMG = canvas.toDataURL('image/png', 1.0);
+    html2canvas(elemento, { scale: 5 }).then((canvas) => {
+      const canvasIMG = canvas.toDataURL('image/png');
       const doc = new jsPDF();
       doc.setFontSize(20);
-      doc.text(titulo, 20, 20)
-      doc.addImage(canvasIMG, 'png', 20, 40, 150, 150);
+      doc.text(titulo, 35, 20)
+      doc.addImage(canvasIMG, 'png', 55, 40, 80, 80);
       doc.save(nombreArchivo);
     }).catch((error) => {
       console.error(`Error al generar el PDF para ${elementId}:`, error);
