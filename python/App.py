@@ -9,10 +9,10 @@ app = Flask(__name__)
 CORS(app)
 
 # Mysql Connection
-app.config['MYSQL_HOST'] = 'bokzfymrzwfpccbqsjza-mysql.services.clever-cloud.com' 
-app.config['MYSQL_USER'] = 'uxqieajd9dm1llbe'
-app.config['MYSQL_PASSWORD'] = 'QrGkyfXIT8cd4hf4ik7v'
-app.config['MYSQL_DB'] = 'bokzfymrzwfpccbqsjza'
+app.config['MYSQL_HOST'] = 'bw9aus3gtbqbw0q5p0t7-mysql.services.clever-cloud.com' 
+app.config['MYSQL_USER'] = 'ufuvijhpatz6nq9k'
+app.config['MYSQL_PASSWORD'] = 'LDEuzJai9VLMtA9OLOUb'
+app.config['MYSQL_DB'] = 'bw9aus3gtbqbw0q5p0t7'
 mysql = MySQL(app)
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
