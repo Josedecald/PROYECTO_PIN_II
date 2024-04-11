@@ -82,13 +82,14 @@ document.addEventListener("DOMContentLoaded", function() {
             localStorage.setItem('currentEmail', user);
             localStorage.setItem('currentID', id_usuario);
             localStorage.setItem('currentName', name);
+            localStorage.setItem('currentRol', type);
 
 
             let timerInterval;
             Swal.fire({
             title: `¡Bienvenido, ${name}!`,
             timer: 1600,
-            timerProgressBar: true,
+            showConfirmButton: false,
             willClose: () => {
                 clearInterval(timerInterval);
             }

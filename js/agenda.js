@@ -46,7 +46,7 @@ const listEvents = async()=>{
                 <td>
                 <button class="btn btn-sm border-primary btn-abrir-modalInfo" data-correo="${event.correo}" data-id="${event.id}" data-titulo="${event.titulo}" data-fecha="${event.fecha}" data-hora="${event.hora}" data-detalle ="${event.detalles}"><i class="fa-solid fa-circle-info text-primary"></i></button>
                 <button class="btn btn-sm border-primary btn-abrir-modalEdit mx-1" data-correo="${event.correo}" data-id="${event.id}"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                <button class="btn btn-sm border-primary btn-eliminar-cita" data-id="${event.id}"><i class="fa-solid fa-trash text-danger"></i></button>
+                <button class="btn btn-sm border-primary btn-eliminar-cita" data-id="${event.id}"><i class="fa-regular fa-circle-xmark text-danger"></i></button>
                 </td>
             </tr>`;
         });
@@ -111,12 +111,12 @@ const listEvents = async()=>{
                       });
                     
                     const result = await swalWithBootstrapButtons.fire({
-                        title: "¿Estas seguro?",
-                        text: "No podras revertirlo luego",
+                        title: "Cancelar cita",
+                        text: "¿Estas seguro?, No podras revertirlo luego",
                         icon: "warning",
                         showCancelButton: true,
-                        cancelButtonText: "No, cancelar",
-                        confirmButtonText: "Si, eliminar",
+                        cancelButtonText: "No, Volver",
+                        confirmButtonText: "Si, Cancelar",
                     });
         
                     if (result.isConfirmed) {
@@ -125,7 +125,7 @@ const listEvents = async()=>{
                         console.log(response);
         
                         Swal.fire({
-                            title: "Cita eliminada exitosamente",
+                            title: "Cita cancelada",
                             icon: "success",
                         }).then((result) => {
                             if (result.isConfirmed) {

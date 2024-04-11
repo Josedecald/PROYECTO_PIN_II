@@ -48,21 +48,19 @@ html{
   }
 
   dialog{
-    min-width: 102vh;
+    min-width: 105vh;
   }
+
 
   .content{
     min-height: 100vh;
     width: 100%;
   }
 
-  .btn{
-    transition: all ease .3s !important;
-  }
-  
-  .btn:hover{
-    transform: scale(1.05);
-  
+  section #calendario{
+    max-width: 160vh;
+    max-height: 80vh;
+
   }
 
 
