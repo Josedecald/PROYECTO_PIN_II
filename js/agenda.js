@@ -41,7 +41,7 @@ const listEvents = async()=>{
                 <td>${event.correo}</td>
                 <td>${event.titulo}</td>
                 <td>${event.fecha}</td>
-                <td>${event.hora}</td>
+                <td>${event.hora_inicio}</td>
                 <td>${truncatedDetalles}</td>
                 <td>
                 <button class="btn btn-sm border-primary btn-abrir-modalInfo" data-correo="${event.correo}" data-id="${event.id}" data-titulo="${event.titulo}" data-fecha="${event.fecha}" data-hora="${event.hora}" data-detalle ="${event.detalles}"><i class="fa-solid fa-circle-info text-primary"></i></button>

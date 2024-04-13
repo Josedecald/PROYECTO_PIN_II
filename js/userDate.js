@@ -28,7 +28,7 @@ document.getElementById('abrirDispo').addEventListener('click', async function()
     }
     
     try {
-        const response = await axios.get(`http://127.0.0.1:5000/getAvailableTimes?fecha=${fechaSeleccionada}`);
+        const response = await axios.get(`http://127.0.0.1:5000/getAvailableTimes/${fechaSeleccionada}`);
         const horariosDisponibles = response.data.horarios;
 
         const modal = document.getElementById('modalDispo');

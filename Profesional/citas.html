@@ -71,9 +71,15 @@
                                 <div class="modal-body">
                                     <form id="cita-form" class="mx-2">
                                         <input id="nombre2" class="form-control mt-3" type="text" placeholder="Nombre" aria-label="Disabled input example" disabled readonly>
-                                        <input id="titulo" class="form-control mt-3" type="text" placeholder="Título">
-                                        <input id="fecha" class="form-control mt-3" type="date" placeholder="Fecha" >
-                                        <input id="hora" class="form-control mt-3" type="time" placeholder="Hora">
+                                        <small class="form-text text-muted">Escriba el titulo de la cita.</small>
+                                        <input id="titulo" class="form-control mb-2" type="text">
+                                        <small class="form-text text-muted">Seleccione la Fecha de la cita.</small>
+                                        <input id="fecha" class="form-control mb-2" type="date" placeholder="Fecha">
+                                        <small class="form-text text-muted">Seleccione la Hora de la cita.</small>
+                                        <input id="hora" class="form-control mb-2" type="time" placeholder="Hora">
+                                        <small class="form-text text-muted">Seleccione la duración estimada de la cita (En minutos).</small>
+                                        <input id="duracion" class="form-control mb-2" type="number" value="30">
+
                                         <textarea id="detalles" class="form-control mt-3 text-break" placeholder="Detalles" cols="30" rows="6"></textarea>
                                     </form>
                                 </div>
