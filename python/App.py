@@ -3,16 +3,17 @@ from flask import Flask, request, jsonify
 from flask_mysqldb import MySQL
 from flask_cors import CORS, cross_origin
 from flask_mail import Mail, Message
+from datetime import datetime, timedelta
 
 # initializations
 app = Flask(__name__)
 CORS(app)
 
 # Mysql Connection
-app.config['MYSQL_HOST'] = 'bw9aus3gtbqbw0q5p0t7-mysql.services.clever-cloud.com' 
-app.config['MYSQL_USER'] = 'ufuvijhpatz6nq9k'
-app.config['MYSQL_PASSWORD'] = 'LDEuzJai9VLMtA9OLOUb'
-app.config['MYSQL_DB'] = 'bw9aus3gtbqbw0q5p0t7'
+app.config['MYSQL_HOST'] = 'localhost' 
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = '123456'
+app.config['MYSQL_DB'] = 'pin_ii_db'
 mysql = MySQL(app)
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -202,7 +203,7 @@ def getAllEvents():
         payload = []
         content = {}
         for result in rv:
-            content = {'id': result[0], 'id_usuario': result[1] , 'id_profesional': result[2], 'correo': result[3], 'titulo': result[4], 'fecha': str(result[5]), 'hora': str(result[6]), 'detalles': result[7]}
+            content = {'id': result[0], 'id_usuario': result[1] , 'id_profesional': result[2], 'correo': result[3], 'titulo': result[4], 'fecha': str(result[5]), 'hora_inicio': str(result[6]), 'detalles': result[7]}
             payload.append(content)
             content = {}
         return jsonify(payload)
@@ -237,25 +238,35 @@ def registrar_citas():
     try:
         titulo = request.json['titulo']
         fecha = request.json['fecha']
-        hora = request.json['hora']
+        hora = request.json['hora_inicio']
+        duracion = int(request.json['duracion'])
         detalles = request.json['detalles']
         email = request.json['correo']
         id_profesional = request.json['id_profesional']
 
+        hora_inicio = datetime.strptime(hora, '%H:%M')
+        hora_fin = hora_inicio + timedelta(minutes=duracion)
+        hora_fin_str = hora_fin.strftime('%H:%M')
+
         cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM evento WHERE fecha = %s AND hora_inicio BETWEEN %s AND %s AND id_profesional = %s", (fecha, hora, hora_fin_str, id_profesional))
+        citas_en_intervalo = cur.fetchall()
+        
+        if citas_en_intervalo:
+            return jsonify({"informacion": "Ya existe una cita programada en ese intervalo de tiempo"}), 400
+
         cur.execute("SELECT id_usuario FROM usuarios WHERE email = %s", (email,))
         usuario = cur.fetchone()
 
         id_usuario = usuario[0]
 
-        cur.execute("INSERT INTO evento (titulo, fecha, hora, detalles, id_usuario, correo, id_profesional) VALUES (%s, %s, %s, %s, %s, %s, %s)", (titulo, fecha, hora, detalles, id_usuario, email, id_profesional))
+        cur.execute("INSERT INTO evento (titulo, fecha, hora_inicio, hora_fin, detalles, id_usuario, correo, id_profesional) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (titulo, fecha, hora, hora_fin_str, detalles, id_usuario, email, id_profesional))
         mysql.connection.commit()
         #enviar_correo(email, 'Cita registrada', fecha, hora)
         return jsonify({"informacion": "Citas registradas correctamente"})
     except Exception as e:
         print(e)
         return jsonify({"informacion": str(e)}), 500
-
 
 #Ruta para actualizar
 @cross_origin()
