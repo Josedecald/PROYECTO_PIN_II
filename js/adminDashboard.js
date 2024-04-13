@@ -13,6 +13,15 @@ $(document).ready(() => {
   });
 });
 
+const enableOpts = (value) =>{
+  let select = document.getElementById('txtCarrera')
+
+  if (value === "Estudiante") {
+    select.style.display = "block";
+  } else {
+    select.style.display = "none";
+  }
+}
 const DescargarPDF = () => {
   const generarPDF = (elementId, titulo, nombreArchivo) => {
     const elemento = document.getElementById(elementId);
