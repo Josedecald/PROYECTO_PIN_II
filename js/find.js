@@ -1,6 +1,3 @@
-
-
-
 document.getElementById('search-form').addEventListener('submit', async function(event) {
     event.preventDefault();
     const correo = document.getElementById('correo-input').value;
@@ -35,8 +32,6 @@ document.getElementById('search-form').addEventListener('submit', async function
             icon: 'warning',
         });
     }
-    
-    
 });
 
 const btnAbrirModal = document.querySelector("#btn-abrir-modal")
@@ -94,27 +89,22 @@ btnGuardarCita.addEventListener("click", async () => {
         });
         return;
     }
+    
+    const fechaHoraActual = new Date();
+    const fechaSeleccionada = new Date(fecha + 'T' + hora + ':00');
 
-    const now = new Date();
-    let currentHour = now.getHours();
-    const currentMinute = now.getMinutes();
-
-    const selectedHour = parseInt(hora.split(':')[0], 10);
-    const selectedMinute = parseInt(hora.split(':')[1], 10);
-
-    if (currentHour >= 12) {
-        currentHour -= 12;
-    }
-    console.log(currentHour, selectedHour)
-
-    if (selectedHour < currentHour || (selectedHour === currentHour && selectedMinute <= currentMinute)) {
+    console.log(fechaHoraActual, fechaSeleccionada)
+    
+    if (fechaSeleccionada< fechaHoraActual){
         Swal.fire({
-            title: "La hora seleccionada debe ser posterior a la hora actual",
-            icon: 'warning',
+            title: 'Hora inválida',
+            text: 'La hora seleccionada ya ha pasado.',
+            icon: 'error',
+            confirmButtonText: 'Entendido',
             target: document.getElementById('modal')
         });
         return;
-    }
+    }    
 
     try {
         const citaData = {
@@ -136,8 +126,7 @@ btnGuardarCita.addEventListener("click", async () => {
 
         const modal = document.querySelector("#modal");
         modal.close();
-
-        // Limpiar los campos del formulario
+        
         document.getElementById('correo-input').value = "";
         document.getElementById('titulo').value = "";
         document.getElementById('fecha').value = "";
@@ -146,12 +135,20 @@ btnGuardarCita.addEventListener("click", async () => {
         document.getElementById('detalles').value = "";
 
     } catch (error) {
+        if (error.response.status === 400) {
         Swal.fire({
             title: "Error al guardar la cita",
-            text: error.message,
+            text: error.response.data.informacion,
+            icon: 'error',
+            target: document.getElementById('modal')
+        });
+    } else {
+        Swal.fire({
+            title: "Error al guardar la cita",
+            text: "Ocurrió un error inesperado",
             icon: 'error',
             target: document.getElementById('modal')
         });
     }
+}
 });
-

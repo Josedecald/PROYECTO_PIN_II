@@ -5,7 +5,7 @@ let dataTable;
 let dataTableInitialized = false;
 
 const dataTableOptions ={
-    pageLength: 8,
+    pageLength: 5,
     destroy: true,
     language: {
         url: "https://cdn.datatables.net/plug-ins/2.0.2/i18n/es-ES.json",
@@ -27,7 +27,10 @@ const initDatable = async()=>{
 
 const listEvents = async()=>{
     try{
-        const response = await fetch("http://127.0.0.1:5000/getAllEvents");
+        const id_user = localStorage.getItem('currentID')
+        console.log(id_user)
+
+        const response = await fetch(`http://127.0.0.1:5000/getAllEventsPro/${id_user}`);
         const events = await response.json();
         
         let content = '';
@@ -44,7 +47,7 @@ const listEvents = async()=>{
                 <td>${event.hora_inicio}</td>
                 <td>${truncatedDetalles}</td>
                 <td>
-                <button class="btn btn-sm border-primary btn-abrir-modalInfo" data-correo="${event.correo}" data-id="${event.id}" data-titulo="${event.titulo}" data-fecha="${event.fecha}" data-hora="${event.hora}" data-detalle ="${event.detalles}"><i class="fa-solid fa-circle-info text-primary"></i></button>
+                <button class="btn btn-sm border-primary btn-abrir-modalInfo" data-correo="${event.correo}" data-id="${event.id}" data-titulo="${event.titulo}" data-fecha="${event.fecha}" data-hora="${event.hora_inicio}" data-detalle ="${event.detalles}"><i class="fa-solid fa-circle-info text-primary"></i></button>
                 <button class="btn btn-sm border-primary btn-abrir-modalEdit mx-1" data-correo="${event.correo}" data-id="${event.id}"><i class="fa-solid fa-pen-to-square text-success"></i></button>
                 <button class="btn btn-sm border-primary btn-eliminar-cita" data-id="${event.id}"><i class="fa-regular fa-circle-xmark text-danger"></i></button>
                 </td>

@@ -91,16 +91,21 @@
                     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title mx-2 col-md-6">Información de la cita</h5>
+                                <h5 class="modal-title mx-2 col-md-6 sticky-top">Información de la cita</h5>
                             </div>                            
                             <div class="modal-body">
                                 <form id="edit-form" class="mx-2">
-                                    <input id="correo_info" class="form-control mt-3" type="text" placeholder="Correo" aria-label="Disabled input example" disabled readonly>
-                                    <input id="cita_info" class="form-control mt-3" type="text" placeholder="cita" aria-label="Disabled input example" disabled readonly>
-                                    <input id="titulo_info" class="form-control mt-3" type="text" placeholder="Título" aria-label="Disabled input example" disabled readonly>
-                                    <input id="fecha_info" class="form-control mt-3" type="date" placeholder="Fecha" aria-label="Disabled input example" disabled readonly>
-                                    <input id="hora_info" class="form-control mt-3" type="time" placeholder="Hora" aria-label="Disabled input example" disabled readonly>
-                                    <textarea id="detalles_info" class="form-control mt-3 text-break" placeholder="Detalles" cols="30" rows="6" aria-label="Disabled input example" disabled readonly></textarea>
+                                    <input id="correo_info" class="form-control mb-3 mt-2" type="text" placeholder="Correo" aria-label="Disabled input example" disabled readonly>
+                                    <small class="form-text text-muted">ID</small>
+                                    <input id="cita_info" class="form-control mb-3" type="text" placeholder="cita" aria-label="Disabled input example" disabled readonly>
+                                    <small class="form-text text-muted">Titulo</small>
+                                    <input id="titulo_info" class="form-control mb-3" type="text" placeholder="Título" aria-label="Disabled input example" disabled readonly>
+                                    <small class="form-text text-muted">Fecha</small>
+                                    <input id="fecha_info" class="form-control mb-3" type="date" placeholder="Fecha" aria-label="Disabled input example" disabled readonly>
+                                    <small class="form-text text-muted">Hora</small>
+                                    <input id="hora_info" class="form-control mb-3" type="time" placeholder="Hora" aria-label="Disabled input example" disabled readonly>
+                                    <small class="form-text text-muted">Detalles</small>
+                                    <textarea id="detalles_info" class="form-control mb-3 text-break" placeholder="Detalles" cols="30" rows="6" aria-label="Disabled input example" disabled readonly></textarea>
                                 </form>
                             </div>
                             <div class="modal-footer align-content-center justify-content-center">
