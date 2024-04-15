@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 from flask_mysqldb import MySQL
 from flask_cors import CORS, cross_origin
 from flask_mail import Mail, Message
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 
 # initializations
 app = Flask(__name__)
@@ -230,6 +230,25 @@ def getAllEventsUser(correo_user):
     except Exception as e:
         print(e)
         return jsonify({"informacion":str(e)})
+    
+@cross_origin()
+@app.route('/getAllEventsPro/<id_profesional>', methods=['GET'])
+def getAllEventsPro(id_profesional):
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM evento WHERE id_profesional = %s',(id_profesional,))
+        rv = cur.fetchall()
+        cur.close()
+        payload = []
+        content = {}
+        for result in rv:
+            content = {'id': result[0], 'id_usuario': result[1] , 'id_profesional': result[2], 'correo': result[3], 'titulo': result[4], 'fecha': str(result[5]), 'hora_inicio': str(result[6]), 'detalles': result[7]}
+            payload.append(content)
+            content = {}
+        return jsonify(payload)
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion":str(e)})
         
 #Registrar cita
 @cross_origin()
@@ -263,7 +282,7 @@ def registrar_citas():
         cur.execute("INSERT INTO evento (titulo, fecha, hora_inicio, hora_fin, detalles, id_usuario, correo, id_profesional) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (titulo, fecha, hora, hora_fin_str, detalles, id_usuario, email, id_profesional))
         mysql.connection.commit()
         #enviar_correo(email, 'Cita registrada', fecha, hora)
-        return jsonify({"informacion": "Citas registradas correctamente"})
+        return jsonify({"informacion": "Citas registradas correctamente"}), 200
     except Exception as e:
         print(e)
         return jsonify({"informacion": str(e)}), 500
@@ -380,27 +399,74 @@ def delete_event(id):
         return jsonify({"informacion": str(e)})
 
 #ruta para consultar los eventos disponibles
-@cross_origin()
-@app.route('/getAvailableTimes', methods=['GET'])
-def get_available_times():
+def get_available_times(fecha):
     try:
-        fecha_seleccionada = request.args.get('fecha')
-        
-        # Consulta para obtener todos los eventos para la fecha seleccionada
+        # Convertir la fecha de string a objeto datetime
+        fecha_seleccionada = datetime.strptime(fecha, '%Y-%m-%d')
+
+        # Crear una lista de intervalos de 20 minutos desde las 8:00 AM hasta las 6:00 PM
+        hora_inicio = fecha_seleccionada.replace(hour=8, minute=0, second=0)
+        hora_fin = fecha_seleccionada.replace(hour=18, minute=0, second=0)
+        intervalos_disponibles = []
+        intervalo_actual = hora_inicio
+        while intervalo_actual < hora_fin:
+            intervalos_disponibles.append(intervalo_actual)
+            intervalo_actual += timedelta(minutes=20)
+
+        # Obtener los eventos programados para la fecha especificada
+        eventos_programados = get_events_for_date(fecha_seleccionada)
+
+        # Filtrar los intervalos disponibles eliminando aquellos ocupados por eventos
+        intervalos_disponibles = filter_available_times(intervalos_disponibles, eventos_programados)
+
+        # Convertir los intervalos de datetime a formato de cadena HH:MM
+        intervalos_disponibles_str = [intervalo.strftime('%H:%M') for intervalo in intervalos_disponibles]
+
+        return intervalos_disponibles_str
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+# Función para obtener los eventos programados para una fecha específica
+def get_events_for_date(fecha):
+    try:
         cur = mysql.connection.cursor()
-        cur.execute('SELECT hora FROM evento WHERE fecha = %s', (fecha_seleccionada,))
-        eventos = [str(evento[0])[:5] for evento in cur.fetchall()]  # Obtenemos solo las horas (sin segundos)
+        cur.execute('SELECT hora_inicio, hora_fin FROM evento WHERE fecha = %s', (fecha,))
+        eventos_programados = cur.fetchall()
         cur.close()
         
-        horas_del_dia = [f"{str(hora).zfill(2)}:00" for hora in range(8, 19)]
+        # Convertir las cadenas de hora de inicio y fin a objetos datetime
+        eventos_programados = [(datetime.combine(fecha.date(), time(0, 0)) + evento[0], datetime.combine(fecha.date(), time(0, 0)) + evento[1]) for evento in eventos_programados]
         
-        horas_disponibles = [hora for hora in horas_del_dia if hora not in eventos]
-        
-        return jsonify({"horarios": horas_disponibles})
-    
+        return eventos_programados
     except Exception as e:
         print(e)
+        return []
+
+# Función para filtrar los intervalos disponibles eliminando aquellos ocupados por eventos
+def filter_available_times(intervalos_disponibles, eventos_programados):
+    for evento in eventos_programados:
+        hora_inicio_evento = evento[0]
+        hora_fin_evento = evento[1]
+
+        # Eliminar los intervalos ocupados por el evento de la lista de intervalos disponibles
+        intervalos_disponibles = [intervalo for intervalo in intervalos_disponibles if not (hora_inicio_evento <= intervalo <= hora_fin_evento)]
+
+    return intervalos_disponibles
+
+
+# Endpoint para obtener los horarios disponibles
+@app.route('/getAvailableTimes/<fecha>', methods=['GET'])
+def get_available_times_route(fecha):
+    try:
+        # Obtener los horarios disponibles para la fecha especificada
+        horarios_disponibles = get_available_times(fecha)
+        return jsonify({"horarios": horarios_disponibles})
+    except Exception as e:
         return jsonify({"error": str(e)})
+
+
 
 
 ##############################################################################################################################
