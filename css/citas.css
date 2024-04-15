@@ -64,13 +64,17 @@ html{
   }
 
   .fc-daygrid-day a {
-    color: inherit; /* Usa el color heredado del elemento padre */
-    text-decoration: none; /* Elimina la decoración del enlace */
+    color: inherit;
+    text-decoration: none;
   }
 
   .fc-col-header-cell-cushion{
-    color: inherit; /* Usa el color heredado del elemento padre */
-    text-decoration: none; /* Elimina la decoración del enlace */
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .fc-daygrid-event-harness { 
+    display: none; 
   }
 
 
