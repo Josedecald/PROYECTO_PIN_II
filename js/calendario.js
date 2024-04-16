@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', async function() {
   const response = await fetch("http://127.0.0.1:5000/getAllEvents");
   const eventsFromDB = await response.json();
   const eventsForCalendar = eventsFromDB.map(event => {
-    // Asegurarse de que la hora siempre tenga dos dígitos
     let hora_inicio = event.hora_inicio;
     let hora_fin = event.hora_fin;
   
