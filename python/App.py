@@ -242,7 +242,7 @@ def getAllEventsPro(id_profesional):
         payload = []
         content = {}
         for result in rv:
-            content = {'id': result[0], 'id_usuario': result[1] , 'id_profesional': result[2], 'correo': result[3], 'titulo': result[4], 'fecha': str(result[5]), 'hora_inicio': str(result[6]), 'detalles': result[7]}
+            content = {'id': result[0], 'id_usuario': result[1] , 'id_profesional': result[2], 'correo': result[3], 'titulo': result[4], 'fecha': str(result[5]), 'hora_inicio': str(result[6]), 'detalles': result[7], 'hora_fin': str(result[8])}
             payload.append(content)
             content = {}
         return jsonify(payload)
@@ -399,12 +399,10 @@ def delete_event(id):
         return jsonify({"informacion": str(e)})
 
 #ruta para consultar los eventos disponibles
-def get_available_times(fecha):
+def get_available_times(fecha, id_profesional):
     try:
-        # Convertir la fecha de string a objeto datetime
         fecha_seleccionada = datetime.strptime(fecha, '%Y-%m-%d')
 
-        # Crear una lista de intervalos de 20 minutos desde las 8:00 AM hasta las 6:00 PM
         hora_inicio = fecha_seleccionada.replace(hour=8, minute=0, second=0)
         hora_fin = fecha_seleccionada.replace(hour=18, minute=0, second=0)
         intervalos_disponibles = []
@@ -413,13 +411,10 @@ def get_available_times(fecha):
             intervalos_disponibles.append(intervalo_actual)
             intervalo_actual += timedelta(minutes=20)
 
-        # Obtener los eventos programados para la fecha especificada
-        eventos_programados = get_events_for_date(fecha_seleccionada)
+        eventos_programados = get_events_for_date(fecha_seleccionada, id_profesional)
 
-        # Filtrar los intervalos disponibles eliminando aquellos ocupados por eventos
         intervalos_disponibles = filter_available_times(intervalos_disponibles, eventos_programados)
 
-        # Convertir los intervalos de datetime a formato de cadena HH:MM
         intervalos_disponibles_str = [intervalo.strftime('%H:%M') for intervalo in intervalos_disponibles]
 
         return intervalos_disponibles_str
@@ -428,15 +423,15 @@ def get_available_times(fecha):
         return {"error": str(e)}
 
 
+
 # Función para obtener los eventos programados para una fecha específica
-def get_events_for_date(fecha):
+def get_events_for_date(fecha, id_profesional):
     try:
         cur = mysql.connection.cursor()
-        cur.execute('SELECT hora_inicio, hora_fin FROM evento WHERE fecha = %s', (fecha,))
+        cur.execute('SELECT hora_inicio, hora_fin FROM evento WHERE fecha = %s and id_profesional = %s', (fecha, id_profesional,))
         eventos_programados = cur.fetchall()
         cur.close()
         
-        # Convertir las cadenas de hora de inicio y fin a objetos datetime
         eventos_programados = [(datetime.combine(fecha.date(), time(0, 0)) + evento[0], datetime.combine(fecha.date(), time(0, 0)) + evento[1]) for evento in eventos_programados]
         
         return eventos_programados
@@ -444,24 +439,20 @@ def get_events_for_date(fecha):
         print(e)
         return []
 
-# Función para filtrar los intervalos disponibles eliminando aquellos ocupados por eventos
 def filter_available_times(intervalos_disponibles, eventos_programados):
     for evento in eventos_programados:
         hora_inicio_evento = evento[0]
         hora_fin_evento = evento[1]
 
-        # Eliminar los intervalos ocupados por el evento de la lista de intervalos disponibles
         intervalos_disponibles = [intervalo for intervalo in intervalos_disponibles if not (hora_inicio_evento <= intervalo <= hora_fin_evento)]
 
     return intervalos_disponibles
 
 
-# Endpoint para obtener los horarios disponibles
-@app.route('/getAvailableTimes/<fecha>', methods=['GET'])
-def get_available_times_route(fecha):
+@app.route('/getAvailableTimes/<fecha>/<id_profesional>', methods=['GET'])
+def get_available_times_route(fecha, id_profesional):
     try:
-        # Obtener los horarios disponibles para la fecha especificada
-        horarios_disponibles = get_available_times(fecha)
+        horarios_disponibles = get_available_times(fecha, id_profesional)
         return jsonify({"horarios": horarios_disponibles})
     except Exception as e:
         return jsonify({"error": str(e)})

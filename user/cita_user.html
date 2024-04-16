@@ -15,7 +15,7 @@
 </head>
 <body class="logged-in" id="userPage">
     <header>
-        <nav class="navbar navbar-expand-sm fixed-top bg-primary" id="Nav">
+        <nav class="navbar navbar-expand-sm bg-primary" id="Nav">
           <div class="container-fluid">
             <button class="btn border-light"><a class="navbar-brand text-white" href="/index.html">SereneMind</a></button>
               <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,18 +37,13 @@
           </div>
       </nav>  
       </header>
-    <div class="main-container d-flex">
-        <div class="content bg-body-secondary">
-            <main class="min-vh-100 d-flex justify-content-center align-items-center">
+            <main class="min-vh-100 d-flex justify-content-center bg-body-secondary">
                 <section class="container">
-                    <div class="row justify-content-center align-items-center">
-                        <div class="col-12 col-md-8">
+                    <div class="row justify-content-center align-content-center d-flex">
+                        <div class="col-md-6 mt-3 ">
                             <form id="search-form" class="form-control shadow">
-                                <h5 class="mb-4 mt-2">Verificar Disponibilidad</h5>
-                                <label>Seleccione la fecha deseada</label>
-                                <input type="date" class="form-control mb-4" id="fecha">
                                 <label>Seleccione el Psicologo de preferencia</label>
-                                <select class="form-select mb-3" aria-label="Default select example">
+                                <select id="id_pro" class="form-select mb-3" aria-label="Default select example">
                                     <option selected>...</option>
                                     <option value="1">María Fernanda Gómez Ríos</option>
                                     <option value="2">Juan Pablo Rodríguez López</option>
@@ -59,33 +54,45 @@
                                     <option value="7">Valentina López Cardona</option>
                                     <option value="8">Carlos Alberto Gutiérrez Muñoz</option>
                                 </select>
-                                  <button class="btn btn-primary mb-3" id="abrirDispo" type="button">Ver disponibilidad</button>
                             </form>
-                        </div>
-                    </div>
-                    <dialog id="modalDispo" class="rounded-3">
-                        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                    
-                                    <h5 class="modal-title mx-2">Horarios disponibles</h5>
-                                </div>
-                                <div class="modal-body">
-                                </div>
-                                <div class="modal-footer align-content-center justify-content-center">
-                                    <button id="btn-cerrar-modal" type="button" class="btn btn-secondary mt-2 mx-5" data-bs-dismiss="modal">Cancelar</button>
-                                </div>
+                            <div class="info card rounded-3 shadow mt-3">
+                                <h5 class="px-3 py-2"><i class="fa-solid fa-circle-info fa-sm text-primary"></i> Informacion</h5>
+                                <p class="px-3 py-2">Tenga en cuenta que los horarios pueden estar expuestos a cambios.<br>
+                                </p>
+                                <p class="px-3 "><i class="fa-solid fa-square me-2 text-light border-black border"></i>- Fechas con horario disponibles</p>
+                                <p class="px-3 "><i class="fa-solid fa-square me-2" style="color: #fb6161;"></i>- Fechas sin horario disponibles</p>
                             </div>
                         </div>
-                    </dialog>            
+                        <section class="col-md-6 ">
+                            <div class="mt-3">
+                                <div id="calendar" class="bg-light shadow py-2 px-3 rounded-3"></div>      
+                            </div>
+                    </section>
+                    </div>        
                 </section>
+                <div class="modal fade" id="modalHorarios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h6 class="modal-title" id="exampleModalLabel">Horarios disponibles <br> (Las horas se muestran en formato de 24 horas)</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="modalBody">
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </main>
-        </div>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/locales/es.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
     <script src="/js/userDate.js"></script>
+    <script src="/js/calendario_user.js"></script>
     <script src="/js/sesion.js"></script>
 </body>
 </html>

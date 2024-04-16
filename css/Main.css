@@ -84,6 +84,16 @@ footer{
   transform: scale(1.1);
 }
 
+header .btn{
+  border-color: white;
+  margin-inline: 3px;
+}
+
+header #index{
+  border-color: transparent !important;
+  margin-inline: 3px;
+}
+
 header .btn:hover{
   background-color: rgba(255, 255, 255, 0.3);
 }
