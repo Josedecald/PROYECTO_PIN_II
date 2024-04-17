@@ -59,8 +59,22 @@ html{
 
   section #calendario{
     max-width: 160vh;
-    max-height: 80vh;
+    max-height: 81vh;
 
+  }
+
+  .fc-daygrid-day a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .fc-col-header-cell-cushion{
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .fc-daygrid-event-harness { 
+    display: none; 
   }
 
 

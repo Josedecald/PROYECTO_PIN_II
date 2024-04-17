@@ -1,6 +1,3 @@
-
-
-
 document.getElementById('search-form').addEventListener('submit', async function(event) {
     event.preventDefault();
     const correo = document.getElementById('correo-input').value;
@@ -35,8 +32,6 @@ document.getElementById('search-form').addEventListener('submit', async function
             icon: 'warning',
         });
     }
-    
-    
 });
 
 const btnAbrirModal = document.querySelector("#btn-abrir-modal")
@@ -59,6 +54,22 @@ btnCerrarModal.addEventListener("click",()=>{
     modal.close();
 })
 
+document.addEventListener('DOMContentLoaded', function() {
+
+    
+    let today = new Date();
+    
+    let year = today.getFullYear();
+    let month = String(today.getMonth() + 1).padStart(2, '0');
+    let day = String(today.getDate()).padStart(2, '0');
+
+    let formattedDate = year + '-' + month + '-' + day;
+
+    console.log(formattedDate)
+
+
+    document.getElementById('fecha').setAttribute('min', formattedDate);
+});
 
 
 const btnGuardarCita = document.querySelector("#btn-guardar-cita");
@@ -67,9 +78,10 @@ btnGuardarCita.addEventListener("click", async () => {
     const titulo = document.getElementById('titulo').value;
     const fecha = document.getElementById('fecha').value;
     const hora = document.getElementById('hora').value;
+    const duracion = document.getElementById('duracion').value;
     const detalles = document.getElementById('detalles').value;
 
-    if ( titulo === "" || fecha === "" || hora === "") {
+    if ( titulo === "" || fecha === "" || hora === "" || duracion === "") { 
         Swal.fire({
             title: "Complete todos los campos",
             icon: 'warning',
@@ -77,38 +89,35 @@ btnGuardarCita.addEventListener("click", async () => {
         });
         return;
     }
+    
+    const fechaHoraActual = new Date();
+    const fechaSeleccionada = new Date(fecha + 'T' + hora + ':00');
 
-    const now = new Date();
-    const currentHour = now.getHours();
-    const currentMinute = now.getMinutes();
-
-    const selectedHour = parseInt(hora.split(':')[0], 10);
-    const selectedMinute = parseInt(hora.split(':')[1], 10);
-
-    console.log(currentHour, selectedHour)
-
-    if (selectedHour < currentHour || (selectedHour === currentHour && selectedMinute <= currentMinute)) {
+    console.log(fechaHoraActual, fechaSeleccionada)
+    
+    if (fechaSeleccionada< fechaHoraActual){
         Swal.fire({
-            title: "La hora seleccionada debe ser posterior a la hora actual",
-            icon: 'warning',
+            title: 'Hora inválida',
+            text: 'La hora seleccionada ya ha pasado.',
+            icon: 'error',
+            confirmButtonText: 'Entendido',
             target: document.getElementById('modal')
         });
         return;
-    }
+    }    
 
     try {
         const citaData = {
             titulo: titulo,
             fecha: fecha,
-            hora: hora,
+            hora_inicio: hora,
+            duracion: duracion,
             detalles: detalles,
             correo: correo,
             id_profesional: localStorage.getItem('currentID')
         };
 
         const response = await axios.post("http://127.0.0.1:5000/registrar_citas", citaData);
-        const his = await axios.post("http://127.0.0.1:5000/registro", citaData);
-
 
         Swal.fire({
             title: "Cita guardada exitosamente",
@@ -117,26 +126,29 @@ btnGuardarCita.addEventListener("click", async () => {
 
         const modal = document.querySelector("#modal");
         modal.close();
-
+        
         document.getElementById('correo-input').value = "";
         document.getElementById('titulo').value = "";
         document.getElementById('fecha').value = "";
         document.getElementById('hora').value = "";
+        document.getElementById('duracion').value = "";
         document.getElementById('detalles').value = "";
-        document.getElementById('nombre').value = "";
-        document.getElementById('nombre2').value = "";
-        document.getElementById('email').value = "";
-        document.getElementById('edad').value = "";
-        document.getElementById('carrera').value = "";
-        document.getElementById('genero').value = "";
 
     } catch (error) {
+        if (error.response.status === 400) {
         Swal.fire({
             title: "Error al guardar la cita",
-            text: error.message,
+            text: error.response.data.informacion,
+            icon: 'error',
+            target: document.getElementById('modal')
+        });
+    } else {
+        Swal.fire({
+            title: "Error al guardar la cita",
+            text: "Ocurrió un error inesperado",
             icon: 'error',
             target: document.getElementById('modal')
         });
     }
+}
 });
-

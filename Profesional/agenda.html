@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SereneMind</title>
+    <title>UniCalm</title>
     
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -18,7 +18,7 @@
     <header>
         <nav class="navbar navbar-expand-sm fixed-top bg-primary" id="Nav">
           <div class="container-fluid">
-            <button class="btn border-light"><a class="navbar-brand text-white" href="/index.html">SereneMind</a></button>
+            <button class="btn border-light"><a class="navbar-brand text-white" href="/index.html">UniCalm</a></button>
               <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
               </button>
@@ -44,6 +44,7 @@
                 <section class="container my-5">
                          <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <button class="btn btn-primary mb-2"><a class="nav-link text-white" href="/Profesional/calendario.html">Vista de Calendario </a></button>
                                 <table class="table bg-light rounded-4" id="datatable_event">
                                     <thead>
                                         <h2>Agenda</h2>
@@ -90,16 +91,21 @@
                     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title mx-2 col-md-6">Información de la cita</h5>
+                                <h5 class="modal-title mx-2 col-md-6 sticky-top">Información de la cita</h5>
                             </div>                            
                             <div class="modal-body">
                                 <form id="edit-form" class="mx-2">
-                                    <input id="correo_info" class="form-control mt-3" type="text" placeholder="Correo" aria-label="Disabled input example" disabled readonly>
-                                    <input id="cita_info" class="form-control mt-3" type="text" placeholder="cita" aria-label="Disabled input example" disabled readonly>
-                                    <input id="titulo_info" class="form-control mt-3" type="text" placeholder="Título" aria-label="Disabled input example" disabled readonly>
-                                    <input id="fecha_info" class="form-control mt-3" type="date" placeholder="Fecha" aria-label="Disabled input example" disabled readonly>
-                                    <input id="hora_info" class="form-control mt-3" type="time" placeholder="Hora" aria-label="Disabled input example" disabled readonly>
-                                    <textarea id="detalles_info" class="form-control mt-3 text-break" placeholder="Detalles" cols="30" rows="6" aria-label="Disabled input example" disabled readonly></textarea>
+                                    <input id="correo_info" class="form-control mb-3 mt-2" type="text" placeholder="Correo" aria-label="Disabled input example" disabled readonly>
+                                    <small class="form-text text-muted">ID</small>
+                                    <input id="cita_info" class="form-control mb-3" type="text" placeholder="cita" aria-label="Disabled input example" disabled readonly>
+                                    <small class="form-text text-muted">Titulo</small>
+                                    <input id="titulo_info" class="form-control mb-3" type="text" placeholder="Título" aria-label="Disabled input example" disabled readonly>
+                                    <small class="form-text text-muted">Fecha</small>
+                                    <input id="fecha_info" class="form-control mb-3" type="date" placeholder="Fecha" aria-label="Disabled input example" disabled readonly>
+                                    <small class="form-text text-muted">Hora</small>
+                                    <input id="hora_info" class="form-control mb-3" type="time" placeholder="Hora" aria-label="Disabled input example" disabled readonly>
+                                    <small class="form-text text-muted">Detalles</small>
+                                    <textarea id="detalles_info" class="form-control mb-3 text-break" placeholder="Detalles" cols="30" rows="6" aria-label="Disabled input example" disabled readonly></textarea>
                                 </form>
                             </div>
                             <div class="modal-footer align-content-center justify-content-center">

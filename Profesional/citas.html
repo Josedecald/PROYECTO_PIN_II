@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SereneMind</title>
+    <title>UniCalm</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -14,7 +14,7 @@
     <header>
         <nav class="navbar navbar-expand-sm fixed-top bg-primary" id="Nav">
           <div class="container-fluid">
-            <button class="btn border-light"><a class="navbar-brand text-white" href="/index.html">SereneMind</a></button>
+            <button class="btn border-light"><a class="navbar-brand text-white" href="/index.html">UniCalm</a></button>
               <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
               </button>
@@ -71,9 +71,15 @@
                                 <div class="modal-body">
                                     <form id="cita-form" class="mx-2">
                                         <input id="nombre2" class="form-control mt-3" type="text" placeholder="Nombre" aria-label="Disabled input example" disabled readonly>
-                                        <input id="titulo" class="form-control mt-3" type="text" placeholder="Título">
-                                        <input id="fecha" class="form-control mt-3" type="date" placeholder="Fecha" >
-                                        <input id="hora" class="form-control mt-3" type="time" placeholder="Hora">
+                                        <small class="form-text text-muted">Escriba el titulo de la cita.</small>
+                                        <input id="titulo" class="form-control mb-2" type="text">
+                                        <small class="form-text text-muted">Seleccione la Fecha de la cita.</small>
+                                        <input id="fecha" class="form-control mb-2" type="date" placeholder="Fecha">
+                                        <small class="form-text text-muted">Seleccione la Hora de la cita.</small>
+                                        <input id="hora" class="form-control mb-2" type="time" placeholder="Hora">
+                                        <small class="form-text text-muted">Seleccione la duración estimada de la cita (En minutos).</small>
+                                        <input id="duracion" class="form-control mb-2" type="number" value="30">
+
                                         <textarea id="detalles" class="form-control mt-3 text-break" placeholder="Detalles" cols="30" rows="6"></textarea>
                                     </form>
                                 </div>

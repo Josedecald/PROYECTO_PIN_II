@@ -3,16 +3,17 @@ from flask import Flask, request, jsonify
 from flask_mysqldb import MySQL
 from flask_cors import CORS, cross_origin
 from flask_mail import Mail, Message
+from datetime import datetime, timedelta, time
 
 # initializations
 app = Flask(__name__)
 CORS(app)
 
 # Mysql Connection
-app.config['MYSQL_HOST'] = 'bw9aus3gtbqbw0q5p0t7-mysql.services.clever-cloud.com' 
-app.config['MYSQL_USER'] = 'ufuvijhpatz6nq9k'
-app.config['MYSQL_PASSWORD'] = 'LDEuzJai9VLMtA9OLOUb'
-app.config['MYSQL_DB'] = 'bw9aus3gtbqbw0q5p0t7'
+app.config['MYSQL_HOST'] = 'localhost' 
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = '123456'
+app.config['MYSQL_DB'] = 'pin_ii_db'
 mysql = MySQL(app)
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -202,7 +203,7 @@ def getAllEvents():
         payload = []
         content = {}
         for result in rv:
-            content = {'id': result[0], 'id_usuario': result[1] , 'id_profesional': result[2], 'correo': result[3], 'titulo': result[4], 'fecha': str(result[5]), 'hora': str(result[6]), 'detalles': result[7]}
+            content = {'id': result[0], 'id_usuario': result[1] , 'id_profesional': result[2], 'correo': result[3], 'titulo': result[4], 'fecha': str(result[5]), 'hora_inicio': str(result[6]), 'detalles': result[7]}
             payload.append(content)
             content = {}
         return jsonify(payload)
@@ -229,6 +230,25 @@ def getAllEventsUser(correo_user):
     except Exception as e:
         print(e)
         return jsonify({"informacion":str(e)})
+    
+@cross_origin()
+@app.route('/getAllEventsPro/<id_profesional>', methods=['GET'])
+def getAllEventsPro(id_profesional):
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM evento WHERE id_profesional = %s',(id_profesional,))
+        rv = cur.fetchall()
+        cur.close()
+        payload = []
+        content = {}
+        for result in rv:
+            content = {'id': result[0], 'id_usuario': result[1] , 'id_profesional': result[2], 'correo': result[3], 'titulo': result[4], 'fecha': str(result[5]), 'hora_inicio': str(result[6]), 'detalles': result[7], 'hora_fin': str(result[8])}
+            payload.append(content)
+            content = {}
+        return jsonify(payload)
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion":str(e)})
         
 #Registrar cita
 @cross_origin()
@@ -237,25 +257,35 @@ def registrar_citas():
     try:
         titulo = request.json['titulo']
         fecha = request.json['fecha']
-        hora = request.json['hora']
+        hora = request.json['hora_inicio']
+        duracion = int(request.json['duracion'])
         detalles = request.json['detalles']
         email = request.json['correo']
         id_profesional = request.json['id_profesional']
 
+        hora_inicio = datetime.strptime(hora, '%H:%M')
+        hora_fin = hora_inicio + timedelta(minutes=duracion)
+        hora_fin_str = hora_fin.strftime('%H:%M')
+
         cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM evento WHERE fecha = %s AND hora_inicio BETWEEN %s AND %s AND id_profesional = %s", (fecha, hora, hora_fin_str, id_profesional))
+        citas_en_intervalo = cur.fetchall()
+        
+        if citas_en_intervalo:
+            return jsonify({"informacion": "Ya existe una cita programada en ese intervalo de tiempo"}), 400
+
         cur.execute("SELECT id_usuario FROM usuarios WHERE email = %s", (email,))
         usuario = cur.fetchone()
 
         id_usuario = usuario[0]
 
-        cur.execute("INSERT INTO evento (titulo, fecha, hora, detalles, id_usuario, correo, id_profesional) VALUES (%s, %s, %s, %s, %s, %s, %s)", (titulo, fecha, hora, detalles, id_usuario, email, id_profesional))
+        cur.execute("INSERT INTO evento (titulo, fecha, hora_inicio, hora_fin, detalles, id_usuario, correo, id_profesional) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (titulo, fecha, hora, hora_fin_str, detalles, id_usuario, email, id_profesional))
         mysql.connection.commit()
         #enviar_correo(email, 'Cita registrada', fecha, hora)
-        return jsonify({"informacion": "Citas registradas correctamente"})
+        return jsonify({"informacion": "Citas registradas correctamente"}), 200
     except Exception as e:
         print(e)
         return jsonify({"informacion": str(e)}), 500
-
 
 #Ruta para actualizar
 @cross_origin()
@@ -369,27 +399,65 @@ def delete_event(id):
         return jsonify({"informacion": str(e)})
 
 #ruta para consultar los eventos disponibles
-@cross_origin()
-@app.route('/getAvailableTimes', methods=['GET'])
-def get_available_times():
+def get_available_times(fecha, id_profesional):
     try:
-        fecha_seleccionada = request.args.get('fecha')
-        
-        # Consulta para obtener todos los eventos para la fecha seleccionada
+        fecha_seleccionada = datetime.strptime(fecha, '%Y-%m-%d')
+
+        hora_inicio = fecha_seleccionada.replace(hour=8, minute=0, second=0)
+        hora_fin = fecha_seleccionada.replace(hour=18, minute=0, second=0)
+        intervalos_disponibles = []
+        intervalo_actual = hora_inicio
+        while intervalo_actual < hora_fin:
+            intervalos_disponibles.append(intervalo_actual)
+            intervalo_actual += timedelta(minutes=20)
+
+        eventos_programados = get_events_for_date(fecha_seleccionada, id_profesional)
+
+        intervalos_disponibles = filter_available_times(intervalos_disponibles, eventos_programados)
+
+        intervalos_disponibles_str = [intervalo.strftime('%H:%M') for intervalo in intervalos_disponibles]
+
+        return intervalos_disponibles_str
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+
+# Función para obtener los eventos programados para una fecha específica
+def get_events_for_date(fecha, id_profesional):
+    try:
         cur = mysql.connection.cursor()
-        cur.execute('SELECT hora FROM evento WHERE fecha = %s', (fecha_seleccionada,))
-        eventos = [str(evento[0])[:5] for evento in cur.fetchall()]  # Obtenemos solo las horas (sin segundos)
+        cur.execute('SELECT hora_inicio, hora_fin FROM evento WHERE fecha = %s and id_profesional = %s', (fecha, id_profesional,))
+        eventos_programados = cur.fetchall()
         cur.close()
         
-        horas_del_dia = [f"{str(hora).zfill(2)}:00" for hora in range(8, 19)]
+        eventos_programados = [(datetime.combine(fecha.date(), time(0, 0)) + evento[0], datetime.combine(fecha.date(), time(0, 0)) + evento[1]) for evento in eventos_programados]
         
-        horas_disponibles = [hora for hora in horas_del_dia if hora not in eventos]
-        
-        return jsonify({"horarios": horas_disponibles})
-    
+        return eventos_programados
     except Exception as e:
         print(e)
+        return []
+
+def filter_available_times(intervalos_disponibles, eventos_programados):
+    for evento in eventos_programados:
+        hora_inicio_evento = evento[0]
+        hora_fin_evento = evento[1]
+
+        intervalos_disponibles = [intervalo for intervalo in intervalos_disponibles if not (hora_inicio_evento <= intervalo <= hora_fin_evento)]
+
+    return intervalos_disponibles
+
+
+@app.route('/getAvailableTimes/<fecha>/<id_profesional>', methods=['GET'])
+def get_available_times_route(fecha, id_profesional):
+    try:
+        horarios_disponibles = get_available_times(fecha, id_profesional)
+        return jsonify({"horarios": horarios_disponibles})
+    except Exception as e:
         return jsonify({"error": str(e)})
+
+
 
 
 ##############################################################################################################################
