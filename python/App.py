@@ -673,6 +673,25 @@ def getAllById_Pro(email):
         print(e)
         return jsonify({"informacion":str(e)})
     
+@cross_origin()
+@app.route('/getAllById_admin/<email>',methods=['GET'])
+def getAllById_admin(email):
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM administradores WHERE correo = %s', (email,))
+        rv = cur.fetchall()
+        cur.close()
+        payload = []
+        content = {}
+        for result in rv:
+            content = {'id_admin': result[0], 'nombre': result[1], 'correo': result[2], 'contraseña': result[3]}
+            payload.append(content)
+            content = {}
+        return jsonify(payload)
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion":str(e)})
+    
 #ruta para registrar usuario
 @cross_origin()
 @app.route('/add_userPro', methods=['POST'])

@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
             title: `¡Bienvenido, ${name}!`,
             timer: 1800,
             showConfirmButton: false,
+            allowOutsideClick: false,
             willClose: () => {
                 clearInterval(timerInterval);
             }
@@ -90,16 +91,13 @@ document.addEventListener("DOMContentLoaded", function() {
             title: `¡Bienvenido, ${name}!`,
             timer: 1600,
             showConfirmButton: false,
+            allowOutsideClick: false,
             willClose: () => {
                 clearInterval(timerInterval);
             }
             }).then((result) => {
             if (result.dismiss === Swal.DismissReason.timer) {
-                if (type === 'Estudiante') {
-                  window.location.href = "../user/Main_pag_user.html";
-              } else if (type === 'Profesional') {
                   window.location.href = "../Profesional/citas.html";
-              }
             }
             });
             }else{
@@ -115,8 +113,52 @@ document.addEventListener("DOMContentLoaded", function() {
         icon: 'warning'
     })
     }
+    }else if(type === 'Administrador'){
+      try {
+        const response = await axios.get(`http://127.0.0.1:5000/getAllById_admin/${user}`);
+        const userData = response.data[0];
+
+        const id_usuario = userData.id_admin;
+        const correo = userData.correo;
+        const contraseña = userData.contraseña;
+        const name = userData.nombre;
+
+        if (correo === user && pass === contraseña){
+
+            localStorage.setItem('currentEmail', user);
+            localStorage.setItem('currentID', id_usuario);
+            localStorage.setItem('currentName', name);
+            localStorage.setItem('currentRol', type);
+
+
+            let timerInterval;
+            Swal.fire({
+            title: `¡Bienvenido, ${name}!`,
+            timer: 1600,
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            willClose: () => {
+                clearInterval(timerInterval);
+            }
+            }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer) {
+                window.location.href = "/admin/dashboardAdmin.html";
+            }
+            });
+            }else{
+                Swal.fire({
+                    title: "Correo o contraseña incorrectos",
+                    icon: 'warning'
+                })
+            }
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        title: "El correo no se encuentra registrado",
+        icon: 'warning'
+    })
     }
 
-    
+  }
   };
   

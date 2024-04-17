@@ -13,8 +13,6 @@
 </head>
 
 <body class="bg-body-tertiary">
-
-  <!-- Barra de navegacion del costado -->
   <div class="main-container d-flex ">
     <div class="sidebar bg-primary rounded-end-3 shadow pe-5" id="side_nav">
       <div class="header-box">
@@ -23,16 +21,13 @@
       <ul class="list-group">
         <li class="list-group-item bg-primary border-0 text-white"></li>
         <hr class="">
-        <li class="list-group-item bg-primary border-0 text-white"><a href="dashboardAdmin.html"
-            class="link-light link-underline-opacity-0"><i class="fa-solid fa-house fa"
-              style="color: #ffffff;"></i> Dashboard</a></li>
+        <li class="list-group-item bg-primary border-0 text-white"><button type="button" class="btn btn-light" data-bs-toggle="modal"
+          data-bs-target="#CreateUsers">Crear usuarios
+        </button></li>
         <hr class="">
-        <li class="list-group-item bg-primary border-0 text-white"><a href="enter_daily_phrases.html"
-            class="link-light link-underline-opacity-0"><i class="fa-solid fa-quote-left me-1"
-              style="color: #ffffff;"></i>Frases Diarias</a></li>
-        <hr class="">
-        <li class="list-group-item bg-primary border-0 text-white"><a href="adminvideos.html"
-            class="link-light link-underline-opacity-0"><i class="fa-brands fa-youtube me-1"></i>Insertar Videos</a>
+        <li class="list-group-item bg-primary border-0 text-white"><button type="button" class="btn btn-light" data-bs-toggle="modal"
+          data-bs-target="#CreateUsers"><a href="adminvideos.html"
+            class="link-light link-underline-opacity-0 text-black">Insertar Videos</a></button>
         </li>
         <hr class="">
       </ul>
@@ -72,18 +67,6 @@
               </div>
             </div>
             <div class="col-12 col-sm-3 col-md-3 col-xl-3">
-              <div class="card border-success-subtle mb-2 me-2 shadow-sm">
-                <div class="card-body pb-4">
-                  <h5 class="card-title">Crear Usuarios</h5>
-                  <button type="button" class="btn btn-success mt-5" data-bs-toggle="modal"
-                    data-bs-target="#CreateUsers">
-                    CREAR
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-sm-3 col-md-3 col-xl-3">
-              <div class="card border-danger-subtle mb-2 me-2 shadow-sm">
                 <div class="card-body pb-4">
                   <h5 class="card-title">Graficos en PDF</h5>
                   <button type="button" onclick="DescargarPDF()" class="btn btn-danger mt-5"><i
@@ -282,7 +265,7 @@
                             </div>
                             <div class="d-flex justify-content-center my-3">
                               <button type="submit" class="btn btn-primary my-2">
-                                Registrarme
+                                Registrar
                               </button>
                             </div>
                           </form>
