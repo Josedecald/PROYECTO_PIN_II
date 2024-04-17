@@ -26,12 +26,12 @@ const DescargarPDF = () => {
   const generarPDF = (elementId, titulo, nombreArchivo) => {
     const elemento = document.getElementById(elementId);
 
-    html2canvas(elemento, { scale: 5 }).then((canvas) => {
+    html2canvas(elemento, { scale: 50 }).then((canvas) => {
       const canvasIMG = canvas.toDataURL('image/png');
       const doc = new jsPDF();
       doc.setFontSize(20);
       doc.text(titulo, 35, 20)
-      doc.addImage(canvasIMG, 'png', 55, 40, 80, 80);
+      doc.addImage(canvasIMG, 'png', 55, 40, 100, 90);
       doc.save(nombreArchivo);
     }).catch((error) => {
       console.error(`Error al generar el PDF para ${elementId}:`, error);
@@ -101,7 +101,6 @@ const getUserData = async () => {
         <td>${user.id}</td>
         <td>${user.nombre}</td>
         <td>${user.email}</td>
-        <td>${user.password}</td>
         <td>${user.edad}</td>
         <td>${user.genero}</td>
         <td>${user.carrera}</td>
