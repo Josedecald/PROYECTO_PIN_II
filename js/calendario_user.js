@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 const response = await fetch(`http://127.0.0.1:5000/getAvailableTimes/${fecha}/${id_profesional}`);
                 const data = await response.json();
 
-                mostrarHorariosDisponibles(data.horarios);
+                mostrarHorariosDisponibles(data.horarios, info);
             } catch (error) {
                 console.error('Error al obtener los horarios disponibles:', error);
             }
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         return dates;
     }
     
-    function mostrarHorariosDisponibles(horarios) {
+    function mostrarHorariosDisponibles(horarios, info) {
         const modal = new bootstrap.Modal(document.getElementById('modalHorarios'));
         const modalBody = document.getElementById('modalBody');
 
@@ -109,8 +109,41 @@ document.addEventListener('DOMContentLoaded', async function() {
             reservarButton.classList.add('btn', 'btn-primary', 'mx-2');
             reservarButton.textContent = 'Reservar cita';
 
-            reservarButton.addEventListener('click', function() {
-                console.log('Cita reservada para el horario:', horario);
+            reservarButton.addEventListener('click', async () => {
+                try {
+                    const citaData = {
+                        titulo: `Cita Programada por ${localStorage.getItem('currentName')}`,
+                        fecha: info.startStr,
+                        hora_inicio: horario,
+                        duracion: 30,
+                        detalles: 'Esta cita fue programada por el usuario',
+                        correo: localStorage.getItem('currentEmail'),
+                        id_profesional: document.getElementById('id_pro').value
+                    };
+            
+                    const response = await axios.post("http://127.0.0.1:5000/registrar_citas", citaData);
+            
+                    Swal.fire({
+                        title: "Cita guardada exitosamente",
+                        icon: "success",
+                    });
+            
+                } catch (error) {
+                    if (error.response.status === 400) {
+                        Swal.fire({
+                            title: "Error al guardar la cita",
+                            text: error.response.data.informacion,
+                            icon: 'error',
+                            target: document.getElementById('modal')
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Error al guardar la cita",
+                            text: "Ocurrió un error inesperado",
+                            icon: 'error',
+                            target: document.getElementById('modal')
+                        });
+                }}
             });
 
             horarioElement.appendChild(reservarButton);
