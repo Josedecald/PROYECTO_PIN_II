@@ -541,7 +541,7 @@ def getAllPubli():
         payload = []
         content = {}
         for result in rv:
-            content = {'id_publi': result[0], 'nombre': result[1], 'contenido': result[2],'fecha_hora': str(result[3]), 'id_usuario': result[5]}
+            content = {'id_publi': result[0], 'nombre': result[1], 'contenido': result[2],'fecha_hora': str(result[3]), 'id_usuario': result[4]}
             payload.append(content)
             content = {}
         return jsonify(payload)
@@ -774,17 +774,45 @@ def delete_contactPro(email):
 def guardar_comen():
     try:
         contenido = request.json['contenido']
-        fecha = request.json['fecha']
-        hora = request.json['hora']
+        id_publi = request.json['id_publi']
+        id_usuario = request.json['id_usuario']
 
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO comentarios (contenido, fecha, hora) VALUES (%s, %s, %s)", (contenido, fecha, hora))
-        mysql.connection.commit()
+        cur.execute("SELECT nombre FROM usuarios WHERE id_usuario = %s", (id_usuario,))
+        usuario = cur.fetchone()
+
+        if usuario:
+            cur = mysql.connection.cursor()
+            cur.execute("INSERT INTO comentarios (contenido, id_publi, nombre ) VALUES (%s, %s, %s)", (contenido, id_publi, usuario))
+            mysql.connection.commit()
+        else:
+            return jsonify({"error": "Usuario no encontrado"})
 
         return jsonify({"informacion": "Comentario registrado correctamente"})
     except Exception as e:
         print(e)
         return jsonify({"informacion": str(e)})
+    
+@cross_origin()
+@app.route('/getcountComen/<id>', methods=['GET'])
+def getcomentcount(id):
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT COUNT(*) as total from comentarios WHERE id_publi = %s',(id))
+        rv = cur.fetchall()
+        cur.close()
+        payload = []
+        content = {}
+        for result in rv:
+            content = {'total de cometarios': result[0]}
+            payload.append(content)
+            content = {}
+        return jsonify(payload)
+    except Exception as e:
+        print(e)
+        return jsonify({"informacion":e})
+
+
 
 #ruta para actualizar comentario
 @cross_origin()
@@ -813,17 +841,17 @@ def update_Comen(id_comen):
 
 #ruta para ver todos los comentarios 
 @cross_origin()
-@app.route('/getAllComen', methods=['GET'])
-def getAllComen():
+@app.route('/getAllComen/<id>', methods=['GET'])
+def getAllComen(id):
     try:
         cur = mysql.connection.cursor()
-        cur.execute('SELECT * FROM comentarios')
+        cur.execute('SELECT * FROM comentarios WHERE id_publi = %s',(id,))
         rv = cur.fetchall()
         cur.close()
         payload = []
         content = {}
         for result in rv:
-            content = {'id_publi': result[0], 'contenido': result[1],'fecha': str(result[2]), 'hora': str(result[3])}
+            content = {'id_comen': result[0],'id_publi': result[1],'nombre': result[2], 'contenido': result[3],'fecha_hora': str(result[4])}
             payload.append(content)
             content = {}
         return jsonify(payload)

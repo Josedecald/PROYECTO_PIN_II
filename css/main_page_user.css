@@ -12,12 +12,13 @@ body main{
     src: url(../fonts/Jost-VariableFont_wght.ttf);
   }
 
-.conv{
+  .conv {
     background-image: url('/img/authentic-small-youthful-marketing-agency-_1_.webp');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 }
+
 
 .psi{
     background-image: url('/img/authentic-scene-young-person-undergoing-psychological-therapy-_1_.webp');

@@ -40,14 +40,13 @@ const listEvents = async()=>{
 
             content += `
             <tr>
-                <td>${event.id}</td> ?:
                 <td>${event.correo}</td>
                 <td>${event.titulo}</td>
                 <td>${event.fecha}</td>
                 <td>${event.hora_inicio}</td>
                 <td>${truncatedDetalles}</td>
                 <td>
-                <button class="btn btn-sm border-primary btn-abrir-modalInfo" data-correo="${event.correo}" data-id="${event.id}" data-titulo="${event.titulo}" data-fecha="${event.fecha}" data-hora="${event.hora_inicio}" data-detalle ="${event.detalles}"><i class="fa-solid fa-circle-info text-primary"></i></button>
+                <button class="btn btn-sm border-primary btn-abrir-modalInfo" data-correo="${event.correo}" data-id="${event.id}" data-titulo="${event.titulo}" data-fecha="${event.fecha}" data-hora="${event.hora_inicio}" data-horaF="${event.hora_fin}" data-detalle ="${event.detalles}"><i class="fa-solid fa-circle-info text-primary"></i></button>
                 <button class="btn btn-sm border-primary btn-abrir-modalEdit mx-1" data-correo="${event.correo}" data-id="${event.id}"><i class="fa-solid fa-pen-to-square text-success"></i></button>
                 <button class="btn btn-sm border-primary btn-eliminar-cita" data-id="${event.id}"><i class="fa-regular fa-circle-xmark text-danger"></i></button>
                 </td>
@@ -61,18 +60,23 @@ const listEvents = async()=>{
 
         btnInfo.forEach(btn => {
             btn.addEventListener("click", () => {
+               
                 correo = btn.getAttribute('data-correo');
                 cita = btn.getAttribute('data-id');
                 titulo = btn.getAttribute('data-titulo');
                 fecha = btn.getAttribute('data-fecha');
                 hora = btn.getAttribute('data-hora');
+                horaF = btn.getAttribute('data-horaF');
                 detalle = btn.getAttribute('data-detalle');
+
+                console.log(hora)
 
                 document.getElementById('titulo_info').value = titulo;
                 document.getElementById('correo_info').value = correo;
                 document.getElementById('cita_info').value = cita;
                 document.getElementById('fecha_info').value = fecha;
                 document.getElementById('hora_info').value = hora;
+                document.getElementById('horaF_info').value = horaF;
                 document.getElementById('detalles_info').value = detalle;
                 modalinfo.showModal();
             });
